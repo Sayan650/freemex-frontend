@@ -1,8 +1,15 @@
+import Background from "../src/components/background/background";
+import ReactRouterSetup from "./Route";
+import "../src/styles/global.css";
+
 function App() {
   return (
-    <div className="App">
-      <h1>Welcome to Freemex 3.0</h1>
-    </div>
+    <>
+      <div className="App">
+        <Background />
+        <ReactRouterSetup />
+      </div>
+    </>
   );
 }
 

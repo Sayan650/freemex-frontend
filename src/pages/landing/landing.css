@@ -1,0 +1,6 @@
+.landing {
+    color : var(--text-color);
+}
+.landing h1 {
+      margin: 0px;
+}

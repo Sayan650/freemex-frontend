@@ -1,0 +1,22 @@
+.rules {
+    margin: 40px;
+}
+
+.rules h1 {
+    text-align: center;
+    font-size: 65px;
+}
+
+.rules-list {
+    box-shadow: 0 0 10px var(--shadow-color);
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    border-radius: 35px;
+    border-width: 4px;
+    border-color: blue;
+    border-style: solid;
+    padding: 45px;
+    text-align: center;
+    font-size: 22px;
+    line-height: 2rem;
+}

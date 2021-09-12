@@ -1,0 +1,13 @@
+.footer {
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.footer img{
+    width: auto;
+    height: 40px;
+}
+.footer h2{
+    margin: 10px;
+}

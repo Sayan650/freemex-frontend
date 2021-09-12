@@ -7,4 +7,5 @@ body {
 }
 :root {
   --text-color: white;
+  --shadow-color:rgb(65, 201, 255);
 }

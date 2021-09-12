@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.foliocont{
+    width: fit-content;
+    margin: auto;
+    padding: 20px ;
+}
+.foliocont .heading{
+    padding: 10px 20px;
+    color: white;
+    font-size: 30px;
+}
+.foliocont .body{
+    width: fit-content;
+    /* border:1px solid white; */
+    margin: 10px auto;
+    
+}
+.foliocont .card{
+    text-align: center;
+    border: 2px solid rgb(43, 13, 112);
+    border-radius: 6px;
+}
+.foliocont .card p{
+    color: white;
+    padding: 10px 28px;
+}
+.foliocont .card span{
+    color: green;
+}
+.msg{
+    margin: 20px 0px 0px 0px;
+    text-align: center;
+    color: green;
+    font-size: 13px;
+}
+.msg span{
+    color: white;
+}
+.stockDetails{
+    text-align: center;
+    margin: 20px;
+    color: white;
+    font-size: 20px;
+}

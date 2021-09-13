@@ -1,11 +1,27 @@
 .navbar{
-    background: rgb(3, 45, 59);
+    background-color:rgba(28, 74, 176,0.2);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0px;
+    width:100%;
+    z-index: 99;
+    height:50px;
+    display: flex;
 }
 .nav{
     display: flex;
-    padding: 10px;
-    width: 80%;
+    padding: 12px 10px;
+    width: 50%;
     margin: auto;
+}
+.logo{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+.logo img{
+    width: 160px;
+    height:31px;
 }
 .nav .links{
     margin: auto;
@@ -17,8 +33,45 @@
     border-radius: 6px;
     text-transform: uppercase;
     font-weight: 600;
+    font-size: 20px;
 }
 .nav .links a:hover{
     background-color: white;
     color: rgb(3, 45, 59);
+}
+.bag{
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    cursor: pointer;
+    display:none;
+}
+
+.bag p{
+    border: 1px solid white;
+    margin: 4px;
+    width:20px;
+    padding: 1px;
+    background-color:white;
+}
+.bag:hover{
+  background-color:white;
+  border-radius: 5px;
+}
+.bag:hover>p{
+    border-color: black;
+    background-color:black;
+
+}
+.hide{
+    display:none;
+}
+
+@media only screen and (max-width : 470px){
+    .bag{
+        display:unset;
+    }
+    .nav{
+        display:none
+    }
 }

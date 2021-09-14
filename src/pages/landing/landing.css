@@ -11,7 +11,7 @@
 }
 
 .landingWrapper {
-  /* width: 600px; */
+  width: 600px;
   box-shadow: 0 0 10px var(--shadow-color);
   background-color: transparent;
   backdrop-filter: blur(10px);
@@ -93,14 +93,15 @@
   height: 40px;
   margin-right: 5px;
 }
-.about h3{
+.about h3 {
   line-height: 1.75rem;
 }
 .rules {
-    margin: 40px;
+  margin: 40px;
 }
 
-.rules h1{
+.rules h1 {
+  margin: 25px;
   text-align: center;
   font-size: 65px;
 }
@@ -117,4 +118,29 @@
   text-align: center;
   font-size: 20px;
   line-height: 2rem;
+}
+@media only screen and (max-width : 768px){
+  .landingWrapper {
+    width: 325px;
+  }
+  .Logo img {
+    height: 45px;
+    width: auto;
+  }
+  .react-typewriter-text {
+    margin: 30px 7px !important;
+    font-size: 20px !important;
+  }
+  .auth img {
+    width: auto;
+    height: 25px;
+  }
+  .google{
+    height: 60px;
+    width:60px;
+  }
+  .github{
+     height: 60px;
+     width:60px;
+  }
 }

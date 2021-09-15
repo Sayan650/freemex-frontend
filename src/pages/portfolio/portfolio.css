@@ -3,17 +3,23 @@
     padding: 0;
 }
 .portfolio{
-    width: fit-content;
+    width: auto;
+    height: fit-content;
     margin: auto;
     min-height: 80vh;
-    padding: 30px 20px ;
-   
+    padding: 30px 0px;
+       
 }
 .portfolio .heading{
     padding: 20px 20px;
     color: white;
-    font-size: 50px;
     text-align: center;
+    width:fit-content;
+    margin: auto;
+    /* font-size: 50px; */
+}
+.portfolio .heading h1{
+    font-size: 100px;
 }
 .portfolio .body{
     width: fit-content;
@@ -58,7 +64,7 @@
     font-size: 20px;
 }
 .stockDetails h2{
-    font-size: 45px;
+    font-size: 65px;
     margin-bottom: 30px;
 }
 .stockDetails .cards{
@@ -182,6 +188,8 @@
     background-color:rgb(140, 16, 140);
 }
 
+/* css for modal */
+
 .ReactModal__Overlay{
     background-color: rgba(0, 0, 0, 0.4)!important;
 }
@@ -243,4 +251,54 @@
     background-color:transparent;
     padding: 4px 14px 4px 5px;
     border: 1px solid red;
+}
+
+@media only screen and (max-width : 900px){
+    .portfolio{
+        padding-top: 40px;
+    }
+    .portfolio .heading h1{
+        
+    }
+}
+
+@media only screen and (max-width :450px){
+    .portfolio{
+        padding-top: 40px;
+    }
+    .portfolio .heading h1{
+        font-size: 21.5vw;
+    }
+    .portfolio .card{
+        padding:10px;
+    }
+    .stockDetails h2{
+        font-size: 15vw;
+    }
+    .portfolio .body{
+        width: 300px;
+    }
+    .ReactModal__Content{
+        width:auto;}
+}
+
+
+@media only screen and (max-width :305px){
+    .portfolio .heading h1{
+        font-size: 21vw;
+    }
+    .portfolio .card{
+        width: 250px;
+        margin: auto;
+    }
+    .portfolio .body{
+        width: 280px;
+    }
+    .stockDetails{
+        width: 280px;
+    }
+    .stockDetails .stockscard{
+        width:250px;
+        margin: auto;
+    }
 }

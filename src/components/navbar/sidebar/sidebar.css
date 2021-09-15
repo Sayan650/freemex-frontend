@@ -1,0 +1,35 @@
+.sidebar {
+      height: 100%;
+      background: var(--background-color);
+      color: var(--text-color);
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 70%;
+      max-width: 320px;
+      z-index: 200;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: column;
+      cursor: pointer;
+}
+.menuList {
+    list-style: none;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 60px;
+}
+
+.menuListItem {
+    margin: 15px 30px;
+    font-size: 1.25rem;
+}
+.menuListItem :hover {
+    color: rgb(45, 45, 246);
+}
+.menuListItem a {
+    text-decoration: none;
+    color: var(--text-color);
+}

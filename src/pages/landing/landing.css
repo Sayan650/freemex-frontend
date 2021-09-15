@@ -11,6 +11,7 @@
 }
 
 .landingWrapper {
+  margin-top: 200px;
   width: 600px;
   box-shadow: 0 0 10px var(--shadow-color);
   background-color: transparent;
@@ -87,6 +88,7 @@
   justify-content: center;
   align-items: center;
   margin: 25px;
+  margin-top: 85px;
 }
 .about img {
   width: auto;
@@ -122,10 +124,14 @@
 @media only screen and (max-width : 768px){
   .landingWrapper {
     width: 325px;
+    margin: 0px;
   }
   .Logo img {
     height: 45px;
     width: auto;
+  }
+  .about {
+    margin-top: 0px;
   }
   .react-typewriter-text {
     margin: 30px 7px !important;

@@ -1,12 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+    font-family: 'Raleway',
+    sans-serif;
 }
 :root {
   --text-color: white;
   --shadow-color: rgb(65, 201, 255);
-  --background-color:rgba(53, 53, 102, 0.85);
+  --background-color: rgba(8, 19, 114, 0.8);
 }

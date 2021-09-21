@@ -1,94 +1,58 @@
-.landingPage {
-  color: var(--text-color);
-}
 
-.landing {
+.landingPage {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 80vh;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
-.landingWrapper {
-  margin-top: 200px;
-  width: 600px;
+.landing {
+  margin-top: 100px;
+  display: flex;
+  width: 100%;
+  height: 60vh;
   box-shadow: 0 0 10px var(--shadow-color);
-  background-color: transparent;
-  backdrop-filter: blur(10px);
+  background-color: var(--background-color);
   border-radius: 35px;
-  padding: 45px 0px;
-  text-align: center;
+  padding: 45px;
+  justify-content: space-between;
+  align-items: center;
 }
 .Logo {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
 }
 .Logo img {
-  height: 90px;
+  height: 100px;
   width: auto;
 }
 .react-typewriter-text {
-  text-align: center !important;
-  margin: 40px 15px !important;
+  margin: 40px 0px !important;
   font-size: 35px !important;
+  color: var(--text-color);
 }
 .auth img {
   width: auto;
-  height: 35px;
+  height: 45px;
+  margin-right: 40px;
+  cursor: pointer;
+}
+.auth img:hover {
+  filter: invert(50%) contrast(100%);
 }
 .auth {
   width: 100%;
   display: flex;
-  justify-content: center;
-}
-.authWrapper {
-  width: 70%;
-  display: flex;
-  justify-content: space-between;
-}
-.google {
-  border-color: rgb(179, 7, 7);
-  background-color: rgb(179, 7, 7);
-  border-width: 3px;
-  border-style: solid;
-  height: 90px;
-  width: 90px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  object-fit: cover;
-  border-radius: 100px;
-}
-.google:hover {
-  cursor: pointer;
-  background-color: transparent;
-}
-
-.github {
-  border-color: red;
-  background-color: red;
-  border-width: 3px;
-  border-style: solid;
-  height: 90px;
-  width: 90px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  object-fit: cover;
-  border-radius: 100px;
-}
-.github:hover {
-  cursor: pointer;
-  background-color: transparent;
 }
 
 .about {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 25px;
+  margin: 50px;
   margin-top: 85px;
+  color: var(--text-color);
 }
 .about img {
   width: auto;
@@ -98,55 +62,74 @@
 .about h3 {
   line-height: 1.75rem;
 }
-.rules {
-  margin: 40px;
-}
-
-.rules h1 {
-  margin: 25px;
-  text-align: center;
-  font-size: 65px;
-}
-
 .notes {
-  box-shadow: 0 0 10px var(--shadow-color);
-  background-color: transparent;
-  backdrop-filter: blur(10px);
-  border-radius: 35px;
-  border-width: 4px;
-  border-color: blue;
-  border-style: solid;
-  padding: 45px;
+  margin: 50px;
+  color: var(--text-color);
+}
+
+.notes h1 {
+  margin: 25px;
+  font-size: 65px;
   text-align: center;
+}
+
+.notesWrapper {
+  box-shadow: 0 0 10px var(--shadow-color);
+   background-color: var(--background-color);
+  border-radius: 35px;
+  padding: 35px;
   font-size: 20px;
   line-height: 2rem;
+  display: flex;
+  justify-content: center;
+}
+.landingIllustration {
+  display: none;
 }
 @media only screen and (max-width : 768px){
-  .landingWrapper {
-    width: 325px;
-    margin: 0px;
+  .landingIllustration2 {
+    display: none;
+  }
+  .landingIllustration {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .landingIllustration img {
+    height: auto;
+    width: 250px;
+  }
+  .landing {
+    margin-top: 65px;
+          width: 80%;
+          height: 550px;
+          padding: 20px;
+          justify-content: center;
+  }
+  .Logo {
+    justify-content: center;
   }
   .Logo img {
     height: 45px;
     width: auto;
   }
-  .about {
-    margin-top: 0px;
-  }
   .react-typewriter-text {
     margin: 30px 7px !important;
     font-size: 20px !important;
+    text-align: center !important;
+  }
+  .auth {
+    justify-content: center;
   }
   .auth img {
     width: auto;
-    height: 25px;
+    height: 30px;
+    margin: 0 30px;
   }
-  .google{
-    height: 60px;
-    width:60px;
+  .about {
+    margin: 30px;
   }
-  .github{
-     height: 60px;
-     width:60px;
+  .notes {
+    margin: 25px;
   }
 }

@@ -29,35 +29,37 @@ const Nav = () => {
   return (
     <>
       <div className="navbar">
-        <div className="logo">
-          <a href="/">
-            <img src="Images/logo.png" alt="" />
-          </a>
-        </div>
-        <div className="nav">
-          <div className="links">
-            <a href="/portfolio">Portfolio</a>
-          </div>
-          <div className="links">
-            <a href="/" onClick={(e) => openModal(e)}>
-              Rules
+        <div className="navbarWrapper">
+          <div className="logo">
+            <a href="/">
+              <img src="Images/logo.png" alt="" />
             </a>
           </div>
-          <div className="links">
-            <a href="/market">Market</a>
+          <div className="nav">
+            <div className="links">
+              <a href="/portfolio">Portfolio</a>
+            </div>
+            <div className="links">
+              <a href="/" onClick={(e) => openModal(e)}>
+                Rules
+              </a>
+            </div>
+            <div className="links">
+              <a href="/market">Market</a>
+            </div>
+            <div className="links">
+              <a href="/transactions">Transaction</a>
+            </div>
+            <div className="links">
+              <a href="/leaderboard">leaderboard</a>
+            </div>
+            <div className="links">
+              <a href="/">Logout</a>
+            </div>
           </div>
-          <div className="links">
-            <a href="/transactions">Transaction</a>
+          <div className="icon" onClick={drawerOpenHandler}>
+            <img src="Images/menu.png" alt="" />
           </div>
-          <div className="links">
-            <a href="/leaderboard">leaderboard</a>
-          </div>
-          <div className="links">
-            <a href="/">Logout</a>
-          </div>
-        </div>
-        <div className="icon" onClick={drawerOpenHandler}>
-          <img src="Images/menu.png" alt="" />
         </div>
       </div>
       {sidebarOpen ? (

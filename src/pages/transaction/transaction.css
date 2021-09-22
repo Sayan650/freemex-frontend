@@ -1,0 +1,129 @@
+.Transaction {
+    margin: auto;
+    width: auto;
+    padding-top: 40px;
+    min-height: 88vh;
+}
+
+.Transactionhead{
+    margin: 10px auto;
+    text-align: center;
+}
+
+.Transactionhead h1 {
+    color: white;
+    padding: 20px;
+    font-size: 120px;
+}
+.Transactionhead h2 {
+    padding: 20px;
+        color:var(--text-color);
+}
+.Transactionhead span {
+   color: var(--text-green-color);
+}
+
+
+
+.Transactionhead .searchbox {
+    margin: auto;
+    width: fit-content;
+    position: relative;
+}
+
+.Transactionhead .searchbox input {
+    background-color: transparent;
+    outline: none;
+    border: 2px solid var(--shadow-color);
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 20px;
+    width: 350px;
+    color: white;
+}
+
+.transactionBody {
+    margin: 20px auto;
+    width: 75%;
+}
+
+.transactionTable {
+    width: 100%;
+    /* border: 2px solid var(--shadow-color); */
+    margin: auto;
+}
+ .transactionTableHead, .row {
+    display: flex;
+    color: white;
+}
+ li {
+    list-style: none;
+    margin: 0px;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+}
+
+.transactionTableHead li {
+    font-weight: 900;
+    background-color: rgba(173, 216, 230, 0.2);
+    backdrop-filter: blur(10px);
+    font-size: 18px;
+
+}
+
+.searchIcon {
+    position: absolute;
+    top: 10px;
+    right: 11px;
+    color: white;
+    cursor: pointer;
+}
+
+.searchIcon:hover {
+    color: var(--shadow-color)
+}
+.brought {
+    color: var(--text-green-color);
+}
+.sold {
+    color : red;
+}
+@media only screen and (max-width :750px) {
+    .Transactionhead h1 {
+        font-size: 13vw;
+    }
+
+    .transactionBody {
+        width: 95vw;
+    }
+}
+
+@media only screen and (max-width :500px) {
+    .Transactionhead .searchbox input {
+        width: 60vw;
+
+        font-size: 16px;
+    }
+
+    .Transactionhead h1 {
+        font-size: auto;
+    }
+
+    .transactionBody {
+        width: 98%;
+    }
+
+    .transactionTableHead li {
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .searchIcon {
+        top: 6px;
+    }
+
+    .transactionTableBody li {
+        font-size: 12px;
+    }
+}

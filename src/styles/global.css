@@ -13,4 +13,7 @@ body {
   --text-color: white;
   --shadow-color: rgb(65, 201, 255);
   --background-color: rgba(8, 19, 114, 0.8);
+  --hover-color:rgb(88, 249, 255);
+  --button-color: blue;
+  --text-green-color: rgb(19, 255, 19);
 }

@@ -27,7 +27,7 @@
     font-size: 1.25rem;
 }
 .menuListItem :hover {
-    color: rgb(45, 45, 246);
+    color: var(--hover-color);
 }
 .menuListItem a {
     text-decoration: none;

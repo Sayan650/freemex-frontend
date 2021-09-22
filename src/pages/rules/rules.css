@@ -14,16 +14,12 @@
     background-color: transparent;
     backdrop-filter: blur(10px);
     border-radius: 35px;
-    border-width: 4px;
-    border-color: blue;
-    border-style: solid;
     padding: 45px;
-    text-align: center;
     font-size: 22px;
     line-height: 2rem;
 }
 .rules-list a{
- color: blue;
+ color: var(--hover-color);
 }
 .ReactModal__Content {
     background-color:var(--background-color) !important;
@@ -36,9 +32,9 @@
     justify-content: center;
 }
 .close {
-    background-color: blue;
+    background-color: var(--button-color);
     border-style: solid;
-    border-color: blue;
+    border-color: var(--button-color);
     color: var(--text-color);
     text-align: center;
     padding: 5px 15px;

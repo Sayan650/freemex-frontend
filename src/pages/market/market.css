@@ -1,0 +1,175 @@
+.Market {
+    margin: auto;
+    width: auto;
+    padding-top: 40px;
+    min-height: 88vh;
+}
+
+.Markethead{
+    margin: 10px auto;
+    text-align: center;
+}
+
+.Markethead h1 {
+    color: white;
+    padding: 20px;
+    font-size: 120px;
+}
+.Markethead h2 {
+    padding: 20px;
+        color:var(--text-color);
+}
+.Markethead span {
+   color: var(--text-green-color);
+}
+
+
+
+.Markethead .searchbox {
+    margin: auto;
+    width: fit-content;
+    position: relative;
+}
+
+.Markethead .searchbox input {
+    background-color: transparent;
+    outline: none;
+    border: 2px solid var(--shadow-color);
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 20px;
+    width: 350px;
+    color: white;
+}
+.searchIcon {
+    position: absolute;
+    top: 10px;
+    right: 11px;
+    color: white;
+    cursor: pointer;
+}
+
+.searchIcon:hover {
+    color: var(--shadow-color)
+}
+.updated{
+    margin: 60px 0px 30px 0px;
+    text-align: center;
+    color: var(--text-color);
+    font-size: 20px;
+}
+.updated span{
+    color: var(--text-green-color);
+}
+.stockscard h2{
+    font-size: 65px;
+    margin-bottom: 30px;
+}
+.stockscard .cards{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: auto;
+}
+.stockscard .cards .scard{
+    margin: auto;
+    width: fit-content;
+    text-align: center;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border-style: solid;
+    border: none;
+    box-shadow: 5px 4px 0px 2px var(--shadow-color);
+    padding: 20px;
+    font-size: 20px;
+    text-align: left;
+    width:15rem;
+    background-color:rgba(28, 74, 176,0.4);
+}
+.stockscard .nameStock{
+    font-weight: 800;
+    color: var(--text-color);
+}
+
+.stockscard .nStock{
+    font-size: 12px;
+    color: rgb(160, 160, 160);
+    margin: 2px 0px;
+}
+
+.stockscard .noStocks{
+    font-size: 16px;
+    color: rgb(140, 16, 140);
+    margin-bottom: 20px;
+}
+.stockscard .priceStocks{
+    font-weight: 700;
+    font-size: 18px;
+    position: relative;
+      color: var(--text-color);
+}
+.stockscard .priceStocks span{
+    position: absolute;
+    right: 0px;
+    color: red;
+}
+.stockscard .priceStocks .downIcon{
+    font-size: 19px;
+    stroke-width: 2;
+    margin: -3px;
+}
+.stockscard .updateStocks{
+    font-size: 12px;
+    color: rgb(160, 160, 160);
+    position: relative;
+    margin: 3px 0px 10px 0px;
+}
+.stockscard .updateStocks .span{
+    position: absolute;
+    right: 0px;
+}
+
+.stockscard .buybutton{
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.stockscard .buymore{
+    padding: 4px 8px;
+    border-radius: 5px;
+    border: 1px solid rgba(28, 74, 176,0.4);
+    background-color:rgb(140, 16, 140);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 16px;
+    outline: none;
+}
+.stockscard .buymore:hover{
+    background-color:transparent;
+    border: 1px solid rgb(140, 16, 140);
+    /* color: rgb(140, 16, 140); */
+    backdrop-filter: blur(10px);
+    
+}
+@media only screen and (max-width :750px) {
+    .Markethead h1 {
+        font-size: 13vw;
+    }
+}
+@media only screen and (max-width :500px) {
+    .Markethead .searchbox input {
+        width: 60vw;
+
+        font-size: 16px;
+    }
+
+    .Markethead h1 {
+        font-size: auto;
+    }
+       .searchIcon {
+        top: 6px;
+    }
+}

@@ -4,6 +4,7 @@ import LandingSection from "./pages/landing/landing";
 import Portfolio from "./pages/portfolio/portfolio";
 import Leaderboard from "./pages/leaderboard/leaderboard"
 import Transaction from "./pages/transaction/transaction";
+import Market from "./pages/market/market";
 
 const ReactRouterSetup = () => {
     return (
@@ -14,6 +15,9 @@ const ReactRouterSetup = () => {
                 </Route>
                 <Route exact path="/portfolio">
                     <Portfolio />
+                </Route>
+                  <Route exact path="/market">
+                    <Market />
                 </Route>
                 <Route exact path="/leaderboard">
                     <Leaderboard/>

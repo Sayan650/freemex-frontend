@@ -41,21 +41,21 @@
   font-size: 20px;
 }
 .links a:hover {
-  outline-style: solid;
+  /* outline-style: solid;
   padding: 5px;
   outline-color: var(--shadow-color);
-  outline-width: 2px;
+  outline-width: 2px; */
   color: var(--shadow-color);
 }
-
+.links a:active {
+  color: var(--shadow-color);
+}
 .icon {
   right: 10px;
   cursor: pointer;
   display: none;
 }
-/* .icon img:hover{
-  border-: solid;
-} */
+
 
 .hide {
   display: none;

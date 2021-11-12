@@ -21,13 +21,12 @@
 .rules-list a{
  color: var(--hover-color);
 }
-.ReactModal__Content {
-    background-color:var(--background-color) !important;
+.rulesmodal {
+    background-color:var(--background-color);
     width: 50vw;
-
-    overflow: scroll;
+    overflow: hidden;
     border-radius: 35px !important;
-    scrollbar-width: thin !important;
+    scrollbar-width: 0.5px !important;
      display: flex;
     justify-content: center;
 }
@@ -54,7 +53,7 @@
 
 }
 @media only screen and (max-width : 900px) {
-    .ReactModal__Content {
+    .rulesmodal{
         width: 80vw;
          border-radius: 15px !important;
          max-height: 85vh;

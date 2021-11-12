@@ -1,5 +1,6 @@
 import "./rules.css";
 
+
 function Rules() {
     return (
         <>

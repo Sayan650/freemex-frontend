@@ -68,7 +68,7 @@ const Nav = () => {
         <Sidebar state={false} />
       )}
       {sidebarOpen ? <Backdrop closeHandler={backdropClickHandler} /> : <></>}
-      <Modal isOpen={rules} onRequestClose={() => setRules(false)}>
+      <Modal isOpen={rules} onRequestClose={() => setRules(false)} className="rulesmodal">
         <div className="">
           <Rules />
           <div className="btn">

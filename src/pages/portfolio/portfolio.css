@@ -198,7 +198,7 @@
     width: 350px;
     margin: 30px auto;
     height: fit-content;
-    background-color: rgba(0, 0, 0, 0.6)!important;
+    background-color: var(--background-color) !important;
     backdrop-filter: blur(12px);
     border: 2px solid var(--shadow-color)!important;
     padding: 0px!important;
@@ -257,9 +257,7 @@
     .portfolio{
         padding-top: 40px;
     }
-    .portfolio .heading h1{
-        
-    }
+ 
 }
 
 @media only screen and (max-width :450px){

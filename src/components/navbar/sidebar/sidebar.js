@@ -43,7 +43,7 @@ function Sidebar({ state, closeHandler }) {
       ) : (
         <></>
       )}
-      <Modal isOpen={rules} onRequestClose={() => setRules(false)}>
+      <Modal isOpen={rules} onRequestClose={() => setRules(false)} className="rulesmodal">
         <div className="">
           <Rules />
           <div className="btn">

@@ -1,7 +1,27 @@
 import "./landing.css";
 import TypeWriterEffect from "react-typewriter-effect";
 
+
 function LandingSection() {
+
+  const googleLogin = async (e)=> {
+    e.preventDefault();
+
+    
+
+    // const res = await fetch(`https://localhost:8000/google`,{
+    //   method: 'GET',
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   credentials: "include",
+    // })
+
+    // const result = res.json();
+    // console.log(result)
+
+  }
+
   return (
     <>
       <div className="landingPage">
@@ -21,7 +41,7 @@ function LandingSection() {
               typeSpeed={150}
             />
             <div className="auth">
-              <img src="Images/googlewhite.png" alt="" />
+              <img src="Images/googlewhite.png" alt="" onClick={googleLogin}/>
               <img src="Images/github.png" alt="" />
             </div>
           </div>

@@ -7,6 +7,16 @@ const Leaderboard = () => {
 
     useEffect(()=>{
         inputRef.current.focus()
+
+        fetch('http://localhost:8000/google',{
+            method: 'GET',
+            headers:{
+                Accept: 'application/json',
+                "Content-Type": 'application/json'
+            }
+        }).then((res)=>{
+            res.json().then((data)=>{console.log(data)})
+        }).catch((err)=>{console.log(err)})
     },[])
 
     return (

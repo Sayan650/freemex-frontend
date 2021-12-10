@@ -1,7 +1,18 @@
 import "./landing.css";
 import TypeWriterEffect from "react-typewriter-effect";
+// import app from "../../setupProxy";
+//  import { Link } from "react-router-dom";
+//  import {useCallback } from "react";
 
 function LandingSection() {
+
+   const submit = (e) => {
+    e.preventDefault();
+        fetch('/api/players')
+      // .then(response => response.json())
+  .then(res => res.text())          // convert to plain text
+  .then(text => console.log(text))  
+  };
   return (
     <>
       <div className="landingPage">
@@ -21,7 +32,8 @@ function LandingSection() {
               typeSpeed={150}
             />
             <div className="auth">
-              <img src="Images/googlewhite.png" alt="" />
+
+              <img src="Images/googlewhite.png" alt="" onClick={submit}/>
               <img src="Images/github.png" alt="" />
             </div>
           </div>

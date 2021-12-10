@@ -1,64 +1,68 @@
 .rules {
-    margin: 20px;
-    color: var(--text-color);
-      scrollbar-width: thin !important;
+  margin: 20px;
+  color: var(--text-color);
+  scrollbar-width: thin !important;
 }
 
 .rules h1 {
-    text-align: center;
-    font-size: 65px;
+  text-align: center;
+  font-size: 65px;
 }
 
 .rules-list {
-    /* box-shadow: 0 0 10px var(--shadow-color); */
-    background-color: transparent;
-    backdrop-filter: blur(10px);
-    border-radius: 35px;
-    padding: 45px;
-    font-size: 22px;
-    line-height: 2rem;
+  /* box-shadow: 0 0 10px var(--shadow-color); */
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  border-radius: 35px;
+  padding: 45px;
+  font-size: 22px;
+  line-height: 2rem;
 }
-.rules-list a{
- color: var(--hover-color);
+.rules-list a {
+  color: var(--hover-color);
 }
 .rulesmodal {
-    background-color:var(--background-color);
-    width: 50vw;
-    overflow: hidden;
-    border-radius: 35px !important;
-    scrollbar-width: 0.5px !important;
-     display: flex;
-    justify-content: center;
+  background-color: var(--background-color);
+  width: 50vw;
+  overflow: auto;
+  border-radius: 35px !important;
+  scrollbar-width: 0.5px !important;
+  display: flex;
+  justify-content: center;
 }
 .close {
-    background-color: var(--button-color);
-    border-style: solid;
-    border-color: var(--button-color);
-    color: var(--text-color);
-    text-align: center;
-    padding: 5px 15px;
-    font-size: 20px;
-    border-radius: 7px;
-    cursor: pointer;
-    box-shadow: 0 0 2px var(--shadow-color);
-        margin-bottom: 30px;
+  background-color: var(--button-color);
+  border-style: solid;
+  border-color: var(--button-color);
+  color: var(--text-color);
+  text-align: center;
+  padding: 5px 15px;
+  font-size: 20px;
+  border-radius: 7px;
+  cursor: pointer;
+  box-shadow: 0 0 2px var(--shadow-color);
+  margin-bottom: 30px;
 }
 .close:hover {
-    background-color: transparent;
+  background-color: transparent;
 }
-.btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-@media only screen and (max-width : 900px) {
-    .rulesmodal{
-        width: 80vw;
-         border-radius: 15px !important;
-         max-height: 85vh;
-    }
-    .rules-list {
-        padding: 10px;
-    }
+@media only screen and (max-width: 900px) {
+  .rulesmodal {
+    width: 80vw;
+    border-radius: 15px !important;
+    max-height: 85vh;
+    
+  }
+  /* .ReactModal__Content {
+    scrollbar-width: 0.5px !important;
+  } */
+  .rules-list {
+    padding: 10px;
+    font-size: 18px;
+  }
 }

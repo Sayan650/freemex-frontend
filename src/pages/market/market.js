@@ -20,8 +20,11 @@ function Market() {
       socketRef.current = io.connect("http://localhost:8000", { transports: ['websocket'] })
       console.log("connection is done")
       socketRef.current.on("market", (res) => {
-        console.log(res);
-        setData(res)
+        const t = res.sort(function(a,b){
+          return a.id - b.id
+        })
+        console.log(t[0])
+        setData(t)
       })
       return () => socketRef.current.disconnect()
     },

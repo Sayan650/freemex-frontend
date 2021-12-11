@@ -1,24 +1,10 @@
 import "./landing.css";
 import TypeWriterEffect from "react-typewriter-effect";
-// import app from "../../setupProxy";
- import { Link } from "react-router-dom";
-//  import {useCallback } from "react";
+//  import { Link } from "react-router-dom";
 
 
 function LandingSection() {
 
-  //  const submit = (e) => {
-  //   e.preventDefault();
-  //       fetch('/auth/google',{
-  //           method: 'GET',
-  //           headers:{
-  //               Accept: 'application/json',
-  //               "Content-Type": 'application/json'
-  //           }
-  //       }).then((res)=>{
-  //           res.json().then((data)=>{console.log(data)})
-  //       }).catch((err)=>{console.log(err)})
-  //   }
   return (
     <>
       <div className="landingPage">
@@ -40,7 +26,8 @@ function LandingSection() {
             <div className="auth">
           <a href="/auth/google">
               <img src="Images/googlewhite.png" alt=""/></a>
-              <img src="Images/github.png" alt="" />
+                <a href="/auth/github">
+              <img src="Images/github.png" alt="" /></a>
             </div>
           </div>
           <div className="landingIllustration2">

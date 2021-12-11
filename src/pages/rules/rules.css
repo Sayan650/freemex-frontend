@@ -23,7 +23,7 @@
 }
 .rulesmodal {
   background-color: var(--background-color);
-  width: 50vw;
+  width: 50vw !important;
   overflow: auto;
   border-radius: 35px !important;
   scrollbar-width: 0.5px !important;

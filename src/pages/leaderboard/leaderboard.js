@@ -24,7 +24,7 @@ const Leaderboard = () => {
                 <h1>Leaderboard</h1>
                 <div className="searchbox" >
                     <SearchIcon className="searchIcon"/>
-                    <input type="text" ref={inputRef} />
+                    <input type="text" ref={inputRef} key="input"/>
                 </div>
             </div>
             <div className="leaderboardbody">
@@ -37,12 +37,12 @@ const Leaderboard = () => {
                         <li>Total Asset</li>
                     </div>
                     {players.map((play, i) => (
-                    <div className="tableBody">
-                        <div className="row">
-                            <li>{i+1}</li>
+                    <div key={i} className="tableBody">
+                        <div key="row" className="row">
+                            <li key="no">{i+1}</li>
                             {/* <li>Amool</li> */}
-                            <li>{play.username}</li>
-                            <li>{play.valueInTotal}</li>
+                            <li key="name">{play.username}</li>
+                            <li key="value">{play.valueInTotal}</li>
                         </div>
                     </div>
                     ))}

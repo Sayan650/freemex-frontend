@@ -1,5 +1,5 @@
 import "./navbar.css";
-import { useState } from "react";
+import React,{useState, useCallback,useEffect} from 'react'
 import Sidebar from "./sidebar/sidebar";
 import Backdrop from "./backdrop";
 import Modal from "react-modal";
@@ -8,6 +8,8 @@ import Rules from "../../pages/rules/rules";
 Modal.setAppElement("#root");
 
 const Nav = () => {
+
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [rules, setRules] = useState(false);
 
@@ -26,6 +28,17 @@ const Nav = () => {
   const closeModal = (e) => {
     setRules(false);
   };
+         const [player, setPlayer] = useState([]);
+  const getPlayer = useCallback(async () => {
+    const response = await fetch('/api/players');
+    const player = await response.json();
+    setPlayer(player.player);
+  }, []);
+
+  useEffect(() => {
+    getPlayer();
+  }, [getPlayer]);
+  console.log (player);
   return (
     <>
       <div className="navbar">
@@ -36,6 +49,16 @@ const Nav = () => {
             </a>
           </div>
           <div className="nav">
+             {player.length === 0 ? (<>
+             <div className="links">
+              <a href="/leaderboard">leaderboard</a>
+            </div>
+               <div className="links">
+              <a href="/" onClick={(e) => openModal(e)}>
+                Rules
+              </a>
+            </div>
+             </>) : (<>
             <div className="links">
               <a href="/portfolio">Portfolio</a>
             </div>
@@ -54,8 +77,9 @@ const Nav = () => {
               <a href="/leaderboard">leaderboard</a>
             </div>
             <div className="links">
-              <a href="/">Logout</a>
+              <a href="/auth/logout">Logout</a>
             </div>
+            </> )}
           </div>
           <div className="icon" onClick={drawerOpenHandler}>
             <img src="Images/menu.png" alt="" />

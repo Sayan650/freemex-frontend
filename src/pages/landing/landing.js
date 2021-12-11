@@ -1,10 +1,20 @@
 import "./landing.css";
 import TypeWriterEffect from "react-typewriter-effect";
-//  import { Link } from "react-router-dom";
-
-
+import React,{useState, useCallback,useEffect} from 'react'
+import Navbar from "../../components/navbar/navbar";
 function LandingSection() {
 
+        const [player, setPlayer] = useState([]);
+  const getPlayer = useCallback(async () => {
+    const response = await fetch('/api/players');
+    const player = await response.json();
+    setPlayer(player.player);
+  }, []);
+
+  useEffect(() => {
+    getPlayer();
+  }, [getPlayer]);
+  console.log (player);
   return (
     <>
       <div className="landingPage">
@@ -25,9 +35,10 @@ function LandingSection() {
             />
             <div className="auth">
           <a href="/auth/google">
-              <img src="Images/googlewhite.png" alt=""/></a>
-                <a href="/auth/github">
+              <img src="Images/googlewhite.png" alt="" /></a>
+              <a href="/auth/github">
               <img src="Images/github.png" alt="" /></a>
+     
             </div>
           </div>
           <div className="landingIllustration2">
@@ -56,6 +67,13 @@ function LandingSection() {
           </ul>
         </div>
       </div>
+                  {player.length === 0
+        ?  "" :  ( 
+          <div className="">
+            <Navbar nav={player} />
+          </div>) (
+          window.location.href="/portfolio" )
+        }
     </>
   );
 }

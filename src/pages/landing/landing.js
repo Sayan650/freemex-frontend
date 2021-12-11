@@ -2,6 +2,11 @@ import "./landing.css";
 import TypeWriterEffect from "react-typewriter-effect";
 
 function LandingSection() {
+
+  const googleLogin = async (e)=> {
+    e.preventDefault();
+  }
+
   return (
     <>
       <div className="landingPage">

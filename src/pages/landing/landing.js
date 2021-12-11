@@ -1,18 +1,24 @@
 import "./landing.css";
 import TypeWriterEffect from "react-typewriter-effect";
 // import app from "../../setupProxy";
-//  import { Link } from "react-router-dom";
+ import { Link } from "react-router-dom";
 //  import {useCallback } from "react";
+
 
 function LandingSection() {
 
-   const submit = (e) => {
-    e.preventDefault();
-        fetch('/api/players')
-      // .then(response => response.json())
-  .then(res => res.text())          // convert to plain text
-  .then(text => console.log(text))  
-  };
+  //  const submit = (e) => {
+  //   e.preventDefault();
+  //       fetch('/auth/google',{
+  //           method: 'GET',
+  //           headers:{
+  //               Accept: 'application/json',
+  //               "Content-Type": 'application/json'
+  //           }
+  //       }).then((res)=>{
+  //           res.json().then((data)=>{console.log(data)})
+  //       }).catch((err)=>{console.log(err)})
+  //   }
   return (
     <>
       <div className="landingPage">
@@ -32,8 +38,8 @@ function LandingSection() {
               typeSpeed={150}
             />
             <div className="auth">
-
-              <img src="Images/googlewhite.png" alt="" onClick={submit}/>
+          <a href="/auth/google">
+              <img src="Images/googlewhite.png" alt=""/></a>
               <img src="Images/github.png" alt="" />
             </div>
           </div>

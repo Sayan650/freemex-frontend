@@ -5,7 +5,7 @@ const BE_URL = process.env.BE_URL || 'http://localhost:8000'
 
 module.exports = function(app) {
     app.use(
-        /^\/(api|auth|socket.io)/,
+        /^\/(api|auth|socket.io|sockjs-node)/,
         createProxyMiddleware({
             target: BE_URL,
             ws: true

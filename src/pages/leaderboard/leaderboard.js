@@ -1,14 +1,33 @@
 import "./leaderboard.css"
 import SearchIcon from '@material-ui/icons/Search';
-import React,{useRef,useEffect} from 'react'
+import React,{useState,useRef,useEffect, useCallback} from 'react'
 
 const Leaderboard = () => {
     const inputRef = useRef()
+  const [players, setPlayers] = useState([]);
+    // useEffect(()=>{
+    //     inputRef.current.focus()
 
-    useEffect(()=>{
-        inputRef.current.focus()
-    },[])
+    //     fetch('/api/players?sort=true',{
+    //         method: 'GET',
+    //         headers:{
+    //             Accept: 'application/json',
+    //             "Content-Type": 'application/json'
+    //         }
+    //     }).then((res)=>{
+    //         res.json().then((data)=>{console.log(data)})
+    //     }).catch((err)=>{console.log(err)})
+    // },[])
+  const getPlayers = useCallback(async () => {
+    const response = await fetch('/api/players?sort=true');
+    const players = await response.json();
+     setPlayers(players);
+  }, []);
 
+  useEffect(() => {
+    getPlayers();
+  }, [getPlayers]);
+  console.log(players);
     return (
         <div className="leaderboard">
             <div className="leaderboardhead">

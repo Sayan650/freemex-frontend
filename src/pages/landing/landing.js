@@ -5,15 +5,16 @@ import Navbar from "../../components/navbar/navbar";
 function LandingSection() {
 
         const [player, setPlayer] = useState([]);
+        const url='/api/players';
   const getPlayer = useCallback(async () => {
-    const response = await fetch('/api/players');
+    const response = await fetch(url);
     const player = await response.json();
     setPlayer(player.player);
-  }, []);
+  }, [url]);
 
   useEffect(() => {
     getPlayer();
-  }, [getPlayer]);
+  }, [url, getPlayer]);
   console.log (player);
   return (
     <>
@@ -73,7 +74,7 @@ function LandingSection() {
             <Navbar nav={player} />
           </div>) (
           window.location.href="/portfolio" )
-        }
+          }
     </>
   );
 }

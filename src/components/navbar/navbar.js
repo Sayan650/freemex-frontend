@@ -38,7 +38,6 @@ const Nav = () => {
   useEffect(() => {
     getPlayer();
   }, [getPlayer]);
-  console.log (player);
   return (
     <>
       <div className="navbar">

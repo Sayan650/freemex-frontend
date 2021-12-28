@@ -14,7 +14,11 @@ function Market() {
   const socketRef = useRef()
   const [BUYmodal, setbuyModal] = useState(false);
   const [data, setData] = useState([])
-
+  const [StockId,setStockId] = useState([]);
+  const [maxBuyStock, setmaxBuyStock] = useState();
+  const [quantity,setQuantity] = useState();
+  const [cashInHand, setcashInHand] = useState(500000);
+  
   useEffect(
     () => {
       socketRef.current = io.connect("http://localhost:8000", { transports: ['websocket'] })
@@ -23,29 +27,50 @@ function Market() {
         const t = res.sort(function(a,b){
           return a.id - b.id
         })
-        console.log(t[0])
+        // console.log(t[0])
         setData(t)
       })
       return () => socketRef.current.disconnect()
     },
     []
   )
+  
 
   useEffect(() => {
     inputRef.current.focus();
   }, []);
-  const openModal = (e) => {
+  const openModal = (e,i) => {
+    // console.log(e.target,i,data[i])
+    setStockId([data[i].code,i])
+    const n = Math.floor(cashInHand/data[i].latestPrice)
+    // console.log(cashInHand/data[i].latestPrice)
+    setmaxBuyStock(n)
     setbuyModal(true);
-    const t = [1, 3, 4, 5, 6]
-    console.log(typeof (data), typeof (t), data[0].name)
-    // for (let i = 0; i < data.length; i++) {
-    //   const element = data[i];
-    //   console.log(element.id)
-    // }
   };
   const closeModal = (e) => {
     setbuyModal(false);
   };
+
+  const BuyTransaction = async(e)=>{
+    console.log(e.target.value,data[e.target.value])
+    console.log(quantity)
+
+    const details = data[e.target.value]
+    const code = details.code
+
+    const res = await fetch('/api/transactions?type=bought',{
+      method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                  quantity,code
+                })
+            })
+    const result = await res.json()
+    console.log(result)
+  }
 
   return (
     <>
@@ -103,7 +128,7 @@ function Market() {
                     <span className="span">{item.changePercent.toFixed(3)}%</span>
                   </div>
                   <div className="buybutton">
-                    <button className="buymore" onClick={(e) => openModal(e)}>
+                    <button className="buymore" onClick={(e) => openModal(e,i)}>
                       Buy
                     </button>
                   </div>
@@ -142,16 +167,16 @@ function Market() {
           onRequestClose={() => setbuyModal(false)}
         >
           <div className="modalheader">
-            <h1>Buy : Apple Inc.</h1>
+            <h1>Buy : {StockId[0]}</h1>
           </div>
           <hr />
           <div className="modalBody">
-            <p>Max you can buy : 3333</p>
-            <input type="text" placeholder="Quantity" />
+            <p>Max you can buy : {maxBuyStock}</p>
+            <input type="text" onChange={(e)=>{setQuantity(e.target.value)}} placeholder="Quantity" />
           </div>
           <hr />
           <div className="modalFooter">
-            <button className="buy">Buy</button>
+            <button className="buy" value={StockId[1]} onClick={(e)=>BuyTransaction(e)}>Buy</button>
             <button className="close" onClick={(e) => closeModal(e)}>
               Cancel
             </button>

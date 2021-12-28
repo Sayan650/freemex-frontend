@@ -5,6 +5,7 @@ import Portfolio from "./pages/portfolio/portfolio";
 import Leaderboard from "./pages/leaderboard/leaderboard"
 import Transaction from "./pages/transaction/transaction";
 import Market from "./pages/market/market";
+import Admin from "./pages/admin/admin"
 
 const ReactRouterSetup = () => {
     return (
@@ -24,6 +25,9 @@ const ReactRouterSetup = () => {
                 </Route>
                 <Route exact path="/transactions">
                     <Transaction />
+                </Route>
+                 <Route exact path="/admin">
+                    <Admin/>
                 </Route>
             </Switch>
         </Router>

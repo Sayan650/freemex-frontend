@@ -15,7 +15,7 @@ const Leaderboard = () => {
   }, []);
 
   useEffect(() => {
-    getPlayers();
+      getPlayers();
   }, [getPlayers]);
 
     return (

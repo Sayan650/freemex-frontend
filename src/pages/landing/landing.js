@@ -4,20 +4,24 @@ import React,{useState, useCallback,useEffect} from 'react'
 import Navbar from "../../components/navbar/navbar";
 function LandingSection() {
 
-        const [player, setPlayer] = useState([]);
-        const url='/api/players';
+           const [player, setPlayer] = useState([]);
   const getPlayer = useCallback(async () => {
-    const response = await fetch(url);
-    const player = await response.json();
-    setPlayer(player.player);
-  }, [url]);
+    const response = await fetch('/api/players');
+        const player = await response.status;
+    setPlayer(player);
+  }, []);
 
   useEffect(() => {
     getPlayer();
-  }, [url, getPlayer]);
+  }, [getPlayer]);
+
   console.log (player);
   return (
     <>
+    {player === 200
+        ?        ( 
+          window.location.href="/portfolio" )
+          : (<>
       <div className="landingPage">
         <div className="landing">
           <div className="landingWrapper">
@@ -68,13 +72,7 @@ function LandingSection() {
           </ul>
         </div>
       </div>
-                  {player.length === 0
-        ?  "" :  ( 
-          <div className="">
-            <Navbar nav={player} />
-          </div>) (
-          window.location.href="/portfolio" )
-          }
+</>)}
     </>
   );
 }

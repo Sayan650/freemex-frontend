@@ -31,13 +31,14 @@ const Nav = () => {
          const [player, setPlayer] = useState([]);
   const getPlayer = useCallback(async () => {
     const response = await fetch('/api/players');
-    const player = await response.json();
-    setPlayer(player.player);
+        const player = await response.status;
+    setPlayer(player);
   }, []);
 
   useEffect(() => {
     getPlayer();
   }, [getPlayer]);
+
   return (
     <>
       <div className="navbar">
@@ -48,7 +49,7 @@ const Nav = () => {
             </a>
           </div>
           <div className="nav">
-             {player.length === 0 ? (<>
+             {player === 401 ? (<>
              <div className="links">
               <a href="/leaderboard">leaderboard</a>
             </div>

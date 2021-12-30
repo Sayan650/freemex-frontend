@@ -18,27 +18,39 @@ function Market() {
   const [maxBuyStock, setmaxBuyStock] = useState();
   const [quantity,setQuantity] = useState();
   const [cashInHand, setcashInHand] = useState(500000);
+
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
   
   useEffect(
     () => {
+      const getstocks = async () =>{
+        const res = await fetch('/api/stocks')
+        const result = await res.json()
+        const t = result.Stocks.sort(function(a,b){
+          return a.id - b.id
+        })
+        // console.log(t)
+        setData(t)
+      }
+      getstocks()
       socketRef.current = io.connect("http://localhost:8000", { transports: ['websocket'] })
       console.log("connection is done")
       socketRef.current.on("market", (res) => {
         const t = res.sort(function(a,b){
           return a.id - b.id
         })
-        // console.log(t[0])
+        // console.log(t)
         setData(t)
       })
       return () => socketRef.current.disconnect()
     },
     []
   )
-  
 
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
+  
   const openModal = (e,i) => {
     // console.log(e.target,i,data[i])
     setStockId([data[i].code,i])
@@ -125,7 +137,7 @@ function Market() {
                     Last Update: <span>
                       {Date(item.latestUpdate).split(" ")[1]+ " " +Date(item.latestUpdate).split(" ")[2]+ ", "+ new Date(item.latestUpdate).toLocaleString().split(',')[1]}
                     </span>{" "}
-                    <span className="span">{item.changePercent.toFixed(3)}%</span>
+                    <span className="span">{parseFloat(item.changePercent).toFixed(2)}%</span>
                   </div>
                   <div className="buybutton">
                     <button className="buymore" onClick={(e) => openModal(e,i)}>

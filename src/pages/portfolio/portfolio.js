@@ -1,6 +1,6 @@
 import "./portfolio.css"
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import React, { useState } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import Modal from 'react-modal'
 
 Modal.setAppElement('#root')
@@ -23,6 +23,16 @@ const Portfolio = () => {
         setsellModal(false)
     }
 
+           const [player, setPlayer] = useState([]);
+  const getPlayer = useCallback(async () => {
+    const response = await fetch('/api/players');
+        const player = await response.json();
+    setPlayer(player.player);
+  }, []);
+
+  useEffect(() => {
+    getPlayer();
+  }, [getPlayer]);
 
     return (
         <div className="portfolio">
@@ -32,9 +42,9 @@ const Portfolio = () => {
                 </div>
                 <div className="body">
                     <div className="card">
-                        <p>Cash: $ <span>8888</span></p>
-                        <p>Value in Stock : $ <span>8888</span></p>
-                        <p className="total" >Total : $ <span>8888</span></p>
+                        <p>Cash: $ <span>{player.valueInCash}</span></p>
+                        <p>Value in Stock : $ <span>{player.valueInStocks}</span></p>
+                        <p className="total" >Total : $ <span>{player.valueInTotal}</span></p>
                     </div>
                     <div className="msg">
                         <p>Page last updated on : <span>8888</span></p>

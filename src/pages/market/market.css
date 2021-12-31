@@ -154,6 +154,41 @@
     backdrop-filter: blur(10px);
     
 }
+
+.snackbar{
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform:translate(-50%, -1%);
+    color: white;
+    background-color:red;
+    padding: 5px 5px 5px 10px;
+    border-radius: 0px 0px 5px 5px;
+    font-weight: 600;
+}
+.snackbar a{
+    color: black;
+    font-weight: 700;
+    margin: 0px 5px;
+}
+.snackbar a:hover{
+    color: white;
+}
+.snackbar button{
+    background-color: transparent;
+    color: white;
+    padding: 3px 6px;
+    outline: none;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+.snackbar button:hover{
+    font-weight: 900;
+    background-color:rgba(0, 0, 0,0.2);
+}
+
 @media only screen and (max-width :750px) {
     .Markethead h1 {
         font-size: 13vw;

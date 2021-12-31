@@ -26,7 +26,7 @@ const ReactRouterSetup = () => {
                 <Route exact path="/transactions">
                     <Transaction />
                 </Route>
-                 <Route exact path="/admin">
+                 <Route exact path="/dashboard">
                     <Admin/>
                 </Route>
             </Switch>

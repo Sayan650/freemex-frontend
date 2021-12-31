@@ -2,16 +2,89 @@
     margin: auto;
     width: auto;
     padding-top: 40px;
-    /* min-height: 88vh; */
+    min-height: 80vh;
 }
 
 .adminhead{
     margin: 10px auto;
     text-align: center;
+}    
+
+
+.Modal{
+    position: absolute;
+    inset: 40px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    width: auto;
+    margin: 55px auto;
+    min-height: 70vh;
+}
+
+.admin .timer {
+    width: 60%;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+.timer form{
+    width: fit-content;
+    margin: auto;
+    text-align: center;
+}
+.timer div{
+    margin: 5px 0px;
+}
+
+.timer form input{
+    padding: 4px 10px;
+    outline: none;
+    border-radius: 4px;
+    border: none;
+    margin: 4px auto;
 }
 
 .adminhead h1 {
     color: white;
     padding: 20px;
     font-size: 120px;
+    margin-top: 100px;
+}
+
+.modalBody form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    font-size: 20px;
+    margin: auto;
+}
+
+.modalBody form input{
+    padding: 5px 10px;
+    border:none;
+    border-radius:4px;
+    margin: 5px auto;
+    font-size: 20px;
+    outline: none;
+}
+.modalBody form button,form button {
+    width: 100px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 4px auto;
+}
+.error{
+    background-color:#d32f2f;
+}
+.success{
+    background-color: #2e7d32;
+}
+.hide{
+    display: none;
 }

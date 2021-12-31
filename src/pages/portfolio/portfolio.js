@@ -23,16 +23,17 @@ const Portfolio = () => {
         setsellModal(false)
     }
 
-           const [player, setPlayer] = useState([]);
-  const getPlayer = useCallback(async () => {
-    const response = await fetch('/api/players');
+    const [player, setPlayer] = useState([]);
+    const getPlayer = useCallback(async () => {
+        const response = await fetch('/api/players');
         const player = await response.json();
-    setPlayer(player.player);
-  }, []);
+        console.log(player);
+        setPlayer(player.player);
+    }, []);
 
-  useEffect(() => {
-    getPlayer();
-  }, [getPlayer]);
+    useEffect(() => {
+        getPlayer();
+    }, [getPlayer]);
 
     return (
         <div className="portfolio">
@@ -61,7 +62,7 @@ const Portfolio = () => {
                                 <p className="nStock"><span>Apple inc.</span></p>
                                 <p className="noStocks">
                                     x3
-                            </p>
+                                </p>
                                 <div className="priceStocks">$ 148.97 <span><ArrowDownwardIcon className="downIcon" /> -5.10</span></div>
                                 <div className="updateStocks">Last Update: <span>Sep 11th, 1:30:00 am </span> <span className="span">-3.31%</span>
                                 </div>

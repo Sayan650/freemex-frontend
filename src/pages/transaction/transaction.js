@@ -1,9 +1,37 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import "./transaction.css";
 
 function Transaction() {
   const inputRef = useRef();
+
+  const [transaction, setTransaction] = useState([]);
+
+  const getTransaction = useCallback(async () => {
+    const response = await fetch('/api/transactions');
+    const transaction = await response.json();
+    console.log(transaction.transactions);
+    setTransaction(transaction.transactions);
+  }, []);
+
+  useEffect(() => {
+    getTransaction();
+  }, [getTransaction]);
+
+
+    // player status
+    const [player, setPlayer] = useState([]);
+    const getPlayer = useCallback(async () => {
+      const response = await fetch('/api/players');
+      const player = await response.json();
+      setPlayer(player.player);
+    }, []);
+  
+    useEffect(() => {
+      getPlayer();
+    }, [getPlayer]);
+
+
 
   useEffect(() => {
     inputRef.current.focus();
@@ -15,7 +43,7 @@ function Transaction() {
         <div className="Transactionhead">
           <h1>Transaction</h1>
           <h2>
-            Cash in your hand: $<span>0</span>
+            Cash in your hand: $ <span>{player.valueInCash}</span>
           </h2>
           <div className="searchbox">
             <SearchIcon className="searchIcon" />
@@ -32,26 +60,19 @@ function Transaction() {
               <li>Price</li>
               <li>Gain/Loss</li>
             </div>
-            <div className="transactionTableBody">
-              <div className="row">
-                <li>Apple Inc.</li>
-                <li className="sold">Sold</li>
-                <li>3</li>
-                <li>AAPL</li>
-                <li>$152.51</li>
-                <li className="sold">$0.00</li>
-              </div>
-            </div>
-            <div className="transactionTableBody">
-              <div className="row">
-                <li>Apple Inc.</li>
-                <li className="brought">Brought</li>
-                <li>3</li>
-                <li>AAPL</li>
-                <li>$152.51</li>
-                <li className="brought">$0.00</li>
-              </div>
-            </div>
+            {transaction.map((item, i) => {
+              return (
+                <div className="transactionTableBody" key={i}>
+                  <div className="row">
+                    <li>{item.Stock.name}</li>
+                    <li className={item.type}>{item.type}</li>
+                    <li>{item.quantity}</li>
+                    <li>{item.Stock.code}</li>
+                    <li>${item.price}</li>
+                    <li className="sold">${item.netProfit}</li>
+                  </div>
+                </div>)
+            })}
           </div>
         </div>
       </div>

@@ -83,11 +83,14 @@
 .searchIcon:hover {
     color: var(--shadow-color)
 }
-.brought {
+.bought {
     color: var(--text-green-color);
+    text-transform: capitalize;
 }
 .sold {
     color : red;
+    text-transform: capitalize;
+
 }
 @media only screen and (max-width :750px) {
     .Transactionhead h1 {

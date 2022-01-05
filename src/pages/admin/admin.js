@@ -37,9 +37,22 @@ function Admin() {
         }
     };
 
-    const timer = ()=> {
-
-        console.log(start_time, end_time)
+    const timer = async ()=> {
+        if (start_time && end_time) {
+            console.log(start_time, end_time)        
+            const res = await fetch('/admin/api/schedules',{
+                method: "POST",
+                headers:{
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    start_time,end_time
+                })
+            })
+            const result = await res.json()
+            console.log(result)
+        }
     }
 
     return (

@@ -69,7 +69,12 @@ function Transaction() {
                     <li>{item.quantity}</li>
                     <li>{item.Stock.code}</li>
                     <li>${item.price}</li>
-                    <li className="sold">${item.netProfit}</li>
+                    {/* <li className="sold">${item.netProfit}</li> */}
+                        {
+                        item.netProfit < 0 ? (
+                          <li className="sold"> {item.netProfit} </li>
+                        ) : ( <li className="bought"> {item.netProfit} </li>)
+                      }
                   </div>
                 </div>)
             })}

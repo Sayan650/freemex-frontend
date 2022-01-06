@@ -6,7 +6,7 @@ function Rules() {
         <>
          <div className="rules" id="rules">
         <h1>Rules</h1>
-        <div class="rules-list">
+        <div className="rules-list">
           <li>
             Freemex contest for Aarohan will begin at 8PM on 29 March 2021.
           </li>

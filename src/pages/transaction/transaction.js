@@ -1,11 +1,31 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import "./transaction.css";
+import { useHistory } from 'react-router-dom';
 
 function Transaction() {
   const inputRef = useRef();
+  const history = useHistory();
+
 
   const [transaction, setTransaction] = useState([]);
+
+  const getSchedule = useCallback(async () =>{
+    const response = await fetch('/api/schedules')
+    const result = await response.json();
+    console.log(new Date(result.schedule.end));
+    localStorage.setItem('start', result.schedule.start)
+    localStorage.setItem('end', result.schedule.end)
+    if (new Date(result.schedule.start)>new Date()) {
+        history.push("/timer");
+    }if (new Date() > new Date(result.schedule.end)) {
+      history.push("/timer");
+  }
+})
+
+useEffect(() => {
+    getSchedule()
+},[getSchedule])
 
   const getTransaction = useCallback(async () => {
     const response = await fetch('/api/transactions');
@@ -31,11 +51,10 @@ function Transaction() {
       getPlayer();
     }, [getPlayer]);
 
-
-
-  useEffect(() => {
+    useEffect(() => {
     inputRef.current.focus();
   }, []);
+  
 
   return (
     <>

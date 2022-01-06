@@ -2,14 +2,34 @@ import "./portfolio.css"
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import React, { useState, useCallback, useEffect } from 'react'
 import Modal from 'react-modal'
+import { useHistory } from 'react-router-dom';
 
 Modal.setAppElement('#root')
 
 
 const Portfolio = () => {
-
+    const history = useHistory();
     const [BUYmodal, setbuyModal] = useState(false)
     const [sellmodal, setsellModal] = useState(false)
+
+
+    const getSchedule = useCallback(async () =>{
+        const response = await fetch('/api/schedules')
+        const result = await response.json();
+        console.log(new Date(result.schedule.end));
+        localStorage.setItem('start', result.schedule.start)
+        localStorage.setItem('end', result.schedule.end)
+        if (new Date(result.schedule.start)>new Date()) {
+            history.push("/timer");
+        }
+        if (new Date() > new Date(result.schedule.end)) {
+            history.push("/timer");
+        }
+    })
+
+    useEffect(() => {
+        getSchedule()
+    },[getSchedule])
 
     const openModal = (e) => {
         if (e.target.innerHTML === "Buy More") {
@@ -34,6 +54,8 @@ const Portfolio = () => {
     useEffect(() => {
         getPlayer();
     }, [getPlayer]);
+
+    
 
     return (
         <div className="portfolio">

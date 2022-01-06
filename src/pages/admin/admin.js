@@ -26,9 +26,9 @@ function Admin() {
                     username, password
                 })
             })
-            const result = await res.json()
-            // console.log(result)
-            if (result.message === "Unauthorized.") {
+            // const result = await res.json()
+            console.log(res)
+            if (res.status !== 200) {
                 return 0
             }else{
                 setbuyModal(false);
@@ -46,14 +46,17 @@ function Admin() {
                     "Content-Type": "application/json"
                 },
                 credentials: "include",
-                body: JSON.stringify({
-                    start_time,end_time
-                })
+                body: JSON.stringify(
+                 {
+                    instance :{
+                        start: start_time,end: end_time
+                    }
+                 })
             })
-            const result = await res.json()
-            console.log(result)
+            // console.log(res)
         }
     }
+
 
     return (
         <div className="admin">

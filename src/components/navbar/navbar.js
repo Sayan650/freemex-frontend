@@ -1,14 +1,15 @@
 import "./navbar.css";
-import React,{useState, useCallback,useEffect} from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import Sidebar from "./sidebar/sidebar";
 import Backdrop from "./backdrop";
 import Modal from "react-modal";
 import Rules from "../../pages/rules/rules";
+import { useHistory } from 'react-router-dom';
 
 Modal.setAppElement("#root");
 
 const Nav = () => {
-
+  const history = useHistory();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [rules, setRules] = useState(false);
@@ -28,10 +29,11 @@ const Nav = () => {
   const closeModal = (e) => {
     setRules(false);
   };
-         const [player, setPlayer] = useState([]);
+
+  const [player, setPlayer] = useState([]);
   const getPlayer = useCallback(async () => {
     const response = await fetch('/api/players');
-        const player = await response.status;
+    const player = await response.status;
     setPlayer(player);
   }, []);
 
@@ -49,37 +51,37 @@ const Nav = () => {
             </a>
           </div>
           <div className="nav">
-             {player === 401 ? (<>
-             <div className="links">
-              <a href="/leaderboard">leaderboard</a>
-            </div>
-               <div className="links">
-              <a href="/" onClick={(e) => openModal(e)}>
-                Rules
-              </a>
-            </div>
-             </>) : (<>
-            <div className="links">
-              <a href="/portfolio">Portfolio</a>
-            </div>
-            <div className="links">
-              <a href="/" onClick={(e) => openModal(e)}>
-                Rules
-              </a>
-            </div>
-            <div className="links">
-              <a href="/market">Market</a>
-            </div>
-            <div className="links">
-              <a href="/transactions">Transaction</a>
-            </div>
-            <div className="links">
-              <a href="/leaderboard">leaderboard</a>
-            </div>
-            <div className="links">
-              <a href="/auth/logout">Logout</a>
-            </div>
-            </> )}
+            {player === 401 ? (<>
+              <div className="links">
+                <a href="/leaderboard">leaderboard</a>
+              </div>
+              <div className="links">
+                <a href="/" onClick={(e) => openModal(e)}>
+                  Rules
+                </a>
+              </div>
+            </>) : (<>
+              <div className="links">
+                <a href="/portfolio">Portfolio</a>
+              </div>
+              <div className="links">
+                <a href="/" onClick={(e) => openModal(e)}>
+                  Rules
+                </a>
+              </div>
+              <div className="links">
+                <a href="/market">Market</a>
+              </div>
+              <div className="links">
+                <a href="/transactions">Transaction</a>
+              </div>
+              <div className="links">
+                <a href="/leaderboard">leaderboard</a>
+              </div>
+              <div className="links">
+                <a href="/auth/logout">Logout</a>
+              </div>
+            </>)}
           </div>
           <div className="icon" onClick={drawerOpenHandler}>
             <img src="Images/menu.png" alt="" />

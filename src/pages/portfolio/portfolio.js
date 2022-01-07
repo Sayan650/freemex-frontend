@@ -388,7 +388,11 @@ const Portfolio = () => {
           <button className="close" onClick={(e) => closeModal(e)}>
             Cancel
           </button>
-          {hide === "error" ? <div className="time">You don't hab</div> : <></>}
+          {hide === "error" ? (
+            <div className="time">You don't have enough cash</div>
+          ) : (
+            <></>
+          )}
         </div>
       </Modal>
 

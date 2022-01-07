@@ -11,13 +11,16 @@ const { io } = require("socket.io-client");
 const Portfolio = () => {
   const [BUYmodal, setbuyModal] = useState(false);
   const [sellmodal, setsellModal] = useState(false);
+  const [namemodal, setNameModal] = useState(false);
   const socketRef = useRef();
   const [data, setData] = useState([]);
+  const [stat, setStat] = useState(0);
   const [stocks, setStocks] = useState([]);
   const [StockId, setStockId] = useState([]);
   const [min, setMin] = useState("");
   const [maxBuyStock, setmaxBuyStock] = useState();
   const [quantity, setQuantity] = useState();
+  const [name, setName] = useState("");
   const [hide, setHide] = useState("hide");
   const [msg, setmsg] = useState("");
 
@@ -69,7 +72,6 @@ const Portfolio = () => {
 
   const openBuyModal = (e, i) => {
     setStockId([stocks[i].Stock.code, i]);
-
     const n = Math.floor(player.valueInCash / stocks[i].Stock.latestPrice);
     setmaxBuyStock(n);
     setbuyModal(true);
@@ -77,6 +79,7 @@ const Portfolio = () => {
   const closeModal = (e) => {
     setbuyModal(false);
     setsellModal(false);
+    setNameModal(false);
   };
   const openModal = (e, i) => {
     setStockId([stocks[i].Stock.code, i]);
@@ -157,7 +160,7 @@ const Portfolio = () => {
       setMin(time);
       setTimeout(() => {
         setHide("hide");
-      }, 2000);
+      }, 10000);
     } else {
       if (result.Stock.code === stocks[e.target.value].Stock.code) {
         window.location.reload(false);
@@ -176,20 +179,75 @@ const Portfolio = () => {
       }
     }
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   window.location.reload(false);
-  // };
+  // change Username
+  const openNameModal = (e) => {
+    setNameModal(true);
+  };
+  const changeName = async (e) => {
+    const res = await fetch("/api/players?scope=username ", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        username: name,
+      }),
+    });
+    const result = await res.json();
+    const status = await res.status;
+    console.log(result);
+    if (status === 400 || status === 500) {
+      setHide("error");
+      setmsg(result.message);
+      setTimeout(() => {
+        setHide("hide");
+      }, 5000);
+    } else {
+      if (status === 200) {
+        window.location.reload(false);
+        closeModal();
+        getPlayer();
+        setHide("success");
+        setTimeout(() => {
+          setHide("hide");
+        }, 5000);
+      } else {
+        setHide("error");
+        setmsg(result.message);
+        setTimeout(() => {
+          setHide("hide");
+        }, 2000);
+      }
+    }
+  };
+  const nameChecker = async (e) => {
+    const res = await fetch("/api/players?scope=username ", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        username: name,
+      }),
+    });
+    const result = await res.json();
+    const status = await res.status;
+    console.log(result);
+    setStat(status);
+    setmsg(result.message);
+  };
   return (
     <div className="portfolio">
       <div className="portfoliopage">
         <div className="Logged">
-          <h1>Logged in as:</h1>
-          <h2>Shruti</h2>
+          <h1>Logged in as :</h1>
+          <h2>{player.username}</h2>
         </div>
-        <div className="button">
-          <button className="buymore" onClick={(e) => openModal(e)}>
-            Buy More
+        <div className="changebutton">
+          <button className="buymore" onClick={(e) => openNameModal(e)}>
+            Change Username
           </button>
         </div>
         <div className="heading">
@@ -339,7 +397,7 @@ const Portfolio = () => {
       <Modal
         style={{ width: "fit-content" }}
         isOpen={sellmodal}
-        onRequestClose={() => setsellModal(false)}
+        onRequestClose={() => setNameModal(false)}
       >
         <div className="modalheader">
           <h1>Sell : {StockId[0]}</h1>
@@ -371,6 +429,50 @@ const Portfolio = () => {
             <div className="time">Wait for {min} min before you could sell</div>
           ) : (
             <></>
+          )}
+        </div>
+      </Modal>
+
+      {/* -------------- modal for username ------------- */}
+
+      <Modal
+        style={{ width: "fit-content" }}
+        isOpen={namemodal}
+        onRequestClose={() => setsellModal(false)}
+      >
+        <div className="modalheader">
+          <h1>Change Username</h1>
+        </div>
+        <hr />
+        <div className="modalBody">
+          <input
+            type="text"
+            onChange={(e) => {
+              nameChecker(e);
+              setName(e.target.value);
+            }}
+            placeholder="text"
+          />
+        </div>
+        <hr />
+        <div className="modalFooter">
+          <button className="buy" onClick={(e) => changeName(e)}>
+            Change
+          </button>
+          <button className="close" onClick={(e) => closeModal(e)}>
+            Cancel
+          </button>
+          {stat === 400 || stat === 0 ? (
+            <div className="time">{msg}</div>
+          ) : (
+            <div className="bought">
+              Username should be of atleast 5 characters.
+            </div>
+          )}
+          {stat === 500 ? (
+            <div className="time">{msg}</div>
+          ) : (
+            <div className="bought">Username should be unique</div>
           )}
         </div>
       </Modal>

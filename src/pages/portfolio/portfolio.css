@@ -1,304 +1,338 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
-.portfolio{
-    width: auto;
-    height: fit-content;
-    margin: auto;
-    min-height: 80vh;
-    padding: 30px 0px;
-       
+.portfolio {
+  width: auto;
+  height: fit-content;
+  margin: auto;
+  min-height: 80vh;
+  padding: 30px 0px;
+  max-width: 1440px;
 }
-.portfolio .heading{
-    padding: 20px 20px;
-    color: white;
-    text-align: center;
-    width:fit-content;
-    margin: auto;
-    /* font-size: 50px; */
+.Logged {
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 15px;
 }
-.portfolio .heading h1{
-    font-size: 100px;
+.Logged h1 {
+  font-size: clamp(20px, 2.77vw, 40px);
 }
-.portfolio .body{
-    width: fit-content;
-    /* border:1px solid white; */
-    margin: 10px auto;
-    
+.Logged h2 {
+  color: var(--shadow-color);
+  margin-left: 10px;
+  font-size: clamp(17px, 2.43vw, 35px);
 }
-.portfolio .card{
-    text-align: center;
+.changebutton {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-right: 15px;
+}
+.changebutton .buymore {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid rgba(28, 74, 176, 0.4);
+  background-color: rgb(140, 16, 140);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 16px;
+  outline: none;
+}
+.changebutton .buymore:hover {
     background-color: transparent;
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    border-style: solid;
-    border: none;
-    box-shadow: 0 0 10px var(--shadow-color);
-    padding: 20px;
-    font-size: 20px;
-}
-.portfolio .card p{
-    color: white;
-    padding: 10px 28px;
-}
-.portfolio .card span{
-    color: green;
-}
-.portfolio .card .total{
-    border-top: 2px solid var(--shadow-color);;
-}
-.msg{
-    margin: 30px 0px 0px 0px;
-    text-align: center;
-    color: green;
-    font-size: 13px;
-}
-.msg span{
-    color: white;
-}
-.stockDetails{
-    text-align: center;
-    margin: 30px 0px;
-    color: white;
-    font-size: 20px;
-}
-.stockDetails h2{
-    font-size: 65px;
-    margin-bottom: 30px;
-}
-.stockDetails .cards{
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin: auto;
-}
-.stockDetails .cards .scard{
-    margin: auto;
-    width: fit-content;
-    text-align: center;
-    background-color: transparent;
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    border-style: solid;
-    border: none;
-    box-shadow: 5px 4px 0px 2px var(--shadow-color);
-    padding: 20px;
-    font-size: 20px;
-    text-align: left;
-    width:15rem;
-    background-color:rgba(28, 74, 176,0.4);
-}
-.stockDetails .nameStock{
-    font-weight: 800;
-}
-
-.stockDetails .nStock{
-    font-size: 12px;
-    color: rgb(160, 160, 160);
-    margin: 2px 0px;
-}
-
-.stockDetails .noStocks{
-    font-size: 16px;
-    color: rgb(140, 16, 140);
-    margin-bottom: 20px;
-}
-.stockDetails .priceStocks{
-    font-weight: 700;
-    font-size: 18px;
-    position: relative;
-}
-.stockDetails .priceStocks span{
-    position: absolute;
-    right: 0px;
-    color: red;
-}
-.stockDetails .priceStocks .downIcon{
-    font-size: 19px;
-    stroke-width: 2;
-    margin: -3px;
-}
-.stockDetails .updateStocks{
-    font-size: 12px;
-    color: rgb(160, 160, 160);
-    position: relative;
-    margin: 3px 0px 10px 0px;
-}
-.stockDetails .updateStocks .span{
-    position: absolute;
-    right: 0px;
-}
-
-.stockDetails .button{
-    position: relative;
-}
-.stockDetails .buymore{
-    padding: 4px 8px;
-    border-radius: 5px;
-    border: 1px solid rgba(28, 74, 176,0.4);
-    background-color:rgb(140, 16, 140);
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 16px;
-    outline: none;
-}
-.stockDetails .buymore:hover{
-    background-color:transparent;
     border: 1px solid rgb(140, 16, 140);
-    /* color: rgb(140, 16, 140); */
     backdrop-filter: blur(10px);
-    
 }
-.stockDetails .sell{
-    padding: 4px 8px;
-    border-radius: 5px;
-    border: none;
-    background-color:red;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    position: absolute;
-    right: 0px;
-    top: 4px;
-    border: 1px solid rgba(28, 74, 176,0.4);
-    font-size: 16px;
-    outline: none;
+.portfolio .heading {
+  padding: 20px 20px;
+  color: var(--text-color);
+  text-align: center;
+  width: fit-content;
+  margin: auto;
+  /* font-size: 50px; */
 }
-.stockDetails .sell:hover{
-    background-color:transparent;
-    border: 1px solid red;
-    backdrop-filter: blur(10px);
+.portfolio .heading h1 {
+  font-size: 100px;
+}
+.portfolio .body {
+  width: fit-content;
+  /* border:1px solid white; */
+  margin: 10px auto;
+}
+.portfolio .card {
+  text-align: center;
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border-style: solid;
+  border: none;
+  box-shadow: 0 0 10px var(--shadow-color);
+  padding: 20px;
+  font-size: 20px;
+}
+.portfolio .card p {
+  color: white;
+  padding: 10px 28px;
+}
+.portfolio .card span {
+  color: green;
+}
+.portfolio .card .total {
+  border-top: 2px solid var(--shadow-color);
+}
+.msg {
+  margin: 30px 0px 0px 0px;
+  text-align: center;
+  color: green;
+  font-size: 13px;
+}
+.msg span {
+  color: white;
+}
+.stockDetails {
+  text-align: center;
+  margin: 30px 0px;
+  color: white;
+  font-size: 20px;
+}
+.stockDetails h2 {
+  font-size: 65px;
+  margin-bottom: 30px;
+}
+.stockDetails .cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: auto;
+}
+.stockDetails .cards .scard {
+  margin: auto;
+  width: fit-content;
+  text-align: center;
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border-style: solid;
+  border: none;
+  box-shadow: 5px 4px 0px 2px var(--shadow-color);
+  padding: 20px;
+  font-size: 20px;
+  text-align: left;
+  width: 15rem;
+  background-color: rgba(28, 74, 176, 0.4);
+}
+.stockDetails .nameStock {
+  font-weight: 800;
 }
 
-.marketbtn{
-    margin: 30px auto;
-    padding: 6px 9px;
-    background-color: transparent;
-    outline: none;
-    color: white;
-    font-size: 18px;
-    font-weight: 700;
-    border: 1px solid rgb(140, 16, 140);
-    border-radius: 6px;
-    cursor: pointer;
+.stockDetails .nStock {
+  font-size: 12px;
+  color: rgb(160, 160, 160);
+  margin: 2px 0px;
 }
-.marketbtn:hover{
-    background-color:rgb(140, 16, 140);
+
+.stockDetails .noStocks {
+  font-size: 16px;
+  color: rgb(140, 16, 140);
+  margin-bottom: 20px;
+}
+.stockDetails .priceStocks {
+  font-weight: 700;
+  font-size: 18px;
+  position: relative;
+}
+.stockDetails .priceStocks span {
+  position: absolute;
+  right: 0px;
+  color: red;
+}
+.stockDetails .priceStocks .downIcon {
+  font-size: 19px;
+  stroke-width: 2;
+  margin: -3px;
+}
+.stockDetails .updateStocks {
+  font-size: 12px;
+  color: rgb(160, 160, 160);
+  position: relative;
+  margin: 3px 0px 10px 0px;
+}
+.stockDetails .updateStocks .span {
+  position: absolute;
+  right: 0px;
+}
+
+.stockDetails .button {
+  position: relative;
+}
+.stockDetails .buymore {
+  padding: 4px 8px;
+  border-radius: 5px;
+  border: 1px solid rgba(28, 74, 176, 0.4);
+  background-color: rgb(140, 16, 140);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 16px;
+  outline: none;
+}
+.stockDetails .buymore:hover {
+  background-color: transparent;
+  border: 1px solid rgb(140, 16, 140);
+  /* color: rgb(140, 16, 140); */
+  backdrop-filter: blur(10px);
+}
+.stockDetails .sell {
+  padding: 4px 8px;
+  border-radius: 5px;
+  border: none;
+  background-color: red;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  top: 4px;
+  border: 1px solid rgba(28, 74, 176, 0.4);
+  font-size: 16px;
+  outline: none;
+}
+.stockDetails .sell:hover {
+  background-color: transparent;
+  border: 1px solid red;
+  backdrop-filter: blur(10px);
+}
+
+.marketbtn {
+  margin: 30px auto;
+  padding: 6px 9px;
+  background-color: transparent;
+  outline: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  border: 1px solid rgb(140, 16, 140);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.marketbtn:hover {
+  background-color: rgb(140, 16, 140);
 }
 
 /* css for modal */
 
-.ReactModal__Overlay{
-    background-color: rgba(0, 0, 0, 0.4)!important;
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.4) !important;
 }
 
-.ReactModal__Content{
-    width: 350px;
-    margin: 30px auto;
-    height: fit-content;
-    background-color: var(--background-color) !important;
-    backdrop-filter: blur(12px);
-    border: 2px solid var(--shadow-color)!important;
-    padding: 0px!important;
+.ReactModal__Content {
+  width: 350px;
+  margin: 30px auto;
+  height: fit-content;
+  background-color: var(--background-color) !important;
+  backdrop-filter: blur(12px);
+  border: 2px solid var(--shadow-color) !important;
+  padding: 0px !important;
 }
-.ReactModal__Content .modalheader{
-    margin: 8px 15px;
-    color: white;
+.ReactModal__Content .modalheader {
+  margin: 8px 15px;
+  color: white;
 }
-.ReactModal__Content .modalBody{
-    color: white;
-    margin: 10px 15px;   
-    text-align:center;
+.ReactModal__Content .modalBody {
+  color: white;
+  margin: 10px 15px;
+  text-align: center;
 }
-.ReactModal__Content .modalBody input{
-    margin: 10px auto;
-    padding: 5px 10px;
-    border-radius: 6px;
-    border:none;
-    outline: none;
-    width: 250px;
+.ReactModal__Content .modalBody input {
+  margin: 10px auto;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  width: 250px;
 }
-.ReactModal__Content .modalFooter{
-    margin: 8px 15px;
-    text-align: center;
+.ReactModal__Content .modalFooter {
+  margin: 8px 15px;
+  text-align: center;
 }
-.ReactModal__Content .modalFooter button{
-    margin: 10px 5px;
-    padding: 5px 15px 5px 6px;
-    outline: none;
-    border:none;
-    color: white;
-    font-weight: 700;
-    font-size: 14px;
-    border-radius: 4px;
-    cursor: pointer;
+.ReactModal__Content .modalFooter button {
+  margin: 10px 5px;
+  padding: 5px 15px 5px 6px;
+  outline: none;
+  border: none;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
 }
-.ReactModal__Content .modalFooter .buy{
-    background-color:rgb(140, 16, 140);
+.ReactModal__Content .modalFooter .buy {
+  background-color: rgb(140, 16, 140);
 }
-.ReactModal__Content .modalFooter .buy:hover{
-    background-color:transparent;
-    padding: 4px 14px 4px 5px;
-    border: 1px solid rgb(140, 16, 140);
+.ReactModal__Content .modalFooter .buy:hover {
+  background-color: transparent;
+  padding: 4px 14px 4px 5px;
+  border: 1px solid rgb(140, 16, 140);
 }
 
-.ReactModal__Content .modalFooter .close{
-    background-color: red;
+.ReactModal__Content .modalFooter .close {
+  background-color: red;
 }
-.ReactModal__Content .modalFooter .close:hover{
-    background-color:transparent;
-    padding: 4px 14px 4px 5px;
-    border: 1px solid red;
+.ReactModal__Content .modalFooter .close:hover {
+  background-color: transparent;
+  padding: 4px 14px 4px 5px;
+  border: 1px solid red;
 }
 .time {
-    color : red;
+  color: red;
 }
-@media only screen and (max-width : 900px){
-    .portfolio{
-        padding-top: 40px;
-    }
- 
-}
-
-@media only screen and (max-width :450px){
-    .portfolio{
-        padding-top: 40px;
-    }
-    .portfolio .heading h1{
-        font-size: 21.5vw;
-    }
-    .portfolio .card{
-        padding:10px;
-    }
-    .stockDetails h2{
-        font-size: 15vw;
-    }
-    .portfolio .body{
-        width: 300px;
-    }
-    .ReactModal__Content{
-        width:auto;}
+@media only screen and (max-width: 900px) {
+  .portfolio {
+    padding-top: 40px;
+  }
 }
 
+@media only screen and (max-width: 450px) {
+  .portfolio {
+    padding-top: 40px;
+  }
+  .portfolio .heading h1 {
+    font-size: 21.5vw;
+  }
+  .portfolio .card {
+    padding: 10px;
+  }
+  .stockDetails h2 {
+    font-size: 15vw;
+  }
+  .portfolio .body {
+    width: 300px;
+  }
+  .ReactModal__Content {
+    width: auto;
+  }
+}
 
-@media only screen and (max-width :305px){
-    .portfolio .heading h1{
-        font-size: 21vw;
-    }
-    .portfolio .card{
-        width: 250px;
-        margin: auto;
-    }
-    .portfolio .body{
-        width: 280px;
-    }
-    .stockDetails{
-        width: 280px;
-    }
-    .stockDetails .stockscard{
-        width:250px;
-        margin: auto;
-    }
+@media only screen and (max-width: 305px) {
+  .portfolio .heading h1 {
+    font-size: 21vw;
+  }
+  .portfolio .card {
+    width: 250px;
+    margin: auto;
+  }
+  .portfolio .body {
+    width: 280px;
+  }
+  .stockDetails {
+    width: 280px;
+  }
+  .stockDetails .stockscard {
+    width: 250px;
+    margin: auto;
+  }
 }

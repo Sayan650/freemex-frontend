@@ -3,7 +3,7 @@ import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import Modal from "react-modal";
-
+import { Link } from "react-router-dom";
 Modal.setAppElement("#root");
 
 const { io } = require("socket.io-client");
@@ -15,6 +15,7 @@ const Portfolio = () => {
   const [data, setData] = useState([]);
   const [stocks, setStocks] = useState([]);
   const [StockId, setStockId] = useState([]);
+  const [min, setMin] = useState("");
   const [maxBuyStock, setmaxBuyStock] = useState();
   const [quantity, setQuantity] = useState();
   const [hide, setHide] = useState("hide");
@@ -110,6 +111,7 @@ const Portfolio = () => {
       }, 2000);
     } else {
       if (result.Stock.code === stocks[e.target.value].Stock.code) {
+        window.location.reload(false);
         closeModal();
         getPlayer();
         setHide("success");
@@ -145,14 +147,20 @@ const Portfolio = () => {
     console.log(result);
 
     // console.log(result)
-    if (result.message === "Forbidden, Not enough cash") {
+    if (result.atleastWaitPeriod >= 0) {
       setHide("error");
       setmsg("Some thing went wrong. Please try again.");
+      var millis = result.atleastWaitPeriod;
+      var minutes = Math.floor(millis / 60000);
+      var seconds = ((millis % 60000) / 1000).toFixed(0);
+      var time = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+      setMin(time);
       setTimeout(() => {
         setHide("hide");
       }, 2000);
     } else {
       if (result.Stock.code === stocks[e.target.value].Stock.code) {
+        window.location.reload(false);
         closeModal();
         getPlayer();
         setHide("success");
@@ -168,21 +176,12 @@ const Portfolio = () => {
       }
     }
   };
-
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   window.location.reload(false);
+  // };
   return (
     <div className="portfolio">
-      <div className={`snackbar ${hide}`}>
-        {hide === "error" ? (
-          `${msg}`
-        ) : (
-          <>
-            your transaction is sucessful. <a href="/portfolio">Portfolio</a>{" "}
-            <button className="delete" onClick={() => setHide("hide")}>
-              X
-            </button>
-          </>
-        )}{" "}
-      </div>
       <div className="portfoliopage">
         <div className="Logged">
           <h1>Logged in as:</h1>
@@ -227,67 +226,73 @@ const Portfolio = () => {
           <h2>Your Stocks</h2>
           <div className="stockscard">
             <div className="cards">
-              {stocks.map((item, i) => (
-                <div className="scard" key={i}>
-                  <p className="nameStock">{item.Stock.code}</p>
-                  <p className="nStock">
-                    <span>{item.Stock.name}</span>
-                  </p>
-                  <div className="priceStocks">
-                    $ {item.Stock.latestPrice}{" "}
-                    {item.Stock.change < 0 ? (
+              {stocks.map((item, i) => {
+                return item.asset.quantity === 0 ? (
+                  <></>
+                ) : (
+                  <div className="scard" key={i}>
+                    <p className="nameStock">{item.Stock.code}</p>
+                    <p className="nStock">
+                      <span>{item.Stock.name}</span>
+                    </p>
+                    <div className="priceStocks">
+                      $ {item.Stock.latestPrice}{" "}
+                      {item.Stock.change < 0 ? (
+                        <span>
+                          <ArrowDownwardIcon className="downIcon" />{" "}
+                          {item.Stock.change}
+                        </span>
+                      ) : (
+                        <span style={{ color: "green" }}>
+                          <ArrowUpwardIcon className="downIcon" />{" "}
+                          {item.Stock.change}
+                        </span>
+                      )}
+                    </div>
+                    <div className="updateStocks">
+                      Last Update:{" "}
                       <span>
-                        <ArrowDownwardIcon className="downIcon" />{" "}
-                        {item.Stock.change}
+                        {Date(item.Stock.latestUpdate).split(" ")[1] +
+                          " " +
+                          Date(item.Stock.latestUpdate).split(" ")[2] +
+                          ", " +
+                          new Date(item.Stock.latestUpdate)
+                            .toLocaleString()
+                            .split(",")[1]}
+                      </span>{" "}
+                      <span className="span">
+                        {parseFloat(item.Stock.changePercent).toFixed(2)}%
                       </span>
-                    ) : (
-                      <span style={{ color: "green" }}>
-                        <ArrowUpwardIcon className="downIcon" />{" "}
-                        {item.Stock.change}
-                      </span>
-                    )}
+                    </div>
+                    <div className="updateStocks">
+                      Amount Invested: $ {item.asset.invested}
+                    </div>
+                    <div className="updateStocks">
+                      Net Profit: $ {item.asset.netProfit}
+                    </div>
+                    <div className="updateStocks">
+                      Quantity Purchased: {item.asset.quantity}
+                    </div>
+                    <div className="button">
+                      <button
+                        className="buymore"
+                        onClick={(e) => openBuyModal(e, i)}
+                      >
+                        Buy More
+                      </button>
+                      <button className="sell" onClick={(e) => openModal(e, i)}>
+                        Sell
+                      </button>
+                    </div>
                   </div>
-                  <div className="updateStocks">
-                    Last Update:{" "}
-                    <span>
-                      {Date(item.Stock.latestUpdate).split(" ")[1] +
-                        " " +
-                        Date(item.Stock.latestUpdate).split(" ")[2] +
-                        ", " +
-                        new Date(item.Stock.latestUpdate)
-                          .toLocaleString()
-                          .split(",")[1]}
-                    </span>{" "}
-                    <span className="span">
-                      {parseFloat(item.Stock.changePercent).toFixed(2)}%
-                    </span>
-                  </div>
-                  <div className="updateStocks">
-                    Amount Invested: $ {item.asset.invested}
-                  </div>
-                  <div className="updateStocks">
-                    Net Profit: $ {item.asset.netProfit}
-                  </div>
-                  <div className="updateStocks">
-                    Quantity Purchased: {item.asset.quantity}
-                  </div>
-                  <div className="button">
-                    <button
-                      className="buymore"
-                      onClick={(e) => openBuyModal(e, i)}
-                    >
-                      Buy More
-                    </button>
-                    <button className="sell" onClick={(e) => openModal(e, i)}>
-                      Sell
-                    </button>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
           <div className="market">
-            <button className="marketbtn">Buy Stocks</button>
+            <Link to="/market">
+              <button className="marketbtn">Buy Stocks</button>
+            </Link>
           </div>
         </div>
       </div>
@@ -325,6 +330,7 @@ const Portfolio = () => {
           <button className="close" onClick={(e) => closeModal(e)}>
             Cancel
           </button>
+          {hide === "error" ? <div className="time">You don't hab</div> : <></>}
         </div>
       </Modal>
 
@@ -361,6 +367,11 @@ const Portfolio = () => {
           <button className="close" onClick={(e) => closeModal(e)}>
             Cancel
           </button>
+          {hide === "error" ? (
+            <div className="time">Wait for {min} min before you could sell</div>
+          ) : (
+            <></>
+          )}
         </div>
       </Modal>
     </div>

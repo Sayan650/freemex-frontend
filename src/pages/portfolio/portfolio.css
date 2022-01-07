@@ -252,7 +252,9 @@
     padding: 4px 14px 4px 5px;
     border: 1px solid red;
 }
-
+.time {
+    color : red;
+}
 @media only screen and (max-width : 900px){
     .portfolio{
         padding-top: 40px;

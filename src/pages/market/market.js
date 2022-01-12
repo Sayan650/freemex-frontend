@@ -4,7 +4,7 @@ import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import "./market.css";
 import Modal from "react-modal";
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 
 const { io } = require("socket.io-client");
 
@@ -12,7 +12,6 @@ Modal.setAppElement("#root");
 
 function Market() {
   const inputRef = useRef();
-  const history = useHistory();
   const socketRef = useRef()
   const [BUYmodal, setbuyModal] = useState(false);
   const [data, setData] = useState([])
@@ -23,22 +22,22 @@ function Market() {
   const [msg, setmsg] = useState("");
 
 
-  const getSchedule = useCallback(async () =>{
-    const response = await fetch('/api/schedules')
-    const result = await response.json();
-    console.log(new Date(result.schedule.end));
-    localStorage.setItem('start', result.schedule.start)
-    localStorage.setItem('end', result.schedule.end)
-    if (new Date(result.schedule.start)>new Date()) {
-        history.push("/timer");
-    }if (new Date() > new Date(result.schedule.end)) {
-      history.push("/timer");
-  }
-})
+//   const getSchedule = async () =>{
+//     const response = await fetch('/api/schedules')
+//     const result = await response.json();
+//     console.log(new Date(result.schedule.end));
+//     localStorage.setItem('start', result.schedule.start)
+//     localStorage.setItem('end', result.schedule.end)
+//     if (new Date(result.schedule.start)>new Date()) {
+//         history.push("/timer");
+//     }if (new Date() > new Date(result.schedule.end)) {
+//       history.push("/timer");
+//   }
+// }
 
-useEffect(() => {
-    getSchedule()
-},[getSchedule])
+// useEffect(() => {
+//     getSchedule()
+// },[getSchedule])
 
 
   useEffect(() => {

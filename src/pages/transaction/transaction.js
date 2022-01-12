@@ -9,8 +9,8 @@ function Transaction() {
 
 
   const [transaction, setTransaction] = useState([]);
-
-  const getSchedule = useCallback(async () =>{
+useEffect(() => {
+  const getSchedule = async () =>{
     const response = await fetch('/api/schedules')
     const result = await response.json();
     console.log(new Date(result.schedule.end));
@@ -21,11 +21,11 @@ function Transaction() {
     }if (new Date() > new Date(result.schedule.end)) {
       history.push("/timer");
   }
-})
+}
 
-useEffect(() => {
-    getSchedule()
-},[getSchedule])
+
+    getSchedule();
+})
 
   const getTransaction = useCallback(async () => {
     const response = await fetch('/api/transactions');

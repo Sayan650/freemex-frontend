@@ -53,7 +53,7 @@ function Admin() {
                     }
                  })
             })
-            // console.log(res)
+            console.log(res);
         }
     }
 

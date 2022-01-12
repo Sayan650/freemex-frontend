@@ -1,6 +1,7 @@
 import "./leaderboard.css"
 import SearchIcon from '@material-ui/icons/Search';
 import React,{useState,useRef, useCallback,useEffect} from 'react'
+import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 
 const Leaderboard = () => {
     const inputRef = useRef()
@@ -20,6 +21,9 @@ const Leaderboard = () => {
 
     return (
         <div className="leaderboard">
+            <MetaDecorator
+                title="Leaderboard - Freemex"
+            />
             <div className="leaderboardhead">
                 <h1>Leaderboard</h1>
                 <div className="searchbox" >

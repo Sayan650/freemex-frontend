@@ -5,6 +5,7 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import "./market.css";
 import Modal from "react-modal";
 import { useHistory } from 'react-router-dom';
+import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 
 const { io } = require("socket.io-client");
 
@@ -21,7 +22,6 @@ function Market() {
   const [quantity, setQuantity] = useState();
   const [hide, setHide] = useState("hide");
   const [msg, setmsg] = useState("");
-
 
   const getSchedule = useCallback(async () =>{
     const response = await fetch('/api/schedules')
@@ -61,8 +61,13 @@ useEffect(() => {
       }
       getstocks()
       // socket connection for stocks
-      socketRef.current = io.connect(`${process.env.REACT_APP_BACKEND_URL}`, { transports: ['websocket'] })
-      console.log("connection is done")
+      socketRef.current = io(`${process.env.REACT_APP_BACKEND_URL}`)
+      socketRef.current.on('connection', () => {
+        console.log("connection is done")
+      })
+      socketRef.current.on("connect_error", (err) => {
+        console.log("connect error:", err.message);
+      });
       socketRef.current.on("market", (res) => {
         const t = res.sort(function (a, b) {
           return a.id - b.id
@@ -144,6 +149,9 @@ useEffect(() => {
 
   return (
     <>
+      <MetaDecorator
+        title="Market - Freemex"
+      />
       <div className="Market">
         <div className={`snackbar ${hide}`}>{hide === 'error' ?(`${msg}`):(<>
           your transaction is sucessful. <a href="/portfolio">Portfolio</a> <button className="delete" onClick={() => setHide('hide')}>X</button> 

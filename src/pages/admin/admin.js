@@ -1,6 +1,7 @@
 import React, { useState} from "react";
 import "./admin.css"
 import Modal from "react-modal";
+import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 
 
 
@@ -60,7 +61,10 @@ function Admin() {
 
     return (
         <div className="admin">
-
+            <MetaDecorator
+                title="Admin - Freemex"
+                description="An admin page to create schedules (or timer)"
+            />
             <div className={`timer ${hide}`}>
                 <form >
                     <div>

@@ -1,9 +1,13 @@
+import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 import "./rules.css";
 
 
 function Rules() {
     return (
         <>
+          <MetaDecorator
+            title="Rules - Freemex"
+          />
          <div className="rules" id="rules">
         <h1>Rules</h1>
         <div className="rules-list">

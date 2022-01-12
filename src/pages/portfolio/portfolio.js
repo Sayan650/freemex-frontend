@@ -4,6 +4,7 @@ import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
+import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 Modal.setAppElement("#root");
 
 const { io } = require("socket.io-client");
@@ -57,17 +58,20 @@ const Portfolio = () => {
     };
     getstocks();
     // socket connection for stocks
-    socketRef.current = io.connect(`${process.env.REACT_APP_BACKEND_URL}`, {
-      transports: ["websocket"],
+    socketRef.current = io(`${process.env.REACT_APP_BACKEND_URL}`)
+    socketRef.current.on('connection', () => {
+      console.log("connection is done")
+    })
+    socketRef.current.on("connect_error", (err) => {
+      console.log("connect error:", err.message);
     });
-    console.log("connection is done");
     socketRef.current.on("market", (res) => {
       const t = res.sort(function (a, b) {
-        return a.id - b.id;
-      });
-      setData(t);
-    });
-    return () => socketRef.current.disconnect();
+        return a.id - b.id
+      })
+      setData(t)
+    })
+    return () => socketRef.current.disconnect()
   }, []);
 
   const openBuyModal = (e, i) => {
@@ -240,6 +244,9 @@ const Portfolio = () => {
   };
   return (
     <div className="portfolio">
+      <MetaDecorator
+        title="Portfolio - Freemex"
+      />
       <div className="portfoliopage">
         <div className="Logged">
           <h1>Logged in as :</h1>

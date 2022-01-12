@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState, useCallback } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import "./transaction.css";
 import { useHistory } from 'react-router-dom';
+import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 
 function Transaction() {
   const inputRef = useRef();
@@ -58,6 +59,9 @@ useEffect(() => {
 
   return (
     <>
+      <MetaDecorator
+        title="Transactions - Freemex"
+      />
       <div className="Transaction">
         <div className="Transactionhead">
           <h1>Transaction</h1>

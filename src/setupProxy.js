@@ -1,7 +1,7 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 //Backend URL
-const BE_URL ='http://localhost:8000'
+const BE_URL =`${process.env.REACT_APP_BACKEND_URL}`
 
 module.exports = function(app) {
     app.use(

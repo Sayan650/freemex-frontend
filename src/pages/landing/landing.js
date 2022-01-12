@@ -1,7 +1,6 @@
 import "./landing.css";
 import TypeWriterEffect from "react-typewriter-effect";
 import React,{useState, useCallback,useEffect} from 'react'
-import Navbar from "../../components/navbar/navbar";
 function LandingSection() {
 
            const [player, setPlayer] = useState([]);

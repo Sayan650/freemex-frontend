@@ -57,7 +57,7 @@ const Portfolio = () => {
     };
     getstocks();
     // socket connection for stocks
-    socketRef.current = io.connect("http://localhost:8000", {
+    socketRef.current = io.connect(`${process.env.REACT_APP_BACKEND_URL}`, {
       transports: ["websocket"],
     });
     console.log("connection is done");

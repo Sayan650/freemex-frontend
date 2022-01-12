@@ -4,10 +4,8 @@ import { useHistory } from 'react-router-dom';
 
 const Timer = () => {
     const history = useHistory();
-    let date = new Date();
+    // let date = new Date();
     const [clock, setClock] = useState('00:00:00')
-    const [start_time,setStartTime] = useState('')
-    const [end_time,setEndTime] = useState('')
 
 
     const intervals = setInterval(function () {
@@ -56,10 +54,8 @@ const Timer = () => {
             // console.log(new Date(current_date))
             tf = new Date(current_date)
             var end_date = new Date(end)
-            var days, hours, minutes, seconds;
-            var target_date = tf.getTime()
 
-            var seconds_left = (target_date-end_date) / 1000;
+            seconds_left = (target_date-end_date) / 1000;
 
             days = pad(parseInt(seconds_left / 86400));
              seconds_left = seconds_left % 86400;

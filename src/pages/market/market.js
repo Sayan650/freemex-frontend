@@ -61,7 +61,7 @@ useEffect(() => {
       }
       getstocks()
       // socket connection for stocks
-      socketRef.current = io.connect("http://localhost:8000", { transports: ['websocket'] })
+      socketRef.current = io.connect(`${process.env.REACT_APP_BACKEND_URL}`, { transports: ['websocket'] })
       console.log("connection is done")
       socketRef.current.on("market", (res) => {
         const t = res.sort(function (a, b) {

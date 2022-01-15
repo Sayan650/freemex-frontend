@@ -50,7 +50,6 @@ const Timer = () => {
              const html = [days, hours, + minutes, + seconds]
              setClock(html)
 
-             // yha pe start hone m itna time ha (is if vale m dal dena)
 
         }if (current_date > new Date(end)) {
             // console.log(new Date(current_date))
@@ -74,7 +73,7 @@ const Timer = () => {
              const html = [days, hours, + minutes, + seconds]
              setClock(html)
 
-             // yha pe end hogya ha (is if vale m dal dena)
+             
         }
 
         

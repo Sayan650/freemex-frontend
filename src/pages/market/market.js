@@ -15,6 +15,7 @@ function Market() {
   const history = useHistory();
   const socketRef = useRef()
   const [BUYmodal, setbuyModal] = useState(false);
+  const [MSGmodal, setMSGModal] = useState(false);
   const [data, setData] = useState([])
   const [StockId, setStockId] = useState([]);
   const [maxBuyStock, setmaxBuyStock] = useState();
@@ -23,22 +24,22 @@ function Market() {
   const [msg, setmsg] = useState("");
 
 
-  const getSchedule = useCallback(async () =>{
+  const getSchedule = useCallback(async () => {
     const response = await fetch('/api/schedules')
     const result = await response.json();
-    console.log(new Date(result.schedule.end));
+    // console.log(new Date(result.schedule.end));
     localStorage.setItem('start', result.schedule.start)
     localStorage.setItem('end', result.schedule.end)
-    if (new Date(result.schedule.start)>new Date()) {
-        history.push("/timer");
-    }if (new Date() > new Date(result.schedule.end)) {
+    if (new Date(result.schedule.start) > new Date()) {
       history.push("/timer");
-  }
-})
+    } if (new Date() > new Date(result.schedule.end)) {
+      history.push("/timer");
+    }
+  })
 
-useEffect(() => {
+  useEffect(() => {
     getSchedule()
-},[getSchedule])
+  }, [getSchedule])
 
 
   useEffect(() => {
@@ -57,7 +58,7 @@ useEffect(() => {
           })
           setData(t)
         }
-        
+
       }
       getstocks()
       // socket connection for stocks
@@ -97,47 +98,69 @@ useEffect(() => {
   };
   const closeModal = (e) => {
     setbuyModal(false);
+    setMSGModal(false)
   };
 
   // for buy transaction 
   const BuyTransaction = async (e) => {
     const details = data[e.target.value]
     const code = details.code
+    // console.log(parseInt(quantity))
 
-    const res = await fetch('/api/transactions?type=bought', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        quantity, code
+    if (parseInt(quantity) > 0) {
+      const res = await fetch('/api/transactions?type=bought', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          quantity, code
+        })
       })
-    })
-    const result = await res.json()
-    // console.log(result)
-    if (result.message === "Forbidden, Not enough cash") {
-      setHide('error')
-      setmsg("Some thing went wrong. Please try again.")
-      setTimeout(() => {
-        setHide('hide')
-      }, 2000);
-
-    } else {
-      if (result.Stock.code === data[e.target.value].code) {
-        closeModal()
-        getPlayer()
-        setHide('success')
-        setTimeout(() => {
-          setHide('hide')
-        }, 5000);
-      } else {
+      const result = await res.json()
+      // console.log(result)
+      if (result.message === "Forbidden, Not enough cash") {
         setHide('error')
-        setmsg("Some thing went wrong. Please try again.")
+        setmsg("Not enough cash")
+        setMSGModal(true);
+        setbuyModal(false);
         setTimeout(() => {
           setHide('hide')
+          setMSGModal(false)
         }, 2000);
+
+      } else {
+        if (result.Stock.code === data[e.target.value].code) {
+          closeModal()
+          getPlayer()
+          setHide('success')
+          setMSGModal(true);
+          setbuyModal(false);
+          setTimeout(() => {
+            setHide('hide')
+            setMSGModal(false)
+          }, 5000);
+        } else {
+          setHide('error')
+          setmsg("Some thing went wrong. Please try again.")
+          setMSGModal(true);
+          setbuyModal(false);
+          setTimeout(() => {
+            setHide('hide')
+            setMSGModal(false)
+          }, 2000);
+        }
       }
+    }else{
+      setHide('error')
+          setmsg("Invalid input. Please try again.")
+          setMSGModal(true);
+          setbuyModal(false);
+          setTimeout(() => {
+            setHide('hide')
+            setMSGModal(false)
+          }, 2000);
     }
 
   }
@@ -145,9 +168,6 @@ useEffect(() => {
   return (
     <>
       <div className="Market">
-        <div className={`snackbar ${hide}`}>{hide === 'error' ?(`${msg}`):(<>
-          your transaction is sucessful. <a href="/portfolio">Portfolio</a> <button className="delete" onClick={() => setHide('hide')}>X</button> 
-        </>)} </div>
         <div className="Markethead">
           <h1>Market</h1>
           <h2>
@@ -210,6 +230,26 @@ useEffect(() => {
               )}
           </div>
         </div>
+
+        <Modal
+          className="msgmodal"
+          style={{
+            width: "fit-content", height: "200px", left: "50%", top: '50%',
+            transform: "translate(-50%,-50%)"
+          }}
+          isOpen={MSGmodal}
+          onRequestClose={() => setMSGModal(false)}
+        >
+          <div className={`snackbar`}>{hide === 'error' ? (`${msg}`) : (<>
+            your transaction has successful head over to <a href="/portfolio">Portfolio</a> see.
+          </>)}
+          </div>
+          <div className="modalFooter">
+            <button className="close" onClick={(e) => closeModal(e)}>
+              Close
+            </button>
+          </div>
+        </Modal>
 
         <Modal
           style={{ width: "fit-content" }}

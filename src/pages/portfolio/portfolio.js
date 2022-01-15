@@ -12,6 +12,7 @@ const Portfolio = () => {
   const [BUYmodal, setbuyModal] = useState(false);
   const [sellmodal, setsellModal] = useState(false);
   const [namemodal, setNameModal] = useState(false);
+  const [MSGmodal, setMSGModal] = useState(false);
   const socketRef = useRef();
   const [data, setData] = useState([]);
   const [stat, setStat] = useState(0);
@@ -79,6 +80,7 @@ const Portfolio = () => {
   const closeModal = (e) => {
     setbuyModal(false);
     setsellModal(false);
+    setMSGModal(false)
     setNameModal(false);
   };
   const openModal = (e, i) => {
@@ -87,96 +89,130 @@ const Portfolio = () => {
     setmaxBuyStock(n);
     setsellModal(true);
   };
-  // for buy transaction
+  // for buy transaction 
   const BuyTransaction = async (e) => {
-    const details = stocks[e.target.value];
-    const code = details.Stock.code;
+    const details = data[e.target.value]
+    const code = details.code
+    // console.log(parseInt(quantity))
 
-    const res = await fetch("/api/transactions?type=bought", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        quantity,
-        code,
-      }),
-    });
-    const result = await res.json();
-
-    // console.log(result)
-    if (result.message === "Forbidden, Not enough cash") {
-      setHide("error");
-      setmsg("Some thing went wrong. Please try again.");
-      setTimeout(() => {
-        setHide("hide");
-      }, 2000);
-    } else {
-      if (result.Stock.code === stocks[e.target.value].Stock.code) {
-        window.location.reload(false);
-        closeModal();
-        getPlayer();
-        setHide("success");
+    if (parseInt(quantity) > 0) {
+      const res = await fetch('/api/transactions?type=bought', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          quantity, code
+        })
+      })
+      const result = await res.json()
+      // console.log(result)
+      if (result.message === "Forbidden, Not enough cash") {
+        setHide('error')
+        setmsg("Not enough cash")
+        setMSGModal(true);
+        setbuyModal(false);
         setTimeout(() => {
-          setHide("hide");
-        }, 5000);
-      } else {
-        setHide("error");
-        setmsg("Some thing went wrong. Please try again.");
-        setTimeout(() => {
-          setHide("hide");
+          setHide('hide')
+          setMSGModal(false)
         }, 2000);
+
+      } else {
+        if (result.Stock.code === data[e.target.value].code) {
+          closeModal()
+          getPlayer()
+          setHide('success')
+          setMSGModal(true);
+          setbuyModal(false);
+          setTimeout(() => {
+            setHide('hide')
+            setMSGModal(false)
+          }, 5000);
+        } else {
+          setHide('error')
+          setmsg("Some thing went wrong. Please try again.")
+          setMSGModal(true);
+          setbuyModal(false);
+          setTimeout(() => {
+            setHide('hide')
+            setMSGModal(false)
+          }, 2000);
+        }
       }
+    } else {
+      setHide('error')
+      setmsg("Invalid input. Please try again.")
+      setMSGModal(true);
+      setbuyModal(false);
+      setTimeout(() => {
+        setHide('hide')
+        setMSGModal(false)
+      }, 2000);
     }
-  };
+
+  }
   // for sell transaction
   const sellTransaction = async (e) => {
     const details = stocks[e.target.value];
     const code = details.Stock.code;
 
-    const res = await fetch("/api/transactions?type=sold", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        quantity,
-        code,
-      }),
-    });
-    const result = await res.json();
-    console.log(result);
+    if (parseInt(quantity) > 0) {
+      const res = await fetch("/api/transactions?type=sold", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          quantity,
+          code,
+        }),
+      });
+      const result = await res.json();
+      console.log(result);
 
-    // console.log(result)
-    if (result.atleastWaitPeriod >= 0) {
-      setHide("error");
-      setmsg("Some thing went wrong. Please try again.");
-      var millis = result.atleastWaitPeriod;
-      var minutes = Math.floor(millis / 60000);
-      var seconds = ((millis % 60000) / 1000).toFixed(0);
-      var time = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-      setMin(time);
-      setTimeout(() => {
-        setHide("hide");
-      }, 10000);
-    } else {
-      if (result.Stock.code === stocks[e.target.value].Stock.code) {
-        window.location.reload(false);
-        closeModal();
-        getPlayer();
-        setHide("success");
-        setTimeout(() => {
-          setHide("hide");
-        }, 5000);
-      } else {
+      // console.log(result)
+      if (result.atleastWaitPeriod >= 0) {
         setHide("error");
         setmsg("Some thing went wrong. Please try again.");
+        var millis = result.atleastWaitPeriod;
+        var minutes = Math.floor(millis / 60000);
+        var seconds = ((millis % 60000) / 1000).toFixed(0);
+        var time = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+        setMin(time);
         setTimeout(() => {
           setHide("hide");
-        }, 2000);
+        }, 10000);
+      } else {
+        if (result.Stock.code === stocks[e.target.value].Stock.code) {
+          window.location.reload(false);
+          closeModal();
+          getPlayer();
+          setHide("success");
+          setmsg("Some thing went wrong. Please try again.");
+          setsellModal(false)
+          setTimeout(() => {
+            setHide("hide");
+          }, 3000);
+        } else {
+          setHide("error");
+          setmsg("Some thing went wrong. Please try again.");
+          setsellModal(false)
+          setTimeout(() => {
+            setHide("hide");
+          }, 2000);
+        }
       }
+    } else {
+      setHide('error')
+      setmsg("Invalid input. Please try again.")
+      setMSGModal(true);
+      setsellModal(false)
+      setTimeout(() => {
+        setHide('hide')
+        setMSGModal(false)
+      }, 2000);
     }
   };
   // change Username
@@ -354,6 +390,28 @@ const Portfolio = () => {
           </div>
         </div>
       </div>
+
+      {/* -------------- modal for msg  ------------- */}
+
+      <Modal
+        className="msgmodal"
+        style={{
+          width: "fit-content", height: "200px", left: "50%", top: '50%',
+          transform: "translate(-50%,-50%)"
+        }}
+        isOpen={MSGmodal}
+        onRequestClose={() => setMSGModal(false)}
+      >
+        <div className={`snackbar`}>{hide === 'error' ? (`${msg}`) : (<>
+          Your transaction was successful head over to <a href="/portfolio">Portfolio</a> see.
+        </>)}
+        </div>
+        <div className="modalFooter">
+          <button className="close" onClick={(e) => closeModal(e)}>
+            Close
+          </button>
+        </div>
+      </Modal>
 
       {/* -------------- modal for buy More ------------- */}
 

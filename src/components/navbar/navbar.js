@@ -4,12 +4,10 @@ import Sidebar from "./sidebar/sidebar";
 import Backdrop from "./backdrop";
 import Modal from "react-modal";
 import Rules from "../../pages/rules/rules";
-import { useHistory } from 'react-router-dom';
 
 Modal.setAppElement("#root");
 
 const Nav = () => {
-  const history = useHistory();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [rules, setRules] = useState(false);
@@ -52,9 +50,6 @@ const Nav = () => {
           </div>
           <div className="nav">
             {player === 401 ? (<>
-              <div className="links">
-                <a href="/leaderboard">leaderboard</a>
-              </div>
               <div className="links">
                 <a href="/" onClick={(e) => openModal(e)}>
                   Rules

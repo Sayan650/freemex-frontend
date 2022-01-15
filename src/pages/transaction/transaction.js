@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState, useCallback } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import "./transaction.css";
 import { useHistory } from 'react-router-dom';
+import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 
 function Transaction() {
   const inputRef = useRef();
@@ -9,8 +10,8 @@ function Transaction() {
 
 
   const [transaction, setTransaction] = useState([]);
-
-  const getSchedule = useCallback(async () =>{
+useEffect(() => {
+  const getSchedule = async () =>{
     const response = await fetch('/api/schedules')
     const result = await response.json();
     console.log(new Date(result.schedule.end));
@@ -21,11 +22,11 @@ function Transaction() {
     }if (new Date() > new Date(result.schedule.end)) {
       history.push("/timer");
   }
-})
+}
 
-useEffect(() => {
-    getSchedule()
-},[getSchedule])
+
+    getSchedule();
+})
 
   const getTransaction = useCallback(async () => {
     const response = await fetch('/api/transactions');
@@ -58,6 +59,9 @@ useEffect(() => {
 
   return (
     <>
+      <MetaDecorator
+        title="Transactions - Freemex"
+      />
       <div className="Transaction">
         <div className="Transactionhead">
           <h1>Transaction</h1>

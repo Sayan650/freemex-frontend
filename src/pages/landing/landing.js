@@ -1,7 +1,7 @@
 import "./landing.css";
 import TypeWriterEffect from "react-typewriter-effect";
 import React,{useState, useCallback,useEffect} from 'react'
-import Navbar from "../../components/navbar/navbar";
+import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 function LandingSection() {
 
            const [player, setPlayer] = useState([]);
@@ -18,6 +18,7 @@ function LandingSection() {
   console.log (player);
   return (
     <>
+    <MetaDecorator />
     {player === 200
         ?        ( 
           window.location.href="/portfolio" )

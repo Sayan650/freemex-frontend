@@ -109,30 +109,40 @@
   flex-wrap: wrap;
   margin: auto;
 }
-.stockDetails .cards .scard {
+.stockDetails .cards .scards {
   margin: auto;
   width: fit-content;
-  text-align: center;
-  background-color: transparent;
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  border-style: solid;
-  border: none;
-  box-shadow: 5px 4px 0px 2px var(--shadow-color);
-  padding: 20px;
+  /* padding: 20px; */
   font-size: 20px;
   text-align: left;
-  width: 15rem;
-  background-color: rgba(28, 74, 176, 0.4);
+  /* width: 15rem; */
+  position: relative;
+}
+.scards img {
+  width: 404px;
+  height: 385px;
+}
+.stocks {
+  position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 300px;
+   transform: translate(-50%, -50%);
 }
 .stockDetails .nameStock {
   font-weight: 800;
+  font-size: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .stockDetails .nStock {
-  font-size: 12px;
-  color: rgb(160, 160, 160);
+  font-size: 20px !important;
+  color: #CDCDCD !important;
   margin: 2px 0px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .stockDetails .noStocks {
@@ -142,7 +152,7 @@
 }
 .stockDetails .priceStocks {
   font-weight: 700;
-  font-size: 18px;
+  font-size: 30px !important;
   position: relative;
 }
 .stockDetails .priceStocks span {
@@ -150,13 +160,13 @@
   right: 0px;
   color: red;
 }
-.stockDetails .priceStocks .downIcon {
-  font-size: 19px;
-  stroke-width: 2;
-  margin: -3px;
+.downIcon {
+  font-size: 24px !important;
+  /* stroke-width: 2; */
+  /* margin: -3px; */
 }
 .stockDetails .updateStocks {
-  font-size: 12px;
+  font-size: 18px !important;
   color: rgb(160, 160, 160);
   position: relative;
   margin: 3px 0px 10px 0px;
@@ -165,24 +175,50 @@
   position: absolute;
   right: 0px;
 }
+.line {
+  width: 300px;
+  height: 0px;
+  border: 1px solid #FFFFFF;
+}
+.updateStocksColumn {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.amount {
+  margin-bottom : 4px;
+  font-size: 20px;
+  line-height: 28px;
+  color: #FFFFFF;
+}
+
+.updateStock {
+  margin: 14px;
+  font-size: 18px;
+  line-height: 21px;
+  color: #CDCDCD;
+font-weight: 600;
+}
 
 .stockDetails .button {
   position: relative;
 }
 .stockDetails .buymore {
-  padding: 4px 8px;
-  border-radius: 5px;
-  border: 1px solid rgba(28, 74, 176, 0.4);
-  background-color: rgb(140, 16, 140);
+  border-radius: 7px;
+  width: 125px;
+  height: 38px;
+  border: 1px !important;
+  background-color: #297904 !important;
   color: white;
   font-weight: 700;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 20px !important;
   outline: none;
 }
 .stockDetails .buymore:hover {
-  background-color: transparent;
-  border: 1px solid rgb(140, 16, 140);
+  background-color: transparent !important;
+  border: 2px solid #297904 !important;
   /* color: rgb(140, 16, 140); */
   backdrop-filter: blur(10px);
 }
@@ -190,15 +226,16 @@
   padding: 4px 8px;
   border-radius: 5px;
   border: none;
+   width: 100px;
+   height: 38px;
   background-color: red;
   color: white;
   font-weight: 700;
   cursor: pointer;
   position: absolute;
   right: 0px;
-  top: 4px;
+    font-size: 20px !important;
   border: 1px solid rgba(28, 74, 176, 0.4);
-  font-size: 16px;
   outline: none;
 }
 .stockDetails .sell:hover {

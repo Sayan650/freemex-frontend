@@ -59,20 +59,20 @@ const Portfolio = () => {
     };
     getstocks();
     // socket connection for stocks
-    socketRef.current = io(`${process.env.REACT_APP_BACKEND_URL}`)
-    socketRef.current.on('connection', () => {
-      console.log("connection is done")
-    })
+    socketRef.current = io(`${process.env.REACT_APP_BACKEND_URL}`);
+    socketRef.current.on("connection", () => {
+      console.log("connection is done");
+    });
     socketRef.current.on("connect_error", (err) => {
       console.log("connect error:", err.message);
     });
     socketRef.current.on("market", (res) => {
       const t = res.sort(function (a, b) {
-        return a.id - b.id
-      })
-      setData(t)
-    })
-    return () => socketRef.current.disconnect()
+        return a.id - b.id;
+      });
+      setData(t);
+    });
+    return () => socketRef.current.disconnect();
   }, []);
 
   const openBuyModal = (e, i) => {
@@ -84,7 +84,7 @@ const Portfolio = () => {
   const closeModal = (e) => {
     setbuyModal(false);
     setsellModal(false);
-    setMSGModal(false)
+    setMSGModal(false);
     setNameModal(false);
   };
   const openModal = (e, i) => {
@@ -93,69 +93,68 @@ const Portfolio = () => {
     setmaxBuyStock(n);
     setsellModal(true);
   };
-  // for buy transaction 
+  // for buy transaction
   const BuyTransaction = async (e) => {
-    const details = data[e.target.value]
-    const code = details.code
+    const details = data[e.target.value];
+    const code = details.code;
     // console.log(parseInt(quantity))
 
     if (parseInt(quantity) > 0) {
-      const res = await fetch('/api/transactions?type=bought', {
+      const res = await fetch("/api/transactions?type=bought", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         credentials: "include",
         body: JSON.stringify({
-          quantity, code
-        })
-      })
-      const result = await res.json()
+          quantity,
+          code,
+        }),
+      });
+      const result = await res.json();
       // console.log(result)
       if (result.message === "Forbidden, Not enough cash") {
-        setHide('error')
-        setmsg("Not enough cash")
+        setHide("error");
+        setmsg("Not enough cash");
         setMSGModal(true);
         setbuyModal(false);
         setTimeout(() => {
-          setHide('hide')
-          setMSGModal(false)
+          setHide("hide");
+          setMSGModal(false);
         }, 2000);
-
       } else {
         if (result.Stock.code === data[e.target.value].code) {
-          closeModal()
-          getPlayer()
-          setHide('success')
+          closeModal();
+          getPlayer();
+          setHide("success");
           setMSGModal(true);
           setbuyModal(false);
           setTimeout(() => {
-            setHide('hide')
-            setMSGModal(false)
+            setHide("hide");
+            setMSGModal(false);
           }, 5000);
         } else {
-          setHide('error')
-          setmsg("Some thing went wrong. Please try again.")
+          setHide("error");
+          setmsg("Some thing went wrong. Please try again.");
           setMSGModal(true);
           setbuyModal(false);
           setTimeout(() => {
-            setHide('hide')
-            setMSGModal(false)
+            setHide("hide");
+            setMSGModal(false);
           }, 2000);
         }
       }
     } else {
-      setHide('error')
-      setmsg("Invalid input. Please try again.")
+      setHide("error");
+      setmsg("Invalid input. Please try again.");
       setMSGModal(true);
       setbuyModal(false);
       setTimeout(() => {
-        setHide('hide')
-        setMSGModal(false)
+        setHide("hide");
+        setMSGModal(false);
       }, 2000);
     }
-
-  }
+  };
   // for sell transaction
   const sellTransaction = async (e) => {
     const details = stocks[e.target.value];
@@ -195,27 +194,27 @@ const Portfolio = () => {
           getPlayer();
           setHide("success");
           setmsg("Some thing went wrong. Please try again.");
-          setsellModal(false)
+          setsellModal(false);
           setTimeout(() => {
             setHide("hide");
           }, 3000);
         } else {
           setHide("error");
           setmsg("Some thing went wrong. Please try again.");
-          setsellModal(false)
+          setsellModal(false);
           setTimeout(() => {
             setHide("hide");
           }, 2000);
         }
       }
     } else {
-      setHide('error')
-      setmsg("Invalid input. Please try again.")
+      setHide("error");
+      setmsg("Invalid input. Please try again.");
       setMSGModal(true);
-      setsellModal(false)
+      setsellModal(false);
       setTimeout(() => {
-        setHide('hide')
-        setMSGModal(false)
+        setHide("hide");
+        setMSGModal(false);
       }, 2000);
     }
   };
@@ -280,9 +279,7 @@ const Portfolio = () => {
   };
   return (
     <div className="portfolio">
-      <MetaDecorator
-        title="Portfolio - Freemex"
-      />
+      <MetaDecorator title="Portfolio - Freemex" />
       <div className="portfoliopage">
         <div className="Logged">
           <h1>Logged in as :</h1>
@@ -331,59 +328,90 @@ const Portfolio = () => {
                 return item.asset.quantity === 0 ? (
                   <></>
                 ) : (
-                  <div className="scard" key={i}>
-                    <p className="nameStock">{item.Stock.code}</p>
-                    <p className="nStock">
-                      <span>{item.Stock.name}</span>
-                    </p>
-                    <div className="priceStocks">
-                      $ {item.Stock.latestPrice}{" "}
-                      {item.Stock.change < 0 ? (
+                  <div className="scards" key={i}>
+                    <img
+                      src="Images/divBackground.png"
+                      alt=""
+                      key={item.Stock.code}
+                    />
+                    <div className="stocks" key={item.Stock.change}>
+                      <p className="nameStock">
+                        {item.Stock.code}{" "}
+                        {item.Stock.change < 0 ? (
+                          <span>
+                            <ArrowDownwardIcon className="downIcon" />{" "}
+                            {item.Stock.change}
+                          </span>
+                        ) : (
+                          <span style={{ color: "green" }}>
+                            <ArrowUpwardIcon className="downIcon" />{" "}
+                            {item.Stock.change}
+                          </span>
+                        )}
+                      </p>
+                      <p className="nStock">
+                        <span>{item.Stock.name}</span>
+
+                        <span className="span">
+                          {parseFloat(item.Stock.changePercent).toFixed(2)}%
+                        </span>
+                      </p>
+                      <div className="priceStocks">
+                        $ {item.Stock.latestPrice}{" "}
+                      </div>
+                      <div className="updateStocks">
+                        Last Updated On :{" "}
                         <span>
-                          <ArrowDownwardIcon className="downIcon" />{" "}
-                          {item.Stock.change}
-                        </span>
-                      ) : (
-                        <span style={{ color: "green" }}>
-                          <ArrowUpwardIcon className="downIcon" />{" "}
-                          {item.Stock.change}
-                        </span>
-                      )}
-                    </div>
-                    <div className="updateStocks">
-                      Last Update:{" "}
-                      <span>
-                        {Date(item.Stock.latestUpdate).split(" ")[1] +
-                          " " +
-                          Date(item.Stock.latestUpdate).split(" ")[2] +
-                          ", " +
-                          new Date(item.Stock.latestUpdate)
-                            .toLocaleString()
-                            .split(",")[1]}
-                      </span>{" "}
-                      <span className="span">
-                        {parseFloat(item.Stock.changePercent).toFixed(2)}%
-                      </span>
-                    </div>
-                    <div className="updateStocks">
-                      Amount Invested: $ {item.asset.invested}
-                    </div>
-                    <div className="updateStocks">
-                      Net Profit: $ {item.asset.netProfit}
-                    </div>
-                    <div className="updateStocks">
-                      Quantity Purchased: {item.asset.quantity}
-                    </div>
-                    <div className="button">
-                      <button
-                        className="buymore"
-                        onClick={(e) => openBuyModal(e, i)}
-                      >
-                        Buy More
-                      </button>
-                      <button className="sell" onClick={(e) => openModal(e, i)}>
-                        Sell
-                      </button>
+                          {Date(item.Stock.latestUpdate).split(" ")[1] +
+                            " " +
+                            Date(item.Stock.latestUpdate).split(" ")[2] +
+                            ", " +
+                            new Date(item.Stock.latestUpdate)
+                              .toLocaleString()
+                              .split(",")[1]}
+                        </span>{" "}
+                      </div>
+                      <div className="line"></div>
+                      <div className="updateStocksColumn">
+                        <div className="updateStock">
+                          <div className="amount">${item.asset.invested}</div>
+                          Amount Invested
+                        </div>
+                        <div className="updateStock">
+                          <div className="amount">
+                            {item.asset.netProfit < 0 ? (
+                              <span style={{ color: "red" }}>
+                                ${item.asset.netProfit}
+                              </span>
+                            ) : (
+                              <span style={{ color: "green" }}>
+                                ${item.asset.netProfit}
+                              </span>
+                            )}
+                          </div>
+                          Net Profit
+                        </div>
+                        <div className="updateStock">
+                          <div className="amount">{item.asset.quantity}</div>
+                          Quantity Purchased
+                        </div>
+                      </div>
+                      <div className="button" key={item.asset.quantity}>
+                        <button
+                          className="buymore"
+                          onClick={(e) => openBuyModal(e, i)}
+                          key={item.asset.netProfit}
+                        >
+                          Buy More
+                        </button>
+                        <button
+                          className="sell"
+                          key={item.asset.invested}
+                          onClick={(e) => openModal(e, i)}
+                        >
+                          Sell
+                        </button>
+                      </div>
                     </div>
                   </div>
                 );
@@ -403,15 +431,24 @@ const Portfolio = () => {
       <Modal
         className="msgmodal"
         style={{
-          width: "fit-content", height: "200px", left: "50%", top: '50%',
-          transform: "translate(-50%,-50%)"
+          width: "fit-content",
+          height: "200px",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%,-50%)",
         }}
         isOpen={MSGmodal}
         onRequestClose={() => setMSGModal(false)}
       >
-        <div className={`snackbar`}>{hide === 'error' ? (`${msg}`) : (<>
-          Your transaction was successful head over to <a href="/portfolio">Portfolio</a> see.
-        </>)}
+        <div className={`snackbar`}>
+          {hide === "error" ? (
+            `${msg}`
+          ) : (
+            <>
+              Your transaction was successful head over to{" "}
+              <a href="/portfolio">Portfolio</a> see.
+            </>
+          )}
         </div>
         <div className="modalFooter">
           <button className="close" onClick={(e) => closeModal(e)}>

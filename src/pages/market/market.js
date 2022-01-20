@@ -204,35 +204,38 @@ function Market() {
               : (<>
                 {data.map((item, i) => {
                   return <div className="scard" key={i}>
-                    <p className="nameStock">{item.code}</p>
-                    <p className="nStock">
-                      <span>{item.name}</span>
-                    </p>
-                    {/* <p className="noStocks">x3</p> */}
-                    <div className="priceStocks">
-                      $ {item.latestPrice}{" "}
-                      {/* <span>
-                    <ArrowDownwardIcon className="downIcon" /> {item.change}
-                  </span> */}
-                      {
+                       <img
+                      src="Images/divBackground.png"
+                      alt=""
+                      key={item.code}
+                    />
+                      <div className="stocks" key={item.name}>
+                    <p className="nameStock">{item.code}
+                               {
                         item.change < 0 ? (<span>
                           <ArrowDownwardIcon className="downIcon" /> {item.change}
                         </span>) : (<span style={{ color: 'green' }}>
                           <ArrowUpwardIcon className="downIcon" /> {item.change}
                         </span>)
                       }
+                    </p>
+                    <p className="nStock">
+                      <span>{item.name} </span><span className="span">{parseFloat(item.changePercent).toFixed(2)}%</span>
+                    </p>
+                    <div className="priceStocks">
+                      $ {item.latestPrice}{" "}
                     </div>
                     <div className="updateStocks">
-                      Last Update: <span>
+                      Last Updated On: <span>
                         {Date(item.latestUpdate).split(" ")[1] + " " + Date(item.latestUpdate).split(" ")[2] + ", " + new Date(item.latestUpdate).toLocaleString().split(',')[1]}
-                      </span>{" "}
-                      <span className="span">{parseFloat(item.changePercent).toFixed(2)}%</span>
+                      </span>
                     </div>
                     <div className="buybutton">
                       <button className="buymore" onClick={(e) => openModal(e, i)}>
                         Buy
                       </button>
                     </div>
+                  </div>
                   </div>
                 })}</>
               )}

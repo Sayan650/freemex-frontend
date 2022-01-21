@@ -2,13 +2,34 @@
     margin: auto;
     width: auto;
     padding-top: 40px;
-    min-height: 80vh;
+    min-height: 84vh;
 }
 
 .adminhead{
     margin: 10px auto;
     text-align: center;
-}    
+}
+.other{
+    height: 590px;
+    overflow-y: auto;
+}
+.other .menu{
+    width: fit-content;
+    margin: 30px auto;
+}
+.other .menu button{
+    margin: 0px 20px;
+    padding:4px 10px;
+    cursor: pointer;
+}
+
+.other table {
+    margin: 20px auto;
+}
+.other table th,.other table td {
+    margin: 5px;
+    padding: 5px;
+}
 
 
 .Modal{
@@ -25,7 +46,7 @@
 }
 
 .admin .timer {
-    width: 60%;
+    /* width: 60%; */
     margin: auto;
     position: absolute;
     top: 50%;
@@ -79,6 +100,43 @@
     cursor: pointer;
     margin: 4px auto;
 }
+
+.transactionTable {
+    width: 90vw;
+    /* border: 2px solid var(--shadow-color); */
+    margin: auto;
+}
+ .transactionTableHead, .row {
+    display: flex;
+    color: white;
+    cursor: pointer;
+}
+.transactionTableBody .row:hover {
+    background-color: rgba(173, 216, 230, 0.2);
+}
+ li {
+    list-style: none;
+    margin: 0px;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    width: 11.4vw!important;
+}
+
+.transactionTableHead li {
+    font-weight: 900;
+    background-color: rgba(173, 216, 230, 0.2);
+    backdrop-filter: blur(10px);
+    font-size: 18px;
+    width: 11.4vw!important;
+}
+.transactionTableHead .row .id{
+    width: 10px!important;
+}
+.id{
+   width: 10px!important;
+}
+
 .error{
     background-color:#d32f2f;
 }

@@ -73,6 +73,7 @@ useEffect(() => {
             <input type="text" ref={inputRef} />
           </div>
         </div>
+
         <div className="transactionBody">
           <div className="transactionTable">
             <div className="transactionTableHead">
@@ -103,6 +104,7 @@ useEffect(() => {
             })}
           </div>
         </div>
+        
       </div>
     </>
   );

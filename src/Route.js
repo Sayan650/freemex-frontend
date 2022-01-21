@@ -5,8 +5,9 @@ import Portfolio from "./pages/portfolio/portfolio";
 import Leaderboard from "./pages/leaderboard/leaderboard"
 import Transaction from "./pages/transaction/transaction";
 import Market from "./pages/market/market";
-import Admin from "./pages/admin/admin"
+import Dashboard from "./pages/dashboard/dashboard"
 import Timer from "./components/timer/timer"
+
 
 const ReactRouterSetup = () => {
     return (
@@ -28,7 +29,7 @@ const ReactRouterSetup = () => {
                     <Transaction />
                 </Route>
                  <Route exact path="/dashboard">
-                    <Admin/>
+                    <Dashboard/>
                 </Route>
                 <Route exact path="/timer">
                     <Timer />

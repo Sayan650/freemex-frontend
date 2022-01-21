@@ -45,7 +45,7 @@
 .leaderboardTable .tableHead li,.leaderboardTable .tableBody li{
     list-style: none;
     margin: 0px;
-    width: 100%;
+    width: 100%!important;
     padding: 10px;
     text-align: left;
 }

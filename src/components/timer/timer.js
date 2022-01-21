@@ -6,7 +6,6 @@ const Timer = () => {
   const history = useHistory();
   // let date = new Date();
   const [clock, setClock] = useState("00:00:00");
-
   const intervals = setInterval(function () {
     // getCountdown();
     if (localStorage.getItem("time")) {

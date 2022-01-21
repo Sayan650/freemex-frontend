@@ -3,7 +3,7 @@ import "./background.css";
 function Background() {
   return (
     <div className="background">
-      <img src="Images/background.png" alt="" />
+      <img src="Images/ba.png" alt="" />
     </div>
   );
 }

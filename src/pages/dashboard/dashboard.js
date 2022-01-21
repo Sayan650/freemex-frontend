@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import "./admin.css"
 import Modal from "react-modal";
 import MetaDecorator from "../../components/metaDecorator/metaDecorator";
@@ -104,7 +104,7 @@ function Dashboard() {
                         <button className="players" onClick={(e) => { getData(e) }}>Player</button>
                         <button className="assets" onClick={(e) => { getData(e) }}>Asset</button>
                         <button className="transactions" onClick={(e) => { getData(e) }}>Transaction</button>
-                        <button className="stocks" onClick={(e) => { getData(e) }}>Stock</button>
+                        <button className="stockss" onClick={(e) => { getData(e) }}>Stock</button>
                     </div>
 
                     {/* ----------------------------for players------------------------------- */}
@@ -280,7 +280,7 @@ function Dashboard() {
             <Modal
                 style={{ width: "fit-content" }}
                 isOpen={BUYmodal}
-                className="Modal"
+                className="ModalAdmin"
             >
                 <div className="modalheader">
                     <div className="adminhead">

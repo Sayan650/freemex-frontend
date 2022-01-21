@@ -24,22 +24,22 @@ function Market() {
   const [msg, setmsg] = useState("");
 
 
-//   const getSchedule = async () =>{
-//     const response = await fetch('/api/schedules')
-//     const result = await response.json();
-//     console.log(new Date(result.schedule.end));
-//     localStorage.setItem('start', result.schedule.start)
-//     localStorage.setItem('end', result.schedule.end)
-//     if (new Date(result.schedule.start)>new Date()) {
-//         history.push("/timer");
-//     }if (new Date() > new Date(result.schedule.end)) {
-//       history.push("/timer");
-//   }
-// }
+  //   const getSchedule = async () =>{
+  //     const response = await fetch('/api/schedules')
+  //     const result = await response.json();
+  //     console.log(new Date(result.schedule.end));
+  //     localStorage.setItem('start', result.schedule.start)
+  //     localStorage.setItem('end', result.schedule.end)
+  //     if (new Date(result.schedule.start)>new Date()) {
+  //         history.push("/timer");
+  //     }if (new Date() > new Date(result.schedule.end)) {
+  //       history.push("/timer");
+  //   }
+  // }
 
-// useEffect(() => {
-//     getSchedule()
-// },[getSchedule])
+  // useEffect(() => {
+  //     getSchedule()
+  // },[getSchedule])
 
 
   useEffect(() => {
@@ -112,7 +112,7 @@ function Market() {
     const code = details.code
     // console.log(parseInt(quantity))
 
-    if (parseInt(quantity) > 0) {
+    if (parseInt(quantity) > 0 && Number.isInteger(Number(quantity))) {
       const res = await fetch('/api/transactions?type=bought', {
         method: "POST",
         headers: {
@@ -157,16 +157,33 @@ function Market() {
           }, 2000);
         }
       }
-    }else{
+    } else {
       setHide('error')
-          setmsg("Invalid input. Please try again.")
-          setMSGModal(true);
-          setbuyModal(false);
-          setTimeout(() => {
-            setHide('hide')
-            setMSGModal(false)
-          }, 2000);
+      setmsg("Invalid input. Please try again.")
+      setMSGModal(true);
+      setbuyModal(false);
+      setTimeout(() => {
+        setHide('hide')
+        setMSGModal(false)
+      }, 2000);
     }
+
+  }
+
+  const searchValue = (e) => {
+    // console.log(e.target.value);
+    const filter = e.target.value;
+
+    document.querySelectorAll('.scard').forEach(element => {
+      // console.log(element.children[1].children[1].children[0].innerHTML,element)
+      if (element.children[1].children[1].children[0].innerHTML.indexOf(filter) > -1) {
+        element.style.display = "";
+      }else if (element.children[1].children[0].children[0].innerHTML.indexOf(filter) > -1) {
+        element.style.display = "";
+      } else {
+        element.style.display = "none";
+      }
+    });
 
   }
 
@@ -183,7 +200,7 @@ function Market() {
           </h2>
           <div className="searchbox">
             <SearchIcon className="searchIcon" />
-            <input type="text" ref={inputRef} />
+            <input type="text" ref={inputRef} onChange={(e) => { searchValue(e) }} />
           </div>
         </div>
         <div className="Marketbody">
@@ -204,34 +221,37 @@ function Market() {
               : (<>
                 {data.map((item, i) => {
                   return <div className="scard" key={i}>
-                    <p className="nameStock">{item.code}</p>
-                    <p className="nStock">
-                      <span>{item.name}</span>
-                    </p>
-                    {/* <p className="noStocks">x3</p> */}
-                    <div className="priceStocks">
-                      $ {item.latestPrice}{" "}
-                      {/* <span>
-                    <ArrowDownwardIcon className="downIcon" /> {item.change}
-                  </span> */}
-                      {
-                        item.change < 0 ? (<span>
-                          <ArrowDownwardIcon className="downIcon" /> {item.change}
-                        </span>) : (<span style={{ color: 'green' }}>
-                          <ArrowUpwardIcon className="downIcon" /> {item.change}
-                        </span>)
-                      }
-                    </div>
-                    <div className="updateStocks">
-                      Last Update: <span>
-                        {Date(item.latestUpdate).split(" ")[1] + " " + Date(item.latestUpdate).split(" ")[2] + ", " + new Date(item.latestUpdate).toLocaleString().split(',')[1]}
-                      </span>{" "}
-                      <span className="span">{parseFloat(item.changePercent).toFixed(2)}%</span>
-                    </div>
-                    <div className="buybutton">
-                      <button className="buymore" onClick={(e) => openModal(e, i)}>
-                        Buy
-                      </button>
+                    <img
+                      src="Images/divBackground.png"
+                      alt=""
+                      key={item.code}
+                    />
+                    <div className="stocks" key={item.name}>
+                      <p className="nameStock"><span>{item.code}</span>
+                        {
+                          item.change < 0 ? (<span>
+                            <ArrowDownwardIcon className="downIcon" /> {item.change}
+                          </span>) : (<span style={{ color: 'green' }}>
+                            <ArrowUpwardIcon className="downIcon" /> {item.change}
+                          </span>)
+                        }
+                      </p>
+                      <p className="nStock">
+                        <span>{item.name} </span><span className="span">{parseFloat(item.changePercent).toFixed(2)}%</span>
+                      </p>
+                      <div className="priceStocks">
+                        $ {item.latestPrice}{" "}
+                      </div>
+                      <div className="updateStocks">
+                        Last Updated On: <span>
+                          {Date(item.latestUpdate).split(" ")[1] + " " + Date(item.latestUpdate).split(" ")[2] + ", " + new Date(item.latestUpdate).toLocaleString().split(',')[1]}
+                        </span>
+                      </div>
+                      <div className="buybutton">
+                        <button className="buymore" onClick={(e) => openModal(e, i)}>
+                          Buy
+                        </button>
+                      </div>
                     </div>
                   </div>
                 })}</>
@@ -270,7 +290,7 @@ function Market() {
           <hr />
           <div className="modalBody">
             <p>Max you can buy : {maxBuyStock}</p>
-            <input type="text" onChange={(e) => { setQuantity(e.target.value) }} placeholder="Quantity" />
+            <input type="number" min="1" max={maxBuyStock} onChange={(e) => { setQuantity(e.target.value) }} placeholder="Quantity" />
           </div>
           <hr />
           <div className="modalFooter">

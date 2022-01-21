@@ -113,14 +113,14 @@
   margin: auto;
   width: fit-content;
   /* padding: 20px; */
-  font-size: 20px;
+  font-size: Clamp(15px,1.35vw,20px);
   text-align: left;
   /* width: 15rem; */
   position: relative;
 }
 .scards img {
-  width: 404px;
-  height: 385px;
+  width: clamp(300px,28vw,404px);
+  height: clamp(281px,26.7vw,385px);
 }
 .stocks {
   position: absolute;
@@ -131,7 +131,7 @@
 }
 .stockDetails .nameStock {
   font-weight: 800;
-  font-size: 30px;
+  font-size: clamp(20px,2.07vw,30px);
   display: flex;
   justify-content: space-between;
   align-items: center;

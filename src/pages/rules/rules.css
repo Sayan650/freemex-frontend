@@ -17,9 +17,11 @@
   padding: 45px;
   font-size: 22px;
   line-height: 2rem;
+  width: 40vw !important;
 }
 .rules-list a {
   color: var(--hover-color);
+    width: 40vw !important;
 }
 .rulesmodal {
   background-color: var(--background-color);

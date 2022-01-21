@@ -112,7 +112,7 @@ function Market() {
     const code = details.code
     // console.log(parseInt(quantity))
 
-    if (parseInt(quantity) > 0) {
+    if (parseInt(quantity) > 0 && Number.isInteger(Number(quantity))) {
       const res = await fetch('/api/transactions?type=bought', {
         method: "POST",
         headers: {
@@ -273,7 +273,7 @@ function Market() {
           <hr />
           <div className="modalBody">
             <p>Max you can buy : {maxBuyStock}</p>
-            <input type="text" onChange={(e) => { setQuantity(e.target.value) }} placeholder="Quantity" />
+            <input type="number" min="1" max={maxBuyStock} onChange={(e) => { setQuantity(e.target.value) }} placeholder="Quantity" />
           </div>
           <hr />
           <div className="modalFooter">

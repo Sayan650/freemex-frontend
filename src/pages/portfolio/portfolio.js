@@ -99,7 +99,7 @@ const Portfolio = () => {
     const code = details.code;
     // console.log(parseInt(quantity))
 
-    if (parseInt(quantity) > 0) {
+    if (parseInt(quantity) > 0 && Number.isInteger(Number(quantity))) {
       const res = await fetch("/api/transactions?type=bought", {
         method: "POST",
         headers: {
@@ -160,7 +160,7 @@ const Portfolio = () => {
     const details = stocks[e.target.value];
     const code = details.Stock.code;
 
-    if (parseInt(quantity) > 0) {
+    if (parseInt(quantity) > 0 && Number.isInteger(Number(quantity))) {
       const res = await fetch("/api/transactions?type=sold", {
         method: "POST",
         headers: {
@@ -471,7 +471,9 @@ const Portfolio = () => {
         <div className="modalBody">
           <p>Max you can buy : {maxBuyStock}</p>
           <input
-            type="text"
+            type="number"
+            min="1"
+            max={maxBuyStock}
             onChange={(e) => {
               setQuantity(e.target.value);
             }}
@@ -512,7 +514,9 @@ const Portfolio = () => {
         <div className="modalBody">
           <p>Max you can sell : {maxBuyStock}</p>
           <input
-            type="text"
+            type="number"
+            min="1"
+            max={maxBuyStock}
             onChange={(e) => {
               setQuantity(e.target.value);
             }}

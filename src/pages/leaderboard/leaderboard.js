@@ -13,11 +13,27 @@ const Leaderboard = () => {
     const players = await response.json();
     setPlayers(players.players);
     // setLoading(false);
+    console.log(players)
   }, []);
 
   useEffect(() => {
       getPlayers();
   }, [getPlayers]);
+
+  const searchValue = (e)=>{
+    //   console.log(e.target.value);
+      const filter = e.target.value;
+
+      document.querySelectorAll('.row').forEach(element => {
+        // console.log(element.children[1].innerHTML,element)
+        if (element.children[1].innerHTML.indexOf(filter) > -1) {
+            element.style.display = "";
+        } else {
+            element.style.display = "none";
+        }
+    });
+
+  }
 
     return (
         <div className="leaderboard">
@@ -28,7 +44,7 @@ const Leaderboard = () => {
                 <h1>Leaderboard</h1>
                 <div className="searchbox" >
                     <SearchIcon className="searchIcon"/>
-                    <input type="text" ref={inputRef} key="input"/>
+                    <input type="text" ref={inputRef} key="input" onChange={(e)=>{searchValue(e)}}/>
                 </div>
             </div>
             <div className="leaderboardbody">

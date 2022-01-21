@@ -290,7 +290,7 @@ function Dashboard() {
                         <div className="adminform">
                             <form action="/admin" method="POST">
                                 <input type="email" onInput={(e) => setUsername(e.target.value)} placeholder="Enter you email" />
-                                <input type="password" onInput={(e) => setPassword(e.target.value)} placeholder="Enter your password" />
+                                <input type="text" onInput={(e) => setPassword(e.target.value)} placeholder="Enter your password" />
                                 <button type="button" onClick={Loginadmin}>Login</button>
                             </form>
                         </div>

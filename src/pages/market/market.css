@@ -82,12 +82,12 @@
   position: relative;
 }
 .scard img {
-  width: 404px;
-  height: 286px;
+  width: clamp(320px, 28vw, 404px);
+  height: clamp(210px, 19.8vw, 286px);
 }
 .stockscard .nameStock{
     font-weight: 800;
-    font-size: 30px;
+    font-size:clamp(22px, 2.07vw, 30px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -96,20 +96,20 @@
 
 .stockscard .nStock{
     margin: 2px 0px;
-      font-size: 18px !important;
+      font-size: clamp(14px, 1.25vw, 18px);
       color: #CDCDCD !important;
       display: flex;
       justify-content: space-between;
 }
 
 .stockscard .noStocks{
-    font-size: 16px;
+    font-size: clamp(12px, 1.1vw, 16px);
     color: rgb(140, 16, 140);
     margin-bottom: 20px;
 }
 .stockscard .priceStocks{
     font-weight: 700;
-    font-size: 30px !important;
+    font-size: clamp(22px, 2.07vw, 30px);
     position: relative;
       color: var(--text-color);
 }
@@ -119,12 +119,12 @@
     color: red;
 }
 .stockscard .priceStocks .downIcon{
-    font-size: 19px;
+    font-size: clamp(14px, 1.25vw, 18px);
     stroke-width: 2;
     margin: -3px;
 }
 .stockscard .updateStocks{
-  font-size: 18px !important;
+  font-size: clamp(14px, 1.25vw, 18px);
   color: rgb(160, 160, 160);
   position: relative;
   margin: 3px 0px 10px 0px;
@@ -141,15 +141,15 @@
     justify-content: center;
 }
 .stockscard .buymore{
-     border-radius: 7px;
-     width: 125px;
-     height: 38px;
+     border-radius: clamp(5px, 0.48vw, 7px);
+     width: clamp(95px, 8.65vw, 125px);
+     height:clamp(32px, 2.6vw, 38px);
      border: 1px !important;
      background-color: #297904 !important;
      color: white;
      font-weight: 700;
      cursor: pointer;
-     font-size: 20px !important;
+     font-size: Clamp(15px, 1.35vw, 20px);
      outline: none;
 }
 .stockscard .buymore:hover{
@@ -162,10 +162,6 @@
 .snackbar{
     width: fit-content;
     margin: auto;
-    /* position: absolute; */
-    /* top: 0%; */
-    /* left: 50%; */
-    /* transform: translate(-50%, -1%); */
     color: white;
     /* background-color: red; */
     padding: 5px 5px 5px 10px;

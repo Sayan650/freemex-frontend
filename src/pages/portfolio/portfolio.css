@@ -119,8 +119,8 @@
   position: relative;
 }
 .scards img {
-  width: clamp(300px,28vw,404px);
-  height: clamp(281px,26.7vw,385px);
+  width: clamp(320px,28vw,404px);
+  height: clamp(305px,26.7vw,385px);
 }
 .stocks {
   position: absolute;
@@ -138,7 +138,7 @@
 }
 
 .stockDetails .nStock {
-  font-size: 20px !important;
+  font-size: Clamp(15px, 1.35vw, 20px) !important;
   color: #CDCDCD !important;
   margin: 2px 0px;
   display: flex;
@@ -146,13 +146,13 @@
 }
 
 .stockDetails .noStocks {
-  font-size: 16px;
+  font-size: clamp(12px,1.1vw,16px) !important;
   color: rgb(140, 16, 140);
   margin-bottom: 20px;
 }
 .stockDetails .priceStocks {
   font-weight: 700;
-  font-size: 30px !important;
+  font-size: clamp(22px, 2.07vw, 30px)!important;
   position: relative;
 }
 .stockDetails .priceStocks span {
@@ -166,7 +166,7 @@
   /* margin: -3px; */
 }
 .stockDetails .updateStocks {
-  font-size: 18px !important;
+  font-size: clamp(14px,1.25vw,18px) !important;
   color: rgb(160, 160, 160);
   position: relative;
   margin: 3px 0px 10px 0px;
@@ -176,7 +176,7 @@
   right: 0px;
 }
 .line {
-  width: 300px;
+  width: clamp(250px, 20.8vw, 300px);
   height: 0px;
   border: 1px solid #FFFFFF;
 }
@@ -188,14 +188,14 @@
 
 .amount {
   margin-bottom : 4px;
-  font-size: 20px;
+  font-size: Clamp(17px, 1.35vw, 20px);
   line-height: 28px;
   color: #FFFFFF;
 }
 
 .updateStock {
   margin: 14px;
-  font-size: 18px;
+  font-size: clamp(14px, 1.25vw, 18px);
   line-height: 21px;
   color: #CDCDCD;
 font-weight: 600;
@@ -205,15 +205,15 @@ font-weight: 600;
   position: relative;
 }
 .stockDetails .buymore {
-  border-radius: 7px;
-  width: 125px;
-  height: 38px;
+  border-radius: clamp(5px,0.48vw,7px) !important;
+  width: clamp(95px,8.65vw,125px) !important;
+  height: clamp(32px,2.6vw,38px) !important;
   border: 1px !important;
   background-color: #297904 !important;
   color: white;
   font-weight: 700;
   cursor: pointer;
-  font-size: 20px !important;
+  font-size: Clamp(15px, 1.35vw, 20px) !important;
   outline: none;
 }
 .stockDetails .buymore:hover {
@@ -226,15 +226,15 @@ font-weight: 600;
   padding: 4px 8px;
   border-radius: 5px;
   border: none;
-   width: 100px;
-   height: 38px;
+   width: clamp(85px, 6.9vw, 100px) !important;
+   height:clamp(32px, 2.6vw, 38px) !important;
   background-color: red;
   color: white;
   font-weight: 700;
   cursor: pointer;
   position: absolute;
   right: 0px;
-    font-size: 20px !important;
+    font-size: Clamp(15px, 1.35vw, 20px) !important;
   border: 1px solid rgba(28, 74, 176, 0.4);
   outline: none;
 }

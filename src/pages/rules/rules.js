@@ -3,12 +3,12 @@ import "./rules.css";
 
 
 function Rules() {
-    return (
-        <>
-          <MetaDecorator
-            title="Rules - Freemex"
-          />
-         <div className="rules" id="rules">
+  return (
+    <>
+      <MetaDecorator
+        title="Rules - Freemex"
+      />
+      <div className="rules" id="rules">
         <h1>Rules</h1>
         <div className="rules-list">
           <li>
@@ -22,7 +22,7 @@ function Rules() {
             Learn more about NASDAQ Timings{" "}
             <a
               href="http://www.nasdaq.com/about/trading-schedule.aspx"
-              // target="_blank"
+            // target="_blank"
             >
               here
             </a>
@@ -35,9 +35,9 @@ function Rules() {
             win.
           </li>
         </div>
-        </div>
-        </>
-    )
+      </div>
+    </>
+  )
 }
 
 export default Rules;

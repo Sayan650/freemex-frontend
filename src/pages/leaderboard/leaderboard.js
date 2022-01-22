@@ -60,7 +60,7 @@ const Leaderboard = () => {
                     <div key={i} className="tableBody">
                         <div key="row" className="row">
                             <li key="no">{i+1}</li>
-                            {/* <li>Amool</li> */}
+                            {/* <li key="avatar"><img src={play.avatar}/></li> */}
                             <li key="name">{play.username}</li>
                             <li key="value">{play.valueInTotal}</li>
                         </div>

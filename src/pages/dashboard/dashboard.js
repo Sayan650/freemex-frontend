@@ -109,8 +109,8 @@ function Dashboard() {
 
                     {/* ----------------------------for players------------------------------- */}
 
-                    <div className="transactionTable">
-                        <div className="transactionTableHead">
+                    <div className="adminTable">
+                        <div className="adminTableHead">
                             {data.length > 0 ?
                                 [
                                     data[1] === "Player" ? <div className="row" key={1}>
@@ -126,7 +126,7 @@ function Dashboard() {
                                 ] : null}
 
                         </div>
-                        <div className="transactionTableBody">
+                        <div className="adminTableBody">
                             {data.length > 0 ?
                                 [
                                     data[1] === "Player" ? [
@@ -151,8 +151,8 @@ function Dashboard() {
 
 
                     {/*------------------------------------- for assets-------------------------------------------- */}
-                    <div className="transactionTable">
-                        <div className="transactionTableHead">
+                    <div className="adminTable">
+                        <div className="adminTableHead">
                             {data.length > 0 ?
                                 [
                                     data[1] === "Asset" ? <div className="row" key={1}>
@@ -168,7 +168,7 @@ function Dashboard() {
                                 ] : null}
 
                         </div>
-                        <div className="transactionTableBody">
+                        <div className="adminTableBody">
                             {data.length > 0 ?
                                 [
                                     data[1] === "Asset" ? [
@@ -193,8 +193,8 @@ function Dashboard() {
 
                     {/*------------------------------ for transaction------------------------------ */}
 
-                    <div className="transactionTable">
-                        <div className="transactionTableHead">
+                    <div className="adminTable">
+                        <div className="adminTableHead">
                             {data.length > 0 ?
                                 [
                                     data[1] === "Transaction" ? <div className="row" key={1}>
@@ -210,7 +210,7 @@ function Dashboard() {
                                 ] : null}
 
                         </div>
-                        <div className="transactionTableBody">
+                        <div className="adminTableBody">
                             {data.length > 0 ?
                                 [
                                     data[1] === "Transaction" ? [
@@ -235,8 +235,8 @@ function Dashboard() {
 
                     {/*------------------------------ for stocks------------------------------ */}
 
-                    <div className="transactionTable">
-                        <div className="transactionTableHead">
+                    <div className="adminTable">
+                        <div className="adminTableHead">
                             {data.length > 0 ?
                                 [
                                     data[1] === "Stock" ? <div className="row" key={1}>
@@ -252,7 +252,7 @@ function Dashboard() {
                                 ] : null}
 
                         </div>
-                        <div className="transactionTableBody">
+                        <div className="adminTableBody">
                             {data.length > 0 ?
                                 [
                                     data[1] === "Stock" ? [

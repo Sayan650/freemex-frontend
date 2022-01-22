@@ -101,20 +101,20 @@
     margin: 4px auto;
 }
 
-.transactionTable {
+.adminTable {
     width: 90vw;
     /* border: 2px solid var(--shadow-color); */
     margin: auto;
 }
- .transactionTableHead, .row {
+ .adminTableHead, .row {
     display: flex;
     color: white;
     cursor: pointer;
 }
-.transactionTableBody .row:hover {
+.adminTableBody .row:hover {
     background-color: rgba(173, 216, 230, 0.2);
 }
- li {
+.adminTableBody  li {
     list-style: none;
     margin: 0px;
     width: 100%;
@@ -123,14 +123,14 @@
     width: 11.4vw!important;
 }
 
-.transactionTableHead li {
+.adminTableHead li {
     font-weight: 900;
     background-color: rgba(173, 216, 230, 0.2);
     backdrop-filter: blur(10px);
     font-size: 18px;
     width: 11.4vw!important;
 }
-.transactionTableHead .row .id{
+.adminTableHead .row .id{
     width: 10px!important;
 }
 .id{

@@ -25,8 +25,8 @@
 }
 .rulesmodal {
   background-color: var(--background-color);
-  width: 50vw !important;
-  overflow: auto;
+  width: 50vw!important;
+  overflow-x:hidden;
   border-radius: 35px !important;
   scrollbar-width: 0.5px !important;
   display: flex;
@@ -55,16 +55,19 @@
 }
 @media only screen and (max-width: 900px) {
   .rulesmodal {
-    width: 80vw;
+    width: 92vw!important;
     border-radius: 15px !important;
     max-height: 85vh;
     
+  }
+  .rules-list{
+    width: auto !important;
   }
   /* .ReactModal__Content {
     scrollbar-width: 0.5px !important;
   } */
   .rules-list {
     padding: 10px;
-    font-size: 18px;
+    font-size: 15px;
   }
 }

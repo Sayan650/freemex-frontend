@@ -91,8 +91,9 @@ const Portfolio = () => {
   };
   // for buy transaction
   const BuyTransaction = async (e) => {
-    const details = data[e.target.value];
-    const code = details.code;
+    const details = stocks[e.target.value];
+    const code = details.Stock.code;
+    console.log(code);
     // console.log(parseInt(quantity))
 
     if (parseInt(quantity) > 0 && Number.isInteger(Number(quantity))) {
@@ -119,7 +120,7 @@ const Portfolio = () => {
           setMSGModal(false);
         }, 2000);
       } else {
-        if (result.Stock.code === data[e.target.value].code) {
+        if (result.Stock.code === stocks[e.target.value].Stock.code) {
           closeModal();
           getPlayer();
           setHide("success");

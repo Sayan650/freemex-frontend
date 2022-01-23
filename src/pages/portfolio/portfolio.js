@@ -22,6 +22,7 @@ const Portfolio = () => {
   const [quantity, setQuantity] = useState();
   const [hide, setHide] = useState("hide");
   const [msg, setmsg] = useState("");
+  const [pCalculate, setPcalculate] = useState();
 
   const [player, setPlayer] = useState([]);
   const getPlayer = useCallback(async () => {
@@ -216,8 +217,26 @@ const Portfolio = () => {
     }
   };
 
+  const profitCal = (index)=>{
+    // console.log(data,stocks,e,index);
+    // const marketPrice = data[index].latestPrice
+    const marketdate = stocks[index]
+    const buyPrice = parseFloat(stocks[index].asset.invested)/parseFloat(stocks[index].asset.quantity)
+    const code = marketdate.Stock.code
+    // console.log(marketdate,data)
+    for (let i = 0; i < data.length; i++) {
+      const element = data[i];
+      if (element.code === code) {
+        const marketPrice = element.latestPrice
+        console.log(marketPrice - buyPrice)
+        setPcalculate(marketPrice - buyPrice)
+      }
+    }
+    // const 
+  }
+
   return (
-    <div className="portfolio">
+    <div className="portfolio" >
       <MetaDecorator title="Portfolio - Freemex" />
       <div className="portfoliopage">
         <div className="heading">
@@ -258,7 +277,7 @@ const Portfolio = () => {
                 return item.asset.quantity === 0 ? (
                   <></>
                 ) : (
-                  <div className="scards" key={i}>
+                  <div className="scards" key={i} onClick={(e)=>profitCal(i)}>
                     <img
                       src="Images/divBackground.png"
                       alt=""

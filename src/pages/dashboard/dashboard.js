@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import "./admin.css"
 import Modal from "react-modal";
 import MetaDecorator from "../../components/metaDecorator/metaDecorator";
@@ -14,6 +14,9 @@ function Dashboard() {
     const [start_time, setStartTime] = useState("");
     const [end_time, setEndTime] = useState("");
     const [data, setData] = useState([])
+    const [instance, setInstance] = useState();
+    const [method, setMethod] = useState();
+    const [options, setOptions] = useState();
 
     const Loginadmin = async (e) => {
         console.log(!username, !password)
@@ -76,6 +79,22 @@ function Dashboard() {
         setData([player[name], name])
     }
 
+    const someRoute = async ()=>{
+        console.log(instance,options,method)
+        const response = await fetch(`/admin/api/${method}`,{
+            method: method,
+            headers:{
+                "content-type": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify({
+                instance,options
+            })
+        })
+        const player = await response.json()
+        console.log(player)
+    }
+
 
     return (
         <div className="admin">
@@ -105,6 +124,25 @@ function Dashboard() {
                         <button className="assets" onClick={(e) => { getData(e) }}>Asset</button>
                         <button className="transactions" onClick={(e) => { getData(e) }}>Transaction</button>
                         <button className="stockss" onClick={(e) => { getData(e) }}>Stock</button>
+                    </div>
+
+                    <div className="otherRequest">
+                        <div>
+                            <textarea type="text" placeholder="Instance" onChange={(e)=>setInstance(e.target.value)}/>
+                        </div>
+                        <div>
+                            <textarea type="text" placeholder="Options" onChange={(e)=>setOptions(e.target.value)}/>
+                        </div>
+                        <div>
+                            <select name="method" onClick={(e)=>setMethod(e.target.value)}>
+                                <option value="POST">POST</option>
+                                <option value="PUT">PUT</option>
+                                <option value="DELETE">DELETE</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="button" onClick={someRoute}>Submit</button>
+                        </div>
                     </div>
 
                     {/* ----------------------------for players------------------------------- */}

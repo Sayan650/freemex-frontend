@@ -1,79 +1,103 @@
 import "./landing.css";
 import TypeWriterEffect from "react-typewriter-effect";
-import React,{useState, useCallback,useEffect} from 'react'
+import React, { useState,useEffect } from "react";
 import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 function LandingSection() {
-
-           const [player, setPlayer] = useState([]);
-  const getPlayer = useCallback(async () => {
-    const response = await fetch('/api/players');
-        const player = await response.status;
+  const [player, setPlayer] = useState(0);
+  const getPlayer = async () => {
+    const response = await fetch("/api/players");
+    const player = await response.status;
     setPlayer(player);
-  }, []);
+      console.log(player);
+  };
+
+  // useEffect(() => {
+  //   getPlayer();
+  // }, [getPlayer]);
+
 
   useEffect(() => {
-    getPlayer();
-  }, [getPlayer]);
+      getPlayer();
+       console.log(player);
+    const start = localStorage.getItem("Start");
+    const end = localStorage.getItem("End");
+    var current_date = new Date().getTime();
+    var new11 = new Date(start).getTime();
+    console.log(start);
+    console.log(end);
+    console.log(current_date);
+    console.log((current_date < new11 || current_date > new Date(end).getTime())  &&
+      player === "403");
+        console.log(player);
 
-  console.log (player);
+    if (
+      (current_date < new11 || current_date > new Date(end).getTime()) &&
+      player === 403
+    ) {
+      window.location.href = "/timer";
+    }
+  }, [player]);
+
   return (
     <>
-    <MetaDecorator />
-    {player === 200
-        ?        ( 
-          window.location.href="/portfolio" )
-          : (<>
-      <div className="landingPage">
-        <div className="landing">
-          <div className="landingWrapper">
-            <div className="landingIllustration">
-              <img src="Images/illustration.png" alt="" />
+      <MetaDecorator />
+      {player === 200 ? (
+        (window.location.href = "/portfolio")
+      ) : (
+        <>
+          <div className="landingPage">
+            <div className="landing">
+              <div className="landingWrapper">
+                <div className="landingIllustration">
+                  <img src="Images/illustration.png" alt="" />
+                </div>
+                <div className="Logo">
+                  <img src="Images/logo.png" alt="" />
+                </div>
+                <TypeWriterEffect
+                  // textStyle={{ fontFamily: "Red Hat Display" }}
+                  startDelay={100}
+                  cursorColor="orange"
+                  text="NASDAQ Timings:8PM - 2:30AM"
+                  typeSpeed={150}
+                />
+                <div className="auth">
+                  <a href="/auth/google">
+                    <img src="Images/googlewhite.png" alt="" />
+                  </a>
+                  <a href="/auth/github">
+                    <img src="Images/github.png" alt="" />
+                  </a>
+                </div>
+              </div>
+              <div className="landingIllustration2">
+                <img src="Images/illustration.png" alt="" />
+              </div>
             </div>
-            <div className="Logo">
+          </div>
+          <div className="about">
+            <h3>
               <img src="Images/logo.png" alt="" />
-            </div>
-            <TypeWriterEffect
-              // textStyle={{ fontFamily: "Red Hat Display" }}
-              startDelay={100}
-              cursorColor="orange"
-              text="NASDAQ Timings:8PM - 2:30AM"
-              typeSpeed={150}
-            />
-            <div className="auth">
-          <a href="/auth/google">
-              <img src="Images/googlewhite.png" alt="" /></a>
-              <a href="/auth/github">
-              <img src="Images/github.png" alt="" /></a>
-     
+              is an online trading game which allows you to buy and sell stocks
+              at your convenience and at the current market price. The player at
+              the end with highest total stocks and cash wins the game.
+            </h3>
+          </div>
+          <div className="notes">
+            <h1>Note</h1>
+            <div className="notesWrapper">
+              <ul>
+                <li>Stock prices are updated every 30 seconds.</li>
+                <li>Leaderboard is updated every minute.</li>
+                <li>
+                  You may notice some after hour fluctuations in stock prices
+                  which are normal.
+                </li>
+              </ul>
             </div>
           </div>
-          <div className="landingIllustration2">
-            <img src="Images/illustration.png" alt="" />
-          </div>
-        </div>
-      </div>
-      <div className="about">
-        <h3>
-          <img src="Images/logo.png" alt="" />
-          is an online trading game which allows you to buy and sell stocks at
-          your convenience and at the current market price. The player at the
-          end with highest total stocks and cash wins the game.
-        </h3>
-      </div>
-      <div className="notes">
-        <h1>Note</h1>
-        <div className="notesWrapper">
-          <ul>
-            <li>Stock prices are updated every 30 seconds.</li>
-            <li>Leaderboard is updated every minute.</li>
-            <li>
-              You may notice some after hour fluctuations in stock prices which
-              are normal.
-            </li>
-          </ul>
-        </div>
-      </div>
-</>)}
+        </>
+      )}
     </>
   );
 }

@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 
 const Timer = () => {
 
+
   const history = useHistory();
   // let date = new Date();
   const [clock, setClock] = useState("00:00:00");

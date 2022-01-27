@@ -143,7 +143,7 @@ const Nav = () => {
               </div>
               <div className="links">
                 <a href="/" onClick={(e) => openProfileModal(e)}>
-                   {profile.length === 0 ? (<></>) : (
+                   {profile === undefined ? (<></>) : (
                   <img src={profile.avatar} alt="" className="avatar"
                   ></img> )}</a>
               </div>

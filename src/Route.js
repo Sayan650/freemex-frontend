@@ -6,7 +6,7 @@ import Leaderboard from "./pages/leaderboard/leaderboard"
 import Transaction from "./pages/transaction/transaction";
 import Market from "./pages/market/market";
 import Dashboard from "./pages/dashboard/dashboard"
-import Timer from "./components/timer/timer"
+import Timer from "./pages/timer/timer"
 
 
 const ReactRouterSetup = () => {

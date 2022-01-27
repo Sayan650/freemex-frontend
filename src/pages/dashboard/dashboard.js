@@ -42,6 +42,8 @@ function Dashboard() {
     const timer = async () => {
         if (start_time && end_time) {
             console.log(start_time, end_time)
+              localStorage.setItem('Start', start_time);
+      localStorage.setItem('End', end_time);
             const res = await fetch('/admin/api/schedules', {
                 method: "POST",
                 headers: {

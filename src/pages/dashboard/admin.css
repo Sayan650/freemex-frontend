@@ -71,6 +71,21 @@
     margin: 4px auto;
 }
 
+.otherRequest{
+    width: fit-content;
+    margin: auto!important;
+    display: flex;
+}
+.otherRequest div{
+    margin: 10px;
+}
+.otherRequest button{
+    width: 100px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 4px auto;
+}
+
 .adminhead h1 {
     color: white;
     padding: 20px;

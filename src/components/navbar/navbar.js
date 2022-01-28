@@ -107,6 +107,12 @@ const Nav = () => {
     setStat(status);
     setmsg(result.message);
   };
+
+      const start = localStorage.getItem("Start");
+    const end = localStorage.getItem("End");
+    var current_date = new Date().getTime();
+    var new11 = new Date(start).getTime();
+
   return (
     <>
       <div className="navbar">
@@ -117,6 +123,7 @@ const Nav = () => {
             </a>
           </div>
           <div className="nav">
+ 
             {player === 401 ? (<>
               <div className="links">
                 <a href="/" onClick={(e) => openModal(e)}>
@@ -124,6 +131,15 @@ const Nav = () => {
                 </a>
               </div>
             </>) : (<>
+                          {((current_date < new11 || current_date > new Date(end).getTime())  &&
+      player === 403) ? (<><div className="links">
+                <a href="/" onClick={(e) => openModal(e)}>
+                  Rules
+                </a>
+              </div>
+                  <div className="links">
+                <a href="/leaderboard">leaderboard</a>
+              </div></>) : (<>
               <div className="links">
                 <a href="/portfolio">Portfolio</a>
               </div>
@@ -146,7 +162,7 @@ const Nav = () => {
                    {profile === undefined ? (<></>) : (
                   <img src={profile.avatar} alt="" className="avatar"
                   ></img> )}</a>
-              </div>
+              </div></>)}
             </>)}
           </div>
           <div className="icon" onClick={drawerOpenHandler}>

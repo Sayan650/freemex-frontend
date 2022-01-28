@@ -92,6 +92,12 @@ function Sidebar({ state, closeHandler }) {
     setStat(status);
     setmsg(result.message);
   };
+
+       const start = localStorage.getItem("Start");
+    const end = localStorage.getItem("End");
+    var current_date = new Date().getTime();
+    var new11 = new Date(start).getTime();
+
   return (
     <>
       {state ? (
@@ -106,10 +112,20 @@ function Sidebar({ state, closeHandler }) {
                 </li>
               </>
             ) : (
-              <>
+              <> {((current_date < new11 || current_date > new Date(end).getTime())  &&
+      player === 403) ? (<>         <li className="menuListItem">
+                  <a href="/leaderboard">leaderboard</a>
+                </li>
                 <li className="menuListItem">
-                <a href="/" onClick={(e) => openProfileModal(e)}>
-                   {profile.length === 0 ? (<></>) : (
+                  <a href="/" onClick={(e) => openModal(e)}>
+                    Rules
+                  </a>
+                </li>       <li className="menuListItem">
+                  <a href="/auth/logout">Logout</a>
+                </li> </> ) :(<>
+                <li className="menuListItem">
+                  <a href="/" onClick={(e) => openProfileModal(e)}>
+                   {profile === undefined ? (<></>) : (
                   <img src={profile.avatar} alt="" className="avatar"
                   ></img> )}</a>
              </li>
@@ -134,7 +150,7 @@ function Sidebar({ state, closeHandler }) {
                   <a href="/auth/logout">Logout</a>
                 </li>
               </>
-            )}
+            )}</>)}
           </ul>
         </div>
       ) : (

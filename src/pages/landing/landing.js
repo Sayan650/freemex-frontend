@@ -11,25 +11,12 @@ function LandingSection() {
       console.log(player);
   };
 
-  // useEffect(() => {
-  //   getPlayer();
-  // }, [getPlayer]);
-
-
   useEffect(() => {
       getPlayer();
-       console.log(player);
     const start = localStorage.getItem("Start");
     const end = localStorage.getItem("End");
     var current_date = new Date().getTime();
     var new11 = new Date(start).getTime();
-    console.log(start);
-    console.log(end);
-    console.log(current_date);
-    console.log((current_date < new11 || current_date > new Date(end).getTime())  &&
-      player === "403");
-        console.log(player);
-
     if (
       (current_date < new11 || current_date > new Date(end).getTime()) &&
       player === 403

@@ -1,16 +1,15 @@
-
 .landingPage {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 1300px;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
 .landing {
   margin-top: 100px;
   display: flex;
-  width: 85%;
+  width: clamp(70%,75%,80%);
   height: 480px;
   box-shadow: 0 0 10px var(--shadow-color);
   background-color: var(--background-color);
@@ -47,12 +46,14 @@
 }
 
 .about {
+  width: 85%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 50px;
+    margin: 0 auto;
   margin-top: 85px;
   color: var(--text-color);
+  max-width: 1440px;
 }
 .about img {
   width: auto;
@@ -63,7 +64,10 @@
   line-height: 1.75rem;
 }
 .notes {
+  max-width: 1440px;
   margin: 50px;
+  width: 85%;
+  margin: 0 auto;
   color: var(--text-color);
 }
 
@@ -75,7 +79,7 @@
 
 .notesWrapper {
   box-shadow: 0 0 10px var(--shadow-color);
-   background-color: var(--background-color);
+  background-color: var(--background-color);
   border-radius: 35px;
   padding: 35px;
   font-size: 20px;
@@ -86,7 +90,7 @@
 .landingIllustration {
   display: none;
 }
-@media only screen and (max-width : 910px){
+@media only screen and (max-width: 910px) {
   .landingIllustration2 {
     display: none;
   }
@@ -101,10 +105,9 @@
   }
   .landing {
     margin-top: 65px;
-          width: 80%;
-          height: 550px;
-          padding: 20px;
-          justify-content: center;
+    height: 550px;
+    padding: 20px;
+    justify-content: center;
   }
   .Logo {
     justify-content: center;
@@ -126,10 +129,5 @@
     height: 30px;
     margin: 0 30px;
   }
-  .about {
-    margin: 30px;
-  }
-  .notes {
-    margin: 25px;
-  }
+
 }

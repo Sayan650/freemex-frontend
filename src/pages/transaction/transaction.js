@@ -1,35 +1,43 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import "./transaction.css";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 
 function Transaction() {
   const inputRef = useRef();
   const history = useHistory();
 
+  const start = localStorage.getItem("Start");
+  const end = localStorage.getItem("End");
+  var current_date = new Date().getTime();
+  var new11 = new Date(start).getTime();
+
+  if (current_date < new11 || current_date > new Date(end).getTime()) {
+    window.location.href = "/";
+  }
 
   const [transaction, setTransaction] = useState([]);
-useEffect(() => {
-  const getSchedule = async () =>{
-    const response = await fetch('/api/schedules')
-    const result = await response.json();
-    console.log(new Date(result.schedule.end));
-    localStorage.setItem('start', result.schedule.start)
-    localStorage.setItem('end', result.schedule.end)
-    if (new Date(result.schedule.start)>new Date()) {
+  useEffect(() => {
+    const getSchedule = async () => {
+      const response = await fetch("/api/schedules");
+      const result = await response.json();
+      console.log(new Date(result.schedule.end));
+      localStorage.setItem("start", result.schedule.start);
+      localStorage.setItem("end", result.schedule.end);
+      if (new Date(result.schedule.start) > new Date()) {
         history.push("/timer");
-    }if (new Date() > new Date(result.schedule.end)) {
-      history.push("/timer");
-  }
-}
-
+      }
+      if (new Date() > new Date(result.schedule.end)) {
+        history.push("/timer");
+      }
+    };
 
     getSchedule();
-})
+  });
 
   const getTransaction = useCallback(async () => {
-    const response = await fetch('/api/transactions');
+    const response = await fetch("/api/transactions");
     const transaction = await response.json();
     console.log(transaction.transactions);
     setTransaction(transaction.transactions);
@@ -39,29 +47,41 @@ useEffect(() => {
     getTransaction();
   }, [getTransaction]);
 
+  // player status
+  const [player, setPlayer] = useState([]);
+  const getPlayer = useCallback(async () => {
+    const response = await fetch("/api/players");
+    const player = await response.json();
+    setPlayer(player.player);
+  }, []);
 
-    // player status
-    const [player, setPlayer] = useState([]);
-    const getPlayer = useCallback(async () => {
-      const response = await fetch('/api/players');
-      const player = await response.json();
-      setPlayer(player.player);
-    }, []);
-  
-    useEffect(() => {
-      getPlayer();
-    }, [getPlayer]);
+  useEffect(() => {
+    getPlayer();
+  }, [getPlayer]);
 
-    useEffect(() => {
+  useEffect(() => {
     inputRef.current.focus();
   }, []);
-  
+
+  const searchValue = (e) => {
+    // console.log(e.target.value);
+    const filter = e.target.value;
+
+    document.querySelectorAll(".row").forEach((element) => {
+      if (
+        element.children[0].innerHTML.indexOf(filter) > -1 ||
+        element.children[0].innerHTML.toLowerCase().indexOf(filter) > -1
+      ) {
+        element.style.display = "";
+      } else {
+        element.style.display = "none";
+      }
+    });
+  };
 
   return (
     <>
-      <MetaDecorator
-        title="Transactions - Freemex"
-      />
+      <MetaDecorator title="Transactions - Freemex" />
       <div className="Transaction">
         <div className="Transactionhead">
           <h1>Transaction</h1>
@@ -70,7 +90,13 @@ useEffect(() => {
           </h2>
           <div className="searchbox">
             <SearchIcon className="searchIcon" />
-            <input type="text" ref={inputRef} />
+            <input
+              type="text"
+              ref={inputRef}
+              onChange={(e) => {
+                searchValue(e);
+              }}
+            />
           </div>
         </div>
 
@@ -94,17 +120,17 @@ useEffect(() => {
                     <li>{item.Stock.code}</li>
                     <li>${item.price}</li>
                     {/* <li className="sold">${item.netProfit}</li> */}
-                        {
-                        item.netProfit < 0 ? (
-                          <li className="sold"> {item.netProfit} </li>
-                        ) : ( <li className="bought"> {item.netProfit} </li>)
-                      }
+                    {item.netProfit < 0 ? (
+                      <li className="sold"> {item.netProfit} </li>
+                    ) : (
+                      <li className="bought"> {item.netProfit} </li>
+                    )}
                   </div>
-                </div>)
+                </div>
+              );
             })}
           </div>
         </div>
-        
       </div>
     </>
   );

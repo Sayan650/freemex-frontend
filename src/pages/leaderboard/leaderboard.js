@@ -6,13 +6,11 @@ import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 const Leaderboard = () => {
     const inputRef = useRef()
       const [players, setPlayers] = useState([]);
-//   const [loading, setLoading] = useState(true);
 
   const getPlayers = useCallback(async () => {
     const response = await fetch('/api/players?sort=true');
     const players = await response.json();
     setPlayers(players.players);
-    // setLoading(false);
     console.log(players)
   }, []);
 
@@ -21,12 +19,10 @@ const Leaderboard = () => {
   }, [getPlayers]);
 
   const searchValue = (e)=>{
-    //   console.log(e.target.value);
       const filter = e.target.value;
 
       document.querySelectorAll('.row').forEach(element => {
-        // console.log(element.children[1].innerHTML,element)
-        if (element.children[1].innerHTML.indexOf(filter) > -1) {
+        if ((element.children[1].innerHTML.indexOf(filter) > -1) || (element.children[1].innerHTML.toLowerCase().indexOf(filter) > -1)) {
             element.style.display = "";
         } else {
             element.style.display = "none";
@@ -61,7 +57,10 @@ const Leaderboard = () => {
                         <div key="row" className="row">
                             <li key="no">{i+1}</li>
                             {/* <li key="avatar"><img src={play.avatar}/></li> */}
-                            <li key="name">{play.username}</li>
+                            {/* <li  key="now"> <img src={play.avatar} alt="" className="avatar"
+                  ></img></li> */}
+                            <li className="Playavatar" key="name"><img src={play.avatar} alt="" 
+                  ></img>{play.username}</li>
                             <li key="value">{play.valueInTotal}</li>
                         </div>
                     </div>

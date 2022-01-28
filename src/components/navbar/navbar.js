@@ -1,5 +1,5 @@
 import "./navbar.css";
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect } from "react";
 import Sidebar from "./sidebar/sidebar";
 import Backdrop from "./backdrop";
 import Modal from "react-modal";
@@ -8,13 +8,12 @@ import Rules from "../../pages/rules/rules";
 Modal.setAppElement("#root");
 
 const Nav = () => {
-
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [rules, setRules] = useState(false);
   const [username, setUsername] = useState(false);
-    const [name, setName] = useState("");
-     const [namemodal, setNameModal] = useState(false);
-    const [stat, setStat] = useState(0);
+  const [name, setName] = useState("");
+  const [namemodal, setNameModal] = useState(false);
+  const [stat, setStat] = useState(0);
   const [msg, setmsg] = useState("");
 
   const drawerOpenHandler = () => {
@@ -29,24 +28,24 @@ const Nav = () => {
     setRules(true);
     e.preventDefault();
   };
-    const openProfileModal = (e) => {
+  const openProfileModal = (e) => {
     setUsername(true);
     e.preventDefault();
   };
   const closeModal = (e) => {
     setRules(false);
     setUsername(false);
-        setNameModal(false);
+    setNameModal(false);
   };
 
   const [player, setPlayer] = useState([]);
-   const [profile, setProfile] = useState([]);
+  const [profile, setProfile] = useState([]);
   const getPlayer = useCallback(async () => {
-    const response = await fetch('/api/players');
+    const response = await fetch("/api/players");
     const player = await response.status;
-    if(player !== 401) {
-    const play = await response.json();
-    setProfile(play.player);
+    if (player !== 401) {
+      const play = await response.json();
+      setProfile(play.player);
     }
     setPlayer(player);
   }, []);
@@ -58,7 +57,7 @@ const Nav = () => {
   const openNameModal = (e) => {
     setNameModal(true);
   };
-    const changeName = async (e) => {
+  const changeName = async (e) => {
     const res = await fetch("/api/players?scope=username ", {
       method: "PUT",
       headers: {
@@ -74,19 +73,16 @@ const Nav = () => {
     console.log(result);
     if (status === 400 || status === 500) {
       setmsg(result.message);
-      setTimeout(() => {
-      }, 5000);
+      setTimeout(() => {}, 5000);
     } else {
       if (status === 200) {
         window.location.reload(false);
         closeModal();
         getPlayer();
-        setTimeout(() => {
-        }, 5000);
+        setTimeout(() => {}, 5000);
       } else {
         setmsg(result.message);
-        setTimeout(() => {
-        }, 2000);
+        setTimeout(() => {}, 2000);
       }
     }
   };
@@ -108,10 +104,10 @@ const Nav = () => {
     setmsg(result.message);
   };
 
-      const start = localStorage.getItem("Start");
-    const end = localStorage.getItem("End");
-    var current_date = new Date().getTime();
-    var new11 = new Date(start).getTime();
+  const start = localStorage.getItem("Start");
+  const end = localStorage.getItem("End");
+  var current_date = new Date().getTime();
+  var new11 = new Date(start).getTime();
 
   return (
     <>
@@ -123,47 +119,78 @@ const Nav = () => {
             </a>
           </div>
           <div className="nav">
- 
-            {player === 401 ? (<>
-              <div className="links">
-                <a href="/" onClick={(e) => openModal(e)}>
-                  Rules
-                </a>
-              </div>
-            </>) : (<>
-                          {((current_date < new11 || current_date > new Date(end).getTime())  &&
-      player === 403) ? (<><div className="links">
-                <a href="/" onClick={(e) => openModal(e)}>
-                  Rules
-                </a>
-              </div>
-                  <div className="links">
-                <a href="/leaderboard">leaderboard</a>
-              </div></>) : (<>
-              <div className="links">
-                <a href="/portfolio">Portfolio</a>
-              </div>
-              <div className="links">
-                <a href="/" onClick={(e) => openModal(e)}>
-                  Rules
-                </a>
-              </div>
-              <div className="links">
-                <a href="/market">Market</a>
-              </div>
-              <div className="links">
-                <a href="/transactions">Transaction</a>
-              </div>
-              <div className="links">
-                <a href="/leaderboard">leaderboard</a>
-              </div>
-              <div className="links">
-                <a href="/" onClick={(e) => openProfileModal(e)}>
-                   {profile === undefined ? (<></>) : (
-                  <img src={profile.avatar} alt="" className="avatar"
-                  ></img> )}</a>
-              </div></>)}
-            </>)}
+            {player === 401 ? (
+              <>
+                <div className="links">
+                  <a href="/" onClick={(e) => openModal(e)}>
+                    Rules
+                  </a>
+                </div>
+              </>
+            ) : (
+              <>
+                {(current_date < new11 ||
+                  current_date > new Date(end).getTime()) &&
+                player === 200 ? (
+                  <>
+                    <div className="links">
+                      <a href="/" onClick={(e) => openModal(e)}>
+                        Rules
+                      </a>
+                    </div>
+                    <div className="links">
+                      <a href="/leaderboard">leaderboard</a>
+                    </div>{" "}
+                    <div className="links">
+                      <a href="/" onClick={(e) => openProfileModal(e)}>
+                        {profile === undefined ? (
+                          <></>
+                        ) : (
+                          <img
+                            src={profile.avatar}
+                            alt=""
+                            className="avatar"
+                          ></img>
+                        )}
+                      </a>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="links">
+                      <a href="/portfolio">Portfolio</a>
+                    </div>
+                    <div className="links">
+                      <a href="/" onClick={(e) => openModal(e)}>
+                        Rules
+                      </a>
+                    </div>
+                    <div className="links">
+                      <a href="/market">Market</a>
+                    </div>
+                    <div className="links">
+                      <a href="/transactions">Transaction</a>
+                    </div>
+                    <div className="links">
+                      <a href="/leaderboard">leaderboard</a>
+                    </div>
+                    <div className="links">
+                      <a href="/" onClick={(e) => openProfileModal(e)}>
+                        {profile === undefined ? (
+                          <></>
+                        ) : (
+                          <img
+                            src={profile.avatar}
+                            alt=""
+                            className="avatar"
+                          ></img>
+                        )}
+                      </a>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
           </div>
           <div className="icon" onClick={drawerOpenHandler}>
             <img src="Images/menu.png" alt="" />
@@ -176,11 +203,15 @@ const Nav = () => {
         <Sidebar state={false} />
       )}
       {sidebarOpen ? <Backdrop closeHandler={backdropClickHandler} /> : <></>}
-      <Modal isOpen={rules} onRequestClose={() => setRules(false)} className="rulesmodal">
+      <Modal
+        isOpen={rules}
+        onRequestClose={() => setRules(false)}
+        className="rulesmodal"
+      >
         <div className="">
           <Rules />
           <div className="btn">
-            <button className="close" onClick={(e) => closeModal(e)}>
+            <button className="close" onClick={(e) => closeModal(e)}   >
               Close
             </button>
           </div>
@@ -188,24 +219,29 @@ const Nav = () => {
       </Modal>
 
       {/* Profile Modal */}
-          <Modal isOpen={username} onRequestClose={() => setUsername(false)}>
-        <div className="">
-               <div className="changebutton">
-          <button className="buymore" onClick={(e) => openNameModal(e)}>
-            Change Username
-          </button>
-        </div>
-              <button className="close"  onClick={(e) => {
-      e.preventDefault();
-      window.location.href='/auth/logout';
-      }}>
-              Logout
-            </button>
-          <div className="btn">
-            <button className="close" onClick={(e) => closeModal(e)}>
-              Close
+      <Modal isOpen={username} onRequestClose={() => setUsername(false)} className="usernamemodal">
+        <div className="Username">
+          <div className="changebutton">
+            <button className="buymore" onClick={(e) => openNameModal(e)}>
+              Change Username
             </button>
           </div>
+             <div className="changebutton">
+          <button
+          className="buymore"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = "/auth/logout";
+            }}
+          >
+            Logout
+          </button>
+          </div>
+        </div>
+        <div className="btn">
+          <button className="close" onClick={(e) => closeModal(e)}>
+            Close
+          </button>
         </div>
       </Modal>
 

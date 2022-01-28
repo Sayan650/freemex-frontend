@@ -1,46 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Changa:wght@400;700&family=Orbitron:wght@500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Changa:wght@400;700&family=Orbitron:wght@500;600;700&display=swap");
 
 .clock {
-	color: var(--text-color);
-	max-width: 1440px;
-	height: 80vh;
-	display : flex;
-	justify-content: center;
-	align-items: center;
+  color: var(--text-color);
+  max-width: 1440px;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .countdown {
-   background: rgba(255, 255, 255, 0.3);
-   box-shadow: 0px 1px 24px -1px rgba(255, 255, 255, 0.1);
-   backdrop-filter: blur(70px);
-   width : 500px;
-   height : 250px;
-   border-radius: 17px;
-   display : flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 1px 24px -1px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(70px);
+  width: clamp(330px,34.7vw, 500px);
+  height: 250px;
+  border-radius: 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .labelsTime {
-	display: flex;
-	font-size: 30px;
-	font-weight: 700;
-	margin: 0px;
-	font-family: 'Orbitron',
-	sans-serif;
+  display: flex;
+  font-size: clamp(20px,2.05vw,30px);
+  font-weight: 700;
+  margin: 0px;
+  font-family: "Orbitron", sans-serif;
 }
-.labelsTime li{
-    margin: 0px 25px;
+.labelsTime li {
+  margin: 0px clamp(15px,1.73vw,25px);
 }
 .labels {
-	display: flex;
-	font-size: 30px;
-	font-weight: 700;
-		margin: 0px;
-		padding-top: 0px;
-		font-family: 'Orbitron',
-		sans-serif;
+  display: flex;
+  font-size: clamp(20px, 2.05vw, 30px);
+  font-weight: 700;
+  margin: 0px;
+  padding-top: 0px;
+  font-family: "Orbitron", sans-serif;
 }
 .labels li {
-	margin : 0px 5px;
-		padding-top: 0px;
+  margin: 0px clamp(1px,0.348vw,5px);
+  padding-top: 0px;
 }

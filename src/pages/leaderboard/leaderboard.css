@@ -40,6 +40,7 @@
 }
 .leaderboardTable .tableHead,.leaderboardTable .tableBody .row{
     display:flex;
+    justify-content: center;
     color: white;
 }
 .leaderboardTable .tableHead li,.leaderboardTable .tableBody li{
@@ -47,7 +48,7 @@
     margin: 0px;
     width: 100%!important;
     padding: 10px;
-    text-align: left;
+    text-align: center;
 }
 .leaderboardTable .tableHead li{
     font-weight: 900;
@@ -64,31 +65,20 @@
     cursor: pointer;
 }
 .searchIcon:hover{
-    color: var(--shadow-color)
+    color: var(--shadow-color);
 }
-/* .leaderboardbody table{
-    width:fit-content;
-    margin: auto;
-}
-.leaderboardbody{
-    width: 100%;
-    margin: 30px auto 20px auto;
-    color: white;
-}
-.leaderboardbody thead{
-    background-color:rgba(65, 201, 255,0.1);;
-    backdrop-filter: blur(10px);
-}
-.sNo{
-    width: 50px;
+.Playavatar {
+    display: flex;
+    align-items:center;
+    gap : 10px;
     text-align: left;
-    padding: 10px;
+    justify-content: center;
 }
-.name, .Username,.assets {
-    width:220px;
-    text-align:left;
-    padding: 10px;
-} */
+.Playavatar img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
 @media only screen and (max-width :750px){
     .leaderboardhead h1{
         font-size: 13vw;

@@ -5,6 +5,7 @@ import React, { useRef, useState, useCallback, useEffect } from "react";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import MetaDecorator from "../../components/metaDecorator/metaDecorator";
+
 Modal.setAppElement("#root");
 
 const { io } = require("socket.io-client");
@@ -35,6 +36,16 @@ const Portfolio = () => {
   useEffect(() => {
     getPlayer();
   }, [getPlayer]);
+
+  const start = localStorage.getItem("Start");
+  const end = localStorage.getItem("End");
+  var current_date = new Date().getTime();
+  var new11 = new Date(start).getTime();
+
+  if (current_date < new11 || current_date > new Date(end).getTime()) {
+    window.location.href = "/";
+  }
+
   useEffect(() => {
     const getStocks = async () => {
       const response = await fetch("/api/assets");
@@ -217,26 +228,27 @@ const Portfolio = () => {
     }
   };
 
-  const profitCal = (index)=>{
-    // console.log(data,stocks,e,index);
-    // const marketPrice = data[index].latestPrice
-    const marketdate = stocks[index]
-    const buyPrice = parseFloat(stocks[index].asset.invested)/parseFloat(stocks[index].asset.quantity)
-    const code = marketdate.Stock.code
-    // console.log(marketdate,data)
+  const profitCal = (index) => {
+    const marketdate = stocks[index];
+    const buyPrice =
+      parseFloat(stocks[index].asset.invested) /
+      parseFloat(stocks[index].asset.quantity);
+    const code = marketdate.Stock.code;
     for (let i = 0; i < data.length; i++) {
       const element = data[i];
       if (element.code === code) {
-        const marketPrice = element.latestPrice
-        console.log(marketPrice - buyPrice)
-        setPcalculate(marketPrice - buyPrice)
+        const marketPrice = element.latestPrice;
+        const diff = marketPrice - buyPrice;
+        console.log(diff);
+        console.log(marketPrice, buyPrice);
+        setPcalculate((diff / buyPrice).toFixed(2));
       }
     }
-    // const 
-  }
+    // const
+  };
 
   return (
-    <div className="portfolio" >
+    <div className="portfolio">
       <MetaDecorator title="Portfolio - Freemex" />
       <div className="portfoliopage">
         <div className="heading">
@@ -254,7 +266,7 @@ const Portfolio = () => {
               Total : $ <span>{player.valueInTotal}</span>
             </p>
           </div>
-          <div className="msg">
+          <div className="updated">
             {data.length !== 0 && (
               <p>
                 Page last updated on :{" "}
@@ -277,7 +289,7 @@ const Portfolio = () => {
                 return item.asset.quantity === 0 ? (
                   <></>
                 ) : (
-                  <div className="scards" key={i} onClick={(e)=>profitCal(i)}>
+                  <div className="scards" key={i} onClick={(e) => profitCal(i)}>
                     <img
                       src="Images/divBackground.png"
                       alt=""
@@ -286,15 +298,15 @@ const Portfolio = () => {
                     <div className="stocks" key={item.Stock.change}>
                       <p className="nameStock">
                         {item.Stock.code}{" "}
-                        {item.Stock.change < 0 ? (
-                          <span>
+                        {pCalculate < 0 ? (
+                          <span style={{ color: "red" }}>
                             <ArrowDownwardIcon className="downIcon" />{" "}
-                            {item.Stock.change}
+                            {pCalculate}
                           </span>
                         ) : (
                           <span style={{ color: "green" }}>
                             <ArrowUpwardIcon className="downIcon" />{" "}
-                            {item.Stock.change}
+                            {pCalculate}
                           </span>
                         )}
                       </p>

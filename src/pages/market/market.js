@@ -23,25 +23,15 @@ function Market() {
   const [hide, setHide] = useState("hide");
   const [msg, setmsg] = useState("");
 
+  const start = localStorage.getItem("Start");
+  const end = localStorage.getItem("End");
+  var current_date = new Date().getTime();
+  var new11 = new Date(start).getTime();
 
-  //   const getSchedule = async () =>{
-  //     const response = await fetch('/api/schedules')
-  //     const result = await response.json();
-  //     console.log(new Date(result.schedule.end));
-  //     localStorage.setItem('start', result.schedule.start)
-  //     localStorage.setItem('end', result.schedule.end)
-  //     if (new Date(result.schedule.start)>new Date()) {
-  //         history.push("/timer");
-  //     }if (new Date() > new Date(result.schedule.end)) {
-  //       history.push("/timer");
-  //   }
-  // }
-
-  // useEffect(() => {
-  //     getSchedule()
-  // },[getSchedule])
-
-
+  if (current_date < new11 || current_date > new Date(end).getTime()) {
+    window.location.href = "/";
+  }
+  
   useEffect(() => {
     inputRef.current.focus();
   }, []);
@@ -175,10 +165,9 @@ function Market() {
     const filter = e.target.value;
 
     document.querySelectorAll('.scard').forEach(element => {
-      // console.log(element.children[1].children[1].children[0].innerHTML,element)
-      if (element.children[1].children[1].children[0].innerHTML.indexOf(filter) > -1) {
+      if ((element.children[1].children[1].children[0].innerHTML.indexOf(filter) > -1 ) || (element.children[1].children[1].children[0].innerHTML.toLowerCase().indexOf(filter) > -1)) {
         element.style.display = "";
-      }else if (element.children[1].children[0].children[0].innerHTML.indexOf(filter) > -1) {
+      }else if ((element.children[1].children[0].children[0].innerHTML.indexOf(filter) > -1) || (element.children[1].children[0].children[0].innerHTML.toLowerCase().indexOf(filter) > -1)) {
         element.style.display = "";
       } else {
         element.style.display = "none";

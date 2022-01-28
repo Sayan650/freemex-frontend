@@ -113,7 +113,12 @@ function Sidebar({ state, closeHandler }) {
               </>
             ) : (
               <> {((current_date < new11 || current_date > new Date(end).getTime())  &&
-      player === 403) ? (<>         <li className="menuListItem">
+      player === 200) ? (<>            <li className="menuListItem">
+                  <a href="/" onClick={(e) => openProfileModal(e)}>
+                   {profile === undefined ? (<></>) : (
+                  <img src={profile.avatar} alt="" className="avatar"
+                  ></img> )}</a>
+             </li> <li className="menuListItem">
                   <a href="/leaderboard">leaderboard</a>
                 </li>
                 <li className="menuListItem">
@@ -171,26 +176,32 @@ function Sidebar({ state, closeHandler }) {
         </div>
       </Modal>
       {/* Profile Modal */}
-          <Modal isOpen={username} onRequestClose={() => setUsername(false)}>
-        <div className="">
-               <div className="changebutton">
-          <button className="buymore" onClick={(e) => openNameModal(e)}>
-            Change Username
-          </button>
-        </div>
-              <button className="close"  onClick={(e) => {
-      e.preventDefault();
-      window.location.href='/auth/logout';
-      }}>
-              Logout
-            </button>
-          <div className="btn">
-            <button className="close" onClick={(e) => closeModal(e)}>
-              Close
+       <Modal isOpen={username} onRequestClose={() => setUsername(false)} className="usernamemodal">
+        <div className="Username">
+          <div className="changebutton">
+            <button className="buymore" onClick={(e) => openNameModal(e)}>
+              Change Username
             </button>
           </div>
+             <div className="changebutton">
+          <button
+          className="buymore"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = "/auth/logout";
+            }}
+          >
+            Logout
+          </button>
+          </div>
+        </div>
+        <div className="btn">
+          <button className="close" onClick={(e) => closeModal(e)}>
+            Close
+          </button>
         </div>
       </Modal>
+
 
       {/* Modal to change the Username */}
       <Modal

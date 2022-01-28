@@ -19,19 +19,21 @@ function LandingSection() {
     var new11 = new Date(start).getTime();
     if (
       (current_date < new11 || current_date > new Date(end).getTime()) &&
-      player === 403
+      player === 200
     ) {
       window.location.href = "/timer";
+    }
+      else if (
+      (current_date > new11 || current_date < new Date(end).getTime()) &&
+      player === 200
+    ) {
+      window.location.href = "/portfolio";
     }
   }, [player]);
 
   return (
     <>
       <MetaDecorator />
-      {player === 200 ? (
-        (window.location.href = "/portfolio")
-      ) : (
-        <>
           <div className="landingPage">
             <div className="landing">
               <div className="landingWrapper">
@@ -83,8 +85,6 @@ function LandingSection() {
               </ul>
             </div>
           </div>
-        </>
-      )}
     </>
   );
 }

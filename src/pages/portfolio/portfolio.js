@@ -23,7 +23,6 @@ const Portfolio = () => {
   const [quantity, setQuantity] = useState();
   const [hide, setHide] = useState("hide");
   const [msg, setmsg] = useState("");
-  const [pCalculate, setPcalculate] = useState();
 
   const [player, setPlayer] = useState([]);
   const getPlayer = useCallback(async () => {
@@ -47,40 +46,54 @@ const Portfolio = () => {
   }
 
   useEffect(() => {
-    const getStocks = async () => {
+    // request for stocks
+    const calStocks = async () => {
       const response = await fetch("/api/assets");
       const asset = await response.json();
       console.log(asset.assets);
-      setStocks(asset.assets);
-    };
-    getStocks();
-  }, []);
-
-  useEffect(() => {
-    // request for stocks
-    const getstocks = async () => {
+      const Sdata = asset.assets;
       const res = await fetch("/api/stocks");
       const result = await res.json();
       const t = result.Stocks.sort(function (a, b) {
         return a.id - b.id;
       });
       setData(t);
-    };
-    getstocks();
-    // socket connection for stocks
-    socketRef.current = io(`${process.env.REACT_APP_BACKEND_URL}`);
-    socketRef.current.on("connection", () => {
-      console.log("connection is done");
-    });
-    socketRef.current.on("connect_error", (err) => {
-      console.log("connect error:", err.message);
-    });
-    socketRef.current.on("market", (res) => {
-      const t = res.sort(function (a, b) {
-        return a.id - b.id;
+
+      // socket connection for stocks
+      socketRef.current = io(`${process.env.REACT_APP_BACKEND_URL}`);
+      socketRef.current.on("connection", () => {
+        console.log("connection is done");
       });
-      setData(t);
-    });
+      socketRef.current.on("connect_error", (err) => {
+        console.log("connect error:", err.message);
+      });
+      socketRef.current.on("market", (res) => {
+        const t = res.sort(function (a, b) {
+          return a.id - b.id;
+        });
+        for (let i = 0; i < t.length; i++) {
+          const element = t[i];
+          for (let j = 0; j < asset.assets.length; j++) {
+            const marketdate = asset.assets[j];
+            const buyPrice =
+              parseFloat(asset.assets[j].asset.invested) /
+              parseFloat(asset.assets[j].asset.quantity);
+            const code = marketdate.Stock.code;
+            if (element.code === code) {
+              const marketPrice = element.latestPrice;
+              const diff = (marketPrice - buyPrice).toFixed(2);
+              const percent = (diff / buyPrice) * 100;
+              Sdata[j].Stock["diff"] = diff;
+              Sdata[j].Stock["percent"] = percent;
+              setStocks(Sdata);
+            }
+          }
+        }
+        setData(t);
+        // profitCal();
+      });
+    };
+    calStocks();
     return () => socketRef.current.disconnect();
   }, []);
 
@@ -228,25 +241,6 @@ const Portfolio = () => {
     }
   };
 
-  const profitCal = (index) => {
-    const marketdate = stocks[index];
-    const buyPrice =
-      parseFloat(stocks[index].asset.invested) /
-      parseFloat(stocks[index].asset.quantity);
-    const code = marketdate.Stock.code;
-    for (let i = 0; i < data.length; i++) {
-      const element = data[i];
-      if (element.code === code) {
-        const marketPrice = element.latestPrice;
-        const diff = marketPrice - buyPrice;
-        console.log(diff);
-        console.log(marketPrice, buyPrice);
-        setPcalculate((diff / buyPrice).toFixed(2));
-      }
-    }
-    // const
-  };
-
   return (
     <div className="portfolio">
       <MetaDecorator title="Portfolio - Freemex" />
@@ -289,7 +283,7 @@ const Portfolio = () => {
                 return item.asset.quantity === 0 ? (
                   <></>
                 ) : (
-                  <div className="scards" key={i} onClick={(e) => profitCal(i)}>
+                  <div className="scards" key={i}>
                     <img
                       src="Images/divBackground.png"
                       alt=""
@@ -297,16 +291,16 @@ const Portfolio = () => {
                     />
                     <div className="stocks" key={item.Stock.change}>
                       <p className="nameStock">
-                        {item.Stock.code}{" "}
-                        {pCalculate < 0 ? (
+                        {item.Stock.code}
+                        {item.Stock.diff < 0 ? (
                           <span style={{ color: "red" }}>
                             <ArrowDownwardIcon className="downIcon" />{" "}
-                            {pCalculate}
+                            {item.Stock.diff}
                           </span>
                         ) : (
                           <span style={{ color: "green" }}>
                             <ArrowUpwardIcon className="downIcon" />{" "}
-                            {pCalculate}
+                            {item.Stock.diff}
                           </span>
                         )}
                       </p>
@@ -314,7 +308,7 @@ const Portfolio = () => {
                         <span>{item.Stock.name}</span>
 
                         <span className="span">
-                          {parseFloat(item.Stock.changePercent).toFixed(2)}%
+                          {parseFloat(item.Stock.percent).toFixed(2)}%
                         </span>
                       </p>
                       <div className="priceStocks">

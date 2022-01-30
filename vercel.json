@@ -10,8 +10,8 @@
       "destination": "https://freemex3b.cybercitizen01.ga/auth/:path*"
     },
     {
-      "source": "/admin/api/schedules",
-      "destination": "https://freemex3b.cybercitizen01.ga/admin/api/schedules"
+      "source": "/admin/api/:path*",
+      "destination": "https://freemex3b.cybercitizen01.ga/admin/api/:path*"
     }
   ]
 }

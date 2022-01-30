@@ -56,7 +56,7 @@ const Leaderboard = () => {
           <div className="tableHead">
             <li className="NO">#</li>
             {/* <li>Name</li> */}
-            <li>Username</li>
+            <li className="Playavatar">Username</li>
             <li>Total Asset</li>
           </div>
           {players.map((play, i) => (

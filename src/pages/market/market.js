@@ -215,7 +215,7 @@ function Market() {
                       alt=""
                       key={item.code}
                     />
-                    <div className="stocks" key={item.name}>
+                    <div className="stock" key={item.name}>
                       <p className="nameStock"><span>{item.code}</span>
                         {
                           item.change < 0 ? (<span>
@@ -258,7 +258,7 @@ function Market() {
           onRequestClose={() => setMSGModal(false)}
         >
           <div className={`snackbar`}>{hide === 'error' ? (`${msg}`) : (<>
-            your transaction has successful head over to <a href="/portfolio">Portfolio</a> see.
+            your transaction was successful head over to <a href="/portfolio">Portfolio</a> see.
           </>)}
           </div>
           <div className="modalFooter">

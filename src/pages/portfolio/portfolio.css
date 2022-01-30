@@ -119,14 +119,14 @@
   position: relative;
 }
 .scards img {
-  width: clamp(320px,28vw,404px);
-  height: clamp(305px,26.7vw,385px);
+  width: clamp(376px,31.9vw,460px);
+  height: clamp(315px,26.7vw,385px);
 }
 .stocks {
   position: absolute;
    top: 50%;
    left: 50%;
-   width: clamp(250px, 20.8vw,300px);
+   width: clamp(300px, 22.35vw,370px);
    transform: translate(-50%, -50%);
 }
 .stockDetails .nameStock {
@@ -136,32 +136,39 @@
   justify-content: space-between;
   align-items: center;
 }
-
+.stockDetails .nameStock p {
+  font-size: clamp(14px, 1.25vw, 18px) !important;
+    color: #CDCDCD !important;
+    margin-bottom: 10px;
+    text-align: right;
+}
 .stockDetails .nStock {
-  font-size: Clamp(15px, 1.35vw, 20px) !important;
+  font-size: clamp(14px, 1.25vw, 18px) !important;
   color: #CDCDCD !important;
-  margin: 2px 0px;
   display: flex;
   justify-content: space-between;
-}
 
+}
+.stockDetails .nStock div {
+  max-width: 250px;
+}
 .stockDetails .noStocks {
   font-size: clamp(12px,1.1vw,16px) !important;
   color: rgb(140, 16, 140);
   margin-bottom: 20px;
 }
-.stockDetails .priceStocks {
+.stockDetails .priceStock {
   font-weight: 700;
   font-size: clamp(22px, 2.07vw, 30px)!important;
   position: relative;
 }
-.stockDetails .priceStocks span {
+.stockDetails .priceStock span {
   position: absolute;
   right: 0px;
-  color: red;
+    font-size: clamp(12px, 1.1vw, 16px) !important;
 }
 .downIcon {
-  font-size: 24px !important;
+  font-size: Clamp(15px, 1.35vw, 20px) !important;
   /* stroke-width: 2; */
   /* margin: -3px; */
 }
@@ -176,25 +183,27 @@
   right: 0px;
 }
 .line {
-  width: clamp(250px, 20.8vw, 300px);
+width: clamp(300px, 22.35vw, 370px);
   height: 0px;
   border: 1px solid #FFFFFF;
 }
 .updateStocksColumn {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
+  margin: 0 auto;
+width: clamp(300px, 22.35vw, 370px);
 }
 
 .amount {
-  margin-bottom : 4px;
-  font-size: Clamp(17px, 1.35vw, 20px);
+  margin-bottom : clamp(2px,0.275vw,4px);
+  font-size: clamp(14px, 1.25vw, 18px);
   line-height: 28px;
   color: #FFFFFF;
 }
 
 .updateStock {
-  margin: 14px;
+  margin: clamp(5px,0.69vw,10px) 0px;
   font-size: clamp(14px, 1.25vw, 18px);
   line-height: 21px;
   color: #CDCDCD;
@@ -298,12 +307,13 @@ font-weight: 600;
 }
 .ReactModal__Content .modalFooter button {
   margin: 10px 5px;
-  padding: 5px 15px 5px 6px;
+  padding: 5px 15px;
   outline: none;
   border: none;
   color: white;
   font-weight: 700;
   font-size: 14px;
+  text-align: center;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -312,7 +322,7 @@ font-weight: 600;
 }
 .ReactModal__Content .modalFooter .buy:hover {
   background-color: transparent;
-  padding: 4px 14px 4px 5px;
+  padding: 4px 14px;
   border: 1px solid rgb(140, 16, 140);
 }
 
@@ -321,7 +331,7 @@ font-weight: 600;
 }
 .ReactModal__Content .modalFooter .close:hover {
   background-color: transparent;
-  padding: 4px 14px 4px 5px;
+  padding: 4px 14px;
   border: 1px solid red;
 }
 .time {

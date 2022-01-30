@@ -11,9 +11,11 @@ Modal.setAppElement("#root");
 const { io } = require("socket.io-client");
 
 const Portfolio = () => {
+  const [loading, setLoading] = useState(true);
   const [BUYmodal, setbuyModal] = useState(false);
   const [sellmodal, setsellModal] = useState(false);
   const [MSGmodal, setMSGModal] = useState(false);
+  const [profile, setProfile] = useState(false);
   const socketRef = useRef();
   const [data, setData] = useState([]);
   const [stocks, setStocks] = useState([]);
@@ -28,23 +30,27 @@ const Portfolio = () => {
   const getPlayer = useCallback(async () => {
     const response = await fetch("/api/players");
     const player = await response.json();
+    const prof = await response.status;
     console.log(player);
     setPlayer(player.player);
+    setProfile(prof);
   }, []);
 
   useEffect(() => {
+    const start = localStorage.getItem("Start");
+    const end = localStorage.getItem("End");
+    var current_date = new Date().getTime();
+    var new11 = new Date(start).getTime();
+
+    if (
+      current_date < new11 ||
+      current_date > new Date(end).getTime() ||
+      profile === 401
+    ) {
+      window.location.href = "/";
+    }
     getPlayer();
-  }, [getPlayer]);
-
-  const start = localStorage.getItem("Start");
-  const end = localStorage.getItem("End");
-  var current_date = new Date().getTime();
-  var new11 = new Date(start).getTime();
-
-  if (current_date < new11 || current_date > new Date(end).getTime()) {
-    window.location.href = "/";
-  }
-
+  }, [getPlayer, profile]);
   useEffect(() => {
     // request for stocks
     const calStocks = async () => {
@@ -89,6 +95,7 @@ const Portfolio = () => {
             }
           }
         }
+        setLoading(false);
         setData(t);
         // profitCal();
       });
@@ -106,7 +113,10 @@ const Portfolio = () => {
   const closeModal = (e) => {
     setbuyModal(false);
     setsellModal(false);
+  };
+  const closemsgModal = (e) => {
     setMSGModal(false);
+    window.location.reload(false);
   };
   const openModal = (e, i) => {
     setStockId([stocks[i].Stock.code, i]);
@@ -211,9 +221,9 @@ const Portfolio = () => {
         }, 10000);
       } else {
         if (result.Stock.code === stocks[e.target.value].Stock.code) {
-          window.location.reload(false);
           closeModal();
           getPlayer();
+          setMSGModal(true);
           setHide("success");
           setmsg("Some thing went wrong. Please try again.");
           setsellModal(false);
@@ -222,6 +232,7 @@ const Portfolio = () => {
           }, 3000);
         } else {
           setHide("error");
+          setMSGModal(true);
           setmsg("Some thing went wrong. Please try again.");
           setsellModal(false);
           setTimeout(() => {
@@ -251,13 +262,13 @@ const Portfolio = () => {
         <div className="body">
           <div className="card">
             <p>
-              Cash: $ <span>{player.valueInCash}</span>
+              Cash: <span>${player.valueInCash}</span>
             </p>
             <p>
-              Value in Stock : $ <span>{player.valueInStocks}</span>
+              Value in Stock : <span>${player.valueInStocks}</span>
             </p>
             <p className="total">
-              Total : $ <span>{player.valueInTotal}</span>
+              Total : <span>${player.valueInTotal}</span>
             </p>
           </div>
           <div className="updated">
@@ -277,102 +288,117 @@ const Portfolio = () => {
         </div>
         <div className="stockDetails">
           <h2>Your Stocks</h2>
-          <div className="stockscard">
-            <div className="cards">
-              {stocks.map((item, i) => {
-                return item.asset.quantity === 0 ? (
-                  <></>
-                ) : (
-                  <div className="scards" key={i}>
-                    <img
-                      src="Images/divBackground.png"
-                      alt=""
-                      key={item.Stock.code}
-                    />
-                    <div className="stocks" key={item.Stock.change}>
-                      <p className="nameStock">
-                        {item.Stock.code}
-                        {item.Stock.diff < 0 ? (
-                          <span style={{ color: "red" }}>
-                            <ArrowDownwardIcon className="downIcon" />{" "}
-                            {item.Stock.diff}
-                          </span>
-                        ) : (
-                          <span style={{ color: "green" }}>
-                            <ArrowUpwardIcon className="downIcon" />{" "}
-                            {item.Stock.diff}
-                          </span>
-                        )}
-                      </p>
-                      <p className="nStock">
-                        <span>{item.Stock.name}</span>
-
-                        <span className="span">
-                          {parseFloat(item.Stock.percent).toFixed(2)}%
-                        </span>
-                      </p>
-                      <div className="priceStocks">
-                        $ {item.Stock.latestPrice}{" "}
-                      </div>
-                      <div className="updateStocks">
-                        Last Updated On :{" "}
-                        <span>
-                          {Date(item.Stock.latestUpdate).split(" ")[1] +
-                            " " +
-                            Date(item.Stock.latestUpdate).split(" ")[2] +
-                            ", " +
-                            new Date(item.Stock.latestUpdate)
-                              .toLocaleString()
-                              .split(",")[1]}
-                        </span>{" "}
-                      </div>
-                      <div className="line"></div>
-                      <div className="updateStocksColumn">
-                        <div className="updateStock">
-                          <div className="amount">${item.asset.invested}</div>
-                          Amount Invested
-                        </div>
-                        <div className="updateStock">
-                          <div className="amount">
-                            {item.asset.netProfit < 0 ? (
+          {loading ? (
+            <div className="loader">
+              <h4>Loading...</h4>
+            </div>
+          ) : (
+            <>
+              <div className="stockscard">
+                <div className="cards">
+                  {stocks.map((item, i) => {
+                    return item.asset.quantity === 0 ? (
+                      <></>
+                    ) : (
+                      <div className="scards" key={i}>
+                        <img
+                          src="Images/divBackground.png"
+                          alt=""
+                          key={item.Stock.code}
+                        />
+                        <div className="stocks" key={item.Stock.change}>
+                          <p className="nameStock">
+                            <div className="">{item.Stock.code}</div>
+                            <p>
+                              Profit/Loss <br /> if you sell
+                            </p>
+                          </p>
+                          <p className="nStock">
+                            <div>{item.Stock.name}</div>
+                            {item.Stock.diff < 0 ? (
                               <span style={{ color: "red" }}>
-                                ${item.asset.netProfit}
+                                <ArrowDownwardIcon className="downIcon" />
+                                {item.Stock.diff}
                               </span>
                             ) : (
                               <span style={{ color: "green" }}>
-                                ${item.asset.netProfit}
+                                <ArrowUpwardIcon className="downIcon" />
+                                {item.Stock.diff}
                               </span>
                             )}
+                          </p>
+                          <div className="priceStock">
+                            $ {item.Stock.latestPrice}{" "}
+                            <span className="span">
+                              {parseFloat(item.Stock.percent).toFixed(2)}%
+                            </span>
                           </div>
-                          Net Profit
-                        </div>
-                        <div className="updateStock">
-                          <div className="amount">{item.asset.quantity}</div>
-                          Quantity Purchased
+                          <div className="updateStocks">
+                            Last Updated On :{" "}
+                            <span>
+                              {Date(item.Stock.latestUpdate).split(" ")[1] +
+                                " " +
+                                Date(item.Stock.latestUpdate).split(" ")[2] +
+                                ", " +
+                                new Date(item.Stock.latestUpdate)
+                                  .toLocaleString()
+                                  .split(",")[1]}
+                            </span>{" "}
+                          </div>
+                          <div className="line"></div>
+                          <div className="updateStocksColumn">
+                            <div className="updateStock">
+                              <div className="amount">
+                                ${item.asset.invested}
+                              </div>
+                              Amount <br /> Invested
+                            </div>
+                            <div className="updateStock">
+                              <div className="amount">
+                                {item.asset.netProfit < 0 ? (
+                                  <span style={{ color: "red" }}>
+                                    ${item.asset.netProfit}
+                                  </span>
+                                ) : (
+                                  <span style={{ color: "green" }}>
+                                    ${item.asset.netProfit}
+                                  </span>
+                                )}
+                              </div>
+                              Net <br />
+                              Profit
+                            </div>
+                            <div className="updateStock">
+                              <div className="amount">
+                                {item.asset.quantity}
+                              </div>
+                              Quantity <br /> Purchased
+                            </div>
+                          </div>
+                          <div className="button" key={item.asset.quantity}>
+                            <button
+                              className="buymore"
+                              onClick={(e) => openBuyModal(e, i)}
+                              key={item.asset.netProfit}
+                            >
+                              Buy More
+                            </button>
+                            <button
+                              className="sell"
+                              key={item.asset.invested}
+                              onClick={(e) => openModal(e, i)}
+                            >
+                              Sell
+                            </button>
+                          </div>
                         </div>
                       </div>
-                      <div className="button" key={item.asset.quantity}>
-                        <button
-                          className="buymore"
-                          onClick={(e) => openBuyModal(e, i)}
-                          key={item.asset.netProfit}
-                        >
-                          Buy More
-                        </button>
-                        <button
-                          className="sell"
-                          key={item.asset.invested}
-                          onClick={(e) => openModal(e, i)}
-                        >
-                          Sell
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          )}
           <div className="market">
             <Link to="/market">
               <button className="marketbtn">Buy Stocks</button>
@@ -396,17 +422,10 @@ const Portfolio = () => {
         onRequestClose={() => setMSGModal(false)}
       >
         <div className={`snackbar`}>
-          {hide === "error" ? (
-            `${msg}`
-          ) : (
-            <>
-              Your transaction was successful head over to{" "}
-              <a href="/portfolio">Portfolio</a> see.
-            </>
-          )}
+          {hide === "error" ? `${msg}` : <>Your transaction was successful</>}
         </div>
         <div className="modalFooter">
-          <button className="close" onClick={(e) => closeModal(e)}>
+          <button className="close" onClick={(e) => closemsgModal(e)}>
             Close
           </button>
         </div>

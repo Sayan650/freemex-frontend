@@ -177,6 +177,9 @@ function Sidebar({ state, closeHandler }) {
       </Modal>
       {/* Profile Modal */}
        <Modal isOpen={username} onRequestClose={() => setUsername(false)} className="usernamemodal">
+           <div className="modalheader">
+          <h3>Hello {profile.username}!</h3>
+        </div>
         <div className="Username">
           <div className="changebutton">
             <button className="buymore" onClick={(e) => openNameModal(e)}>

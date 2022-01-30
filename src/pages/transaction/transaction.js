@@ -1,12 +1,10 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import "./transaction.css";
-import { useHistory } from "react-router-dom";
 import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 
 function Transaction() {
   const inputRef = useRef();
-  const history = useHistory();
 
   const start = localStorage.getItem("Start");
   const end = localStorage.getItem("End");
@@ -18,23 +16,6 @@ function Transaction() {
   }
 
   const [transaction, setTransaction] = useState([]);
-  useEffect(() => {
-    const getSchedule = async () => {
-      const response = await fetch("/api/schedules");
-      const result = await response.json();
-      console.log(new Date(result.schedule.end));
-      localStorage.setItem("start", result.schedule.start);
-      localStorage.setItem("end", result.schedule.end);
-      if (new Date(result.schedule.start) > new Date()) {
-        history.push("/timer");
-      }
-      if (new Date() > new Date(result.schedule.end)) {
-        history.push("/timer");
-      }
-    };
-
-    getSchedule();
-  });
 
   const getTransaction = useCallback(async () => {
     const response = await fetch("/api/transactions");

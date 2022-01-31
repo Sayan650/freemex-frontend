@@ -112,13 +112,13 @@ const Timer = () => {
 
   return (
     <div className="clock">
-      {currentdate < start || currentdate > end ? (
+      {currentdate > start && currentdate > end ? (
         <>
-          <h1>Event Starts in</h1>
+          <h1>Event has already ended before</h1>
         </>
       ) : (
         <>
-          <h1>Event has already ended before</h1>
+          <h1>Event Starts in</h1>
         </>
       )}
       <div className="countdown">

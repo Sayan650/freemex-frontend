@@ -38,7 +38,9 @@ const Nav = () => {
     setNameModal(false);
   };
   
-
+   const [currentdate, setCurrentdate] = useState(0);
+    const [start, setStart] = useState(0);
+     const [end, setEnd] = useState(0);
   const [player, setPlayer] = useState([]);
   const [profile, setProfile] = useState([]);
   const getPlayer = useCallback(async () => {
@@ -104,11 +106,22 @@ const Nav = () => {
     setStat(status);
     setmsg(result.message);
   };
-
-  const start = localStorage.getItem("Start");
-  const end = localStorage.getItem("End");
-  var current_date = new Date().getTime();
-  var new11 = new Date(start).getTime();
+ useEffect(() => {
+    const time = async()=>{
+      const res = await fetch('/api/schedules', {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include",
+      })
+      const result = await res.json();
+      setCurrentdate(new Date().getTime());
+      setEnd(new Date(result.schedule.end).getTime());
+      setStart(new Date(result.schedule.start).getTime());
+    }
+    time()
+  }, []);
 
   return (
     <>
@@ -130,8 +143,8 @@ const Nav = () => {
               </>
             ) : (
               <>
-                {(current_date < new11 ||
-                  current_date > new Date(end).getTime()) &&
+                {(currentdate < start ||
+                  currentdate > end) &&
                 player === 200 ? (
                   <>
                     <div className="links">

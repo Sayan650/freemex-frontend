@@ -15,44 +15,49 @@ const Timer = () => {
 
   const history = useHistory();
   // let date = new Date();
+  const [currentdate, setCurrentdate] = useState(0);
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(0);
   const [clock, setClock] = useState("00:00:00");
-  const [timer, setTimer] = useState("")
-  
+  const [timer, setTimer] = useState("");
+
   useEffect(() => {
-    const time = async()=>{
-      const res = await fetch('/api/schedules', {
+    const time = async () => {
+      const res = await fetch("/api/schedules", {
         method: "GET",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         credentials: "include",
-      })
+      });
       const result = await res.json();
       console.log(result);
-      setTimer(result.schedule)
-    }
-   time()
-  },[])
-
+      setTimer(result.schedule);
+      setCurrentdate(new Date().getTime());
+      setEnd(new Date(result.schedule.end).getTime());
+      setStart(new Date(result.schedule.start).getTime());
+    };
+    time();
+  }, []);
 
   useEffect(() => {
     getPlayer();
     console.log(player);
     let myInterval = setInterval(() => {
       const getCountdown = async () => {
-
         const start = new Date(timer.start).getTime();
         const end = new Date(timer.end).getTime();
         var current_date = Date.now();
+
         if (
           (current_date > start && current_date < new Date(end).getTime()) ||
           player === 401
         ) {
-          history.push("/portfolio");
+          history.push("/");
         }
 
         // console.log(start_time)
-        
+
         if (start > current_date) {
           // tf = new Date(start);
           var target_date = start;
@@ -103,10 +108,19 @@ const Timer = () => {
     return () => {
       clearInterval(myInterval);
     };
-  }, [history, player,timer]);
+  }, [history, player, timer]);
 
   return (
     <div className="clock">
+      {currentdate < start && currentdate > end ? (
+        <>
+          <h1>Event Starts in</h1>
+        </>
+      ) : (
+        <>
+          <h1>Event has already ended before</h1>
+        </>
+      )}
       <div className="countdown">
         <div className="labelsTime">
           <li>{clock[0]}</li>

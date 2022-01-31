@@ -37,28 +37,24 @@ const Portfolio = () => {
   }, []);
 
   useEffect(() => {
-    const time = async()=>{
-      const res = await fetch('/api/schedules', {
+    const time = async () => {
+      const res = await fetch("/api/schedules", {
         method: "GET",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         credentials: "include",
-      })
+      });
       const result = await res.json();
       var current_date = new Date().getTime();
       var end = new Date(result.schedule.end).getTime();
       var start = new Date(result.schedule.start).getTime();
-  
-      if (
-        current_date < start ||
-        current_date > end||
-        profile === 401
-      ) {
+
+      if (current_date < start || current_date > end || profile === 401) {
         window.location.href = "/timer";
       }
-    }
-    time()
+    };
+    time();
     getPlayer();
   }, [getPlayer, profile]);
   useEffect(() => {

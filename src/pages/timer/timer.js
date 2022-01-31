@@ -16,36 +16,46 @@ const Timer = () => {
   const history = useHistory();
   // let date = new Date();
   const [clock, setClock] = useState("00:00:00");
-  const intervals = setInterval(function () {
-    // getCountdown();
-    if (localStorage.getItem("time")) {
-      clearInterval(intervals);
+  const [timer, setTimer] = useState("")
+  
+  useEffect(() => {
+    const time = async()=>{
+      const res = await fetch('/api/schedules', {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include",
+      })
+      const result = await res.json();
+      console.log(result);
+      setTimer(result.schedule)
     }
-  }, 1000);
+   time()
+  },[])
+
+
   useEffect(() => {
     getPlayer();
     console.log(player);
     let myInterval = setInterval(() => {
       const getCountdown = async () => {
-        const start = localStorage.getItem("Start");
-        const end = localStorage.getItem("End");
-        var current_date = new Date().getTime();
-        var new11 = new Date(start).getTime();
-        // // console.log(current_date > new Date(start) && current_date < new Date(end))
+
+        const start = new Date(timer.start).getTime();
+        const end = new Date(timer.end).getTime();
+        var current_date = Date.now();
         if (
-          (current_date > new11 && current_date < new Date(end).getTime()) ||
+          (current_date > start && current_date < new Date(end).getTime()) ||
           player === 401
         ) {
-          history.push("/");
+          history.push("/portfolio");
         }
 
         // console.log(start_time)
-        let tf = new Date(
-          "Sat Jan 08 2022 09:40:00 GMT+0530 (India Standard Time)"
-        );
-        if (new Date(start) > current_date) {
-          tf = new Date(start);
-          var target_date = tf.getTime();
+        
+        if (start > current_date) {
+          // tf = new Date(start);
+          var target_date = start;
           var days, hours, minutes, seconds;
 
           // find the amount of "seconds" between now and target
@@ -62,14 +72,13 @@ const Timer = () => {
 
           // format countdown string + set tag value
           const html = [days, hours, +minutes, +seconds];
+          // console.log(seconds_left);
           setClock(html);
         }
         if (current_date > new Date(end)) {
-          // console.log(new Date(current_date))
-          tf = new Date(current_date);
-          var end_date = new Date(end);
+          var end_date = parseInt(end);
 
-          seconds_left = (target_date - end_date) / 1000;
+          seconds_left = (current_date - end_date) / 1000;
 
           days = pad(parseInt(seconds_left / 86400));
           seconds_left = seconds_left % 86400;
@@ -94,7 +103,7 @@ const Timer = () => {
     return () => {
       clearInterval(myInterval);
     };
-  }, [history,player]);
+  }, [history, player,timer]);
 
   return (
     <div className="clock">

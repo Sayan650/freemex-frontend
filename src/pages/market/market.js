@@ -23,14 +23,29 @@ function Market() {
   const [hide, setHide] = useState("hide");
   const [msg, setmsg] = useState("");
 
-  const start = localStorage.getItem("Start");
-  const end = localStorage.getItem("End");
-  var current_date = new Date().getTime();
-  var new11 = new Date(start).getTime();
-
-  if (current_date < new11 || current_date > new Date(end).getTime()) {
-    window.location.href = "/";
-  }
+  useEffect(() => {
+    const time = async()=>{
+      const res = await fetch('/api/schedules', {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include",
+      })
+      const result = await res.json();
+      var current_date = new Date().getTime();
+      var end = new Date(result.schedule.end).getTime();
+      var start = new Date(result.schedule.start).getTime();
+  
+      if (
+        current_date < start ||
+        current_date > end
+      ) {
+        window.location.href = "/timer";
+      }
+    }
+    time()
+  }, []);
   
   useEffect(() => {
     inputRef.current.focus();

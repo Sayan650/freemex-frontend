@@ -109,11 +109,11 @@ function Dashboard() {
                     <form >
                         <div>
                             <label htmlFor="start_date"><h4 >Start Date and Time</h4></label>
-                            <input type="datetime-local" onChange={(e) => setStartTime(e.target.value)} className="starttime" />
+                            <input type="datetime-local" onChange={(e) => setStartTime(new Date(e.target.value).getTime())} className="starttime" />
                         </div>
                         <div >
                             <label htmlFor="start_time"><h4 >End Date and Time</h4></label>
-                            <input type="datetime-local" onChange={(e) => setEndTime(e.target.value)} className="endtime" />
+                            <input type="datetime-local" onChange={(e) => setEndTime(new Date(e.target.value).getTime())} className="endtime" />
                         </div>
                         <button className="submit" onClick={timer} type="button">Submit</button>
                     </form>

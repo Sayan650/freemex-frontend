@@ -112,7 +112,7 @@ const Timer = () => {
 
   return (
     <div className="clock">
-      {currentdate < start && currentdate > end ? (
+      {currentdate < start || currentdate > end ? (
         <>
           <h1>Event Starts in</h1>
         </>

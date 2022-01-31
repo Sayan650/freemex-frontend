@@ -3,15 +3,15 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://13.90.31.184/api/:path*"
+      "destination": "https://freemex3b.cybercitizen01.ga/api/:path*"
     },
     {
       "source": "/auth/:path*",
-      "destination": "https://13.90.31.184/auth/:path*"
+      "destination": "https://freemex3b.cybercitizen01.ga/auth/:path*"
     },
     {
       "source": "/admin/api/:path*",
-      "destination": "https://13.90.31.184/admin/api/:path*"
+      "destination": "https://freemex3b.cybercitizen01.ga/admin/api/:path*"
     }
   ]
 }

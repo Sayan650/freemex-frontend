@@ -119,6 +119,7 @@ const Portfolio = () => {
   const closeModal = (e) => {
     setbuyModal(false);
     setsellModal(false);
+    setmsg("");
   };
   const closemsgModal = (e) => {
     setMSGModal(false);

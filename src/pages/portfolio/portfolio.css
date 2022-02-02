@@ -290,8 +290,11 @@ font-weight: 600;
 }
 .ReactModal__Content .modalBody {
   color: white;
-  margin: 10px 15px;
+  margin:15px;
   text-align: center;
+}
+.ReactModal__Content .modalBody p{
+   margin:15px;
 }
 .ReactModal__Content .modalBody input {
   margin: 10px auto;

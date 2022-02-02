@@ -22,6 +22,7 @@ const Portfolio = () => {
   const [StockId, setStockId] = useState([]);
   const [min, setMin] = useState("");
   const [maxBuyStock, setmaxBuyStock] = useState();
+  const [profitcal, setProfitcal] = useState();
   const [quantity, setQuantity] = useState();
   const [hide, setHide] = useState("hide");
   const [msg, setmsg] = useState("");
@@ -63,7 +64,7 @@ const Portfolio = () => {
       const response = await fetch("/api/assets");
       const asset = await response.json();
       console.log(asset.assets);
-      const Sdata = asset.assets;
+      setStocks(asset.assets);
       const res = await fetch("/api/stocks");
       const result = await res.json();
       const t = result.Stocks.sort(function (a, b) {
@@ -83,27 +84,8 @@ const Portfolio = () => {
         const t = res.sort(function (a, b) {
           return a.id - b.id;
         });
-        for (let i = 0; i < t.length; i++) {
-          const element = t[i];
-          for (let j = 0; j < asset.assets.length; j++) {
-            const marketdate = asset.assets[j];
-            const buyPrice =
-              parseFloat(asset.assets[j].asset.invested) /
-              parseFloat(asset.assets[j].asset.quantity);
-            const code = marketdate.Stock.code;
-            if (element.code === code) {
-              const marketPrice = element.latestPrice;
-              const diff = (marketPrice - buyPrice).toFixed(2);
-              const percent = (diff / buyPrice) * 100;
-              Sdata[j].Stock["diff"] = diff;
-              Sdata[j].Stock["percent"] = percent;
-              setStocks(Sdata);
-            }
-          }
-        }
         setLoading(false);
         setData(t);
-        // profitCal();
       });
     };
     calStocks();
@@ -131,6 +113,19 @@ const Portfolio = () => {
     const n = stocks[i].asset.quantity;
     setmaxBuyStock(n);
     setsellModal(true);
+    for (let j = 0; j < data.length; j++) {
+      const element = data[j];
+      const marketdate = stocks[i];
+      const buyPrice =
+        parseFloat(stocks[i].asset.invested) /
+        parseFloat(stocks[i].asset.quantity);
+      const code = marketdate.Stock.code;
+      if (element.code === code) {
+        const marketPrice = element.latestPrice;
+        const diff = (marketPrice - buyPrice).toFixed(2);
+        setProfitcal(diff);
+      }
+    }
   };
   // for buy transaction
   const BuyTransaction = async (e) => {
@@ -316,30 +311,27 @@ const Portfolio = () => {
                         />
                         <div className="stocks" key={item.Stock.change}>
                           <p className="nameStock">
-                            <div className="">{item.Stock.code}</div>
-                            <p>
-                              Profit/Loss <br /> if you sell
-                            </p>
-                          </p>
-                          <p className="nStock">
-                            <div>{item.Stock.name}</div>
-                            {item.Stock.diff < 0 ? (
+                            {item.Stock.code}
+                            {item.Stock.change < 0 ? (
                               <span style={{ color: "red" }}>
                                 <ArrowDownwardIcon className="downIcon" />
-                                {item.Stock.diff}
+                                {item.Stock.change}
                               </span>
                             ) : (
                               <span style={{ color: "green" }}>
                                 <ArrowUpwardIcon className="downIcon" />
-                                {item.Stock.diff}
+                                {item.Stock.change}
                               </span>
                             )}
                           </p>
+                          <p className="nStock">
+                            {item.Stock.name}
+                            <span className="span">
+                              {parseFloat(item.Stock.changePercent).toFixed(2)}%
+                            </span>
+                          </p>
                           <div className="priceStock">
                             $ {item.Stock.latestPrice}{" "}
-                            <span className="span">
-                              {parseFloat(item.Stock.percent).toFixed(2)}%
-                            </span>
                           </div>
                           <div className="updateStocks">
                             Last Updated On :{" "}
@@ -495,6 +487,14 @@ const Portfolio = () => {
         <hr />
         <div className="modalBody">
           <p>Max you can sell : {maxBuyStock}</p>
+          <p>
+            Profit/Loss if you sell :{" "}
+            {profitcal < 0 ? (
+              <span style={{ color: "red" }}>${profitcal}</span>
+            ) : (
+              <span style={{ color: "green" }}>${profitcal}</span>
+            )}
+          </p>
           <input
             type="number"
             min="1"

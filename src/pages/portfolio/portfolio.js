@@ -58,13 +58,20 @@ const Portfolio = () => {
     time();
     getPlayer();
   }, [getPlayer, profile]);
+
   useEffect(() => {
-    // request for stocks
-    const calStocks = async () => {
+    const Stocks = async () => {
       const response = await fetch("/api/assets");
       const asset = await response.json();
       console.log(asset.assets);
       setStocks(asset.assets);
+      setLoading(false);
+    };
+    Stocks();
+  }, []);
+  useEffect(() => {
+    // request for stocks
+    const calStocks = async () => {
       const res = await fetch("/api/stocks");
       const result = await res.json();
       const t = result.Stocks.sort(function (a, b) {
@@ -84,7 +91,7 @@ const Portfolio = () => {
         const t = res.sort(function (a, b) {
           return a.id - b.id;
         });
-        setLoading(false);
+
         setData(t);
       });
     };

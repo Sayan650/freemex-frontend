@@ -233,7 +233,7 @@ function Market() {
                     <div className="stock" key={item.name}>
                       <p className="nameStock"><span>{item.code}</span>
                         {
-                          item.change < 0 ? (<span>
+                          item.change < 0 ? (<span style={{ color: 'red' }}>
                             <ArrowDownwardIcon className="downIcon" /> {item.change}
                           </span>) : (<span style={{ color: 'green' }}>
                             <ArrowUpwardIcon className="downIcon" /> {item.change}

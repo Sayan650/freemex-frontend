@@ -38,9 +38,9 @@ const Nav = () => {
     setNameModal(false);
   };
   
-   const [currentdate, setCurrentdate] = useState(0);
-    const [start, setStart] = useState(0);
-     const [end, setEnd] = useState(0);
+  const [currentdate, setCurrentdate] = useState(0);
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(0);
   const [player, setPlayer] = useState([]);
   const [profile, setProfile] = useState([]);
   const getPlayer = useCallback(async () => {
@@ -89,22 +89,13 @@ const Nav = () => {
       }
     }
   };
-  const nameChecker = async (e) => {
-    const res = await fetch("/api/players?scope=username ", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        username: name,
-      }),
-    });
-    const result = await res.json();
-    const status = await res.status;
-    console.log(result);
-    setStat(status);
-    setmsg(result.message);
+  const nameChecker = (name) => {
+    if (name.length < 5) {
+      setStat(400);
+      setmsg('Username should be of atleast 5 characters.');
+      return
+    }
+    setStat(200)
   };
  useEffect(() => {
     const time = async()=>{
@@ -276,8 +267,8 @@ const Nav = () => {
           <input
             type="text"
             onChange={(e) => {
-              nameChecker(e);
               setName(e.target.value);
+              nameChecker(e.target.value);
             }}
             placeholder="text"
           />

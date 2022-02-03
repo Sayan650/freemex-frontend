@@ -6,26 +6,31 @@ import Rules from "../../../pages/rules/rules";
 
 function Sidebar({ state, closeHandler }) {
   const [rules, setRules] = useState(false);
-    const [username, setUsername] = useState(false);
-    const [name, setName] = useState("");
-     const [namemodal, setNameModal] = useState(false);
-    const [stat, setStat] = useState(0);
+  const [username, setUsername] = useState(false);
+  const [name, setName] = useState("");
+  const [namemodal, setNameModal] = useState(false);
+  const [stat, setStat] = useState(0);
   const [msg, setmsg] = useState("");
+
   const openModal = (e) => {
     setRules(true);
     e.preventDefault();
   };
-      const openProfileModal = (e) => {
+
+  const openProfileModal = (e) => {
     setUsername(true);
     e.preventDefault();
   }
+
   const closeModal = (e) => {
     setRules(false);
-        setUsername(false);
-        setNameModal(false);
+    setUsername(false);
+    setNameModal(false);
   };
+
   const [player, setPlayer] = useState([]);
- const [profile, setProfile] = useState([]);
+  const [profile, setProfile] = useState([]);
+
   const getPlayer = useCallback(async () => {
     const response = await fetch('/api/players');
     const player = await response.status;
@@ -43,7 +48,8 @@ function Sidebar({ state, closeHandler }) {
   const openNameModal = (e) => {
     setNameModal(true);
   };
-    const changeName = async (e) => {
+
+  const changeName = async (e) => {
     const res = await fetch("/api/players?scope=username ", {
       method: "PUT",
       headers: {
@@ -75,29 +81,21 @@ function Sidebar({ state, closeHandler }) {
       }
     }
   };
-  const nameChecker = async (e) => {
-    const res = await fetch("/api/players?scope=username ", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        username: name,
-      }),
-    });
-    const result = await res.json();
-    const status = await res.status;
-    console.log(result);
-    setStat(status);
-    setmsg(result.message);
+
+  const nameChecker = (name) => {
+    if (name.length < 5) {
+      setStat(400);
+      setmsg('Username should be of atleast 5 characters.');
+      return
+    }
+    setStat(200)
   };
 
-  
-       const [currentdate, setCurrentdate] = useState(0);
-    const [start, setStart] = useState(0);
-     const [end, setEnd] = useState(0);
-      useEffect(() => {
+  const [currentdate, setCurrentdate] = useState(0);
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(0);
+
+  useEffect(() => {
     const time = async()=>{
       const res = await fetch('/api/schedules', {
         method: "GET",
@@ -237,8 +235,8 @@ function Sidebar({ state, closeHandler }) {
           <input
             type="text"
             onChange={(e) => {
-              nameChecker(e);
               setName(e.target.value);
+              nameChecker(e.target.value);
             }}
             placeholder="text"
           />

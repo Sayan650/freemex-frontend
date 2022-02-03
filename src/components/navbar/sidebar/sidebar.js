@@ -63,8 +63,9 @@ function Sidebar({ state, closeHandler }) {
     const result = await res.json();
     const status = await res.status;
     console.log(result);
-    if (status === 400 || status === 500) {
-      setmsg(result.message);
+      if (status === 400) {
+      setStat(400);
+      setmsg("Username should be unique");
       setTimeout(() => {
       }, 5000);
     } else {
@@ -84,18 +85,19 @@ function Sidebar({ state, closeHandler }) {
 
   const nameChecker = (name) => {
     if (name.length < 5) {
-      setStat(400);
+      setStat(500);
       setmsg('Username should be of atleast 5 characters.');
-      return
     }
-    setStat(200)
+    else {
+      setStat(0);
+      setmsg("");
+    }
   };
-
   const [currentdate, setCurrentdate] = useState(0);
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(0);
 
-  useEffect(() => {
+ useEffect(() => {
     const time = async()=>{
       const res = await fetch('/api/schedules', {
         method: "GET",
@@ -105,13 +107,15 @@ function Sidebar({ state, closeHandler }) {
         credentials: "include",
       })
       const result = await res.json();
+      console.log(result);
+      if(result.message!== "No schedule found, please contact admin."){
       setCurrentdate(new Date().getTime());
       setEnd(new Date(result.schedule.end).getTime());
       setStart(new Date(result.schedule.start).getTime());
     }
+  }
     time()
   }, []);
-
 
   return (
     <>
@@ -249,17 +253,13 @@ function Sidebar({ state, closeHandler }) {
           <button className="close" onClick={(e) => closeModal(e)}>
             Cancel
           </button>
-          {stat === 400 || stat === 0 ? (
+             {stat === 500 ? (
             <div className="time">{msg}</div>
-          ) : (
-            <div className="bought">
-              Username should be of atleast 5 characters.
-            </div>
+          ) : (<></>
           )}
-          {stat === 500 ? (
+                   {stat === 400 ? (
             <div className="time">{msg}</div>
-          ) : (
-            <div className="bought">Username should be unique</div>
+          ) : (<></>
           )}
         </div>
       </Modal>

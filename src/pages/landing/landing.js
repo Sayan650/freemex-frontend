@@ -23,6 +23,8 @@ function LandingSection() {
       });
       const result = await res.json();
       var current_date = new Date().getTime();
+          if(result.message!== "No schedule found, please contact admin."){
+
       var end = new Date(result.schedule.end).getTime();
       var start = new Date(result.schedule.start).getTime();
   console.log(current_date);
@@ -34,6 +36,7 @@ function LandingSection() {
       ) {
         window.location.href = "/portfolio";
       }
+    }
     };
     time();
   }, [player]);

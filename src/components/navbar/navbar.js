@@ -74,8 +74,9 @@ const Nav = () => {
     const result = await res.json();
     const status = await res.status;
     console.log(result);
-    if (status === 400 || status === 500) {
-      setmsg(result.message);
+    if (status === 400) {
+      setStat(400);
+      setmsg("Username should be unique");
       setTimeout(() => {}, 5000);
     } else {
       if (status === 200) {
@@ -91,11 +92,13 @@ const Nav = () => {
   };
   const nameChecker = (name) => {
     if (name.length < 5) {
-      setStat(400);
+      setStat(500);
       setmsg('Username should be of atleast 5 characters.');
-      return
     }
-    setStat(200)
+    else {
+      setStat(0);
+      setmsg("");
+    }
   };
  useEffect(() => {
     const time = async()=>{
@@ -107,10 +110,12 @@ const Nav = () => {
         credentials: "include",
       })
       const result = await res.json();
+        if(result.message!== "No schedule found, please contact admin."){
       setCurrentdate(new Date().getTime());
       setEnd(new Date(result.schedule.end).getTime());
       setStart(new Date(result.schedule.start).getTime());
     }
+  }
     time()
   }, []);
 
@@ -281,17 +286,13 @@ const Nav = () => {
           <button className="close" onClick={(e) => closeModal(e)}>
             Cancel
           </button>
-          {stat === 400 || stat === 0 ? (
-            <div className="time">{msg}</div>
-          ) : (
-            <div className="bought">
-              Username should be of atleast 5 characters.
-            </div>
-          )}
           {stat === 500 ? (
             <div className="time">{msg}</div>
-          ) : (
-            <div className="bought">Username should be unique</div>
+          ) : (<></>
+          )}
+                   {stat === 400 ? (
+            <div className="time">{msg}</div>
+          ) : (<></>
           )}
         </div>
       </Modal>

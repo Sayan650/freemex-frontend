@@ -6,11 +6,13 @@ import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 const Leaderboard = () => {
   const inputRef = useRef();
   const [players, setPlayers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getPlayers = useCallback(async () => {
     const response = await fetch("/api/players?sort=true");
     const players = await response.json();
     setPlayers(players.players);
+      setLoading(false);
     console.log(players);
   }, []);
 
@@ -59,6 +61,12 @@ const Leaderboard = () => {
             <li className="Playavatar">Username</li>
             <li>Total Asset</li>
           </div>
+             {loading ? (
+            <div className="loader">
+              <h4>Loading...</h4>
+            </div>
+          ) : (
+            <>
           {players.map((play, i) => (
             <div key={i} className="tableBody">
               <div key="row" className="row">
@@ -72,7 +80,7 @@ const Leaderboard = () => {
                 <li key="value">{play.valueInTotal}</li>
               </div>
             </div>
-          ))}
+          ))}</> )}
         </div>
       </div>
     </div>

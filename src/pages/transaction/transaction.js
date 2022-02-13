@@ -5,29 +5,27 @@ import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 
 function Transaction() {
   const inputRef = useRef();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const time = async()=>{
-      const res = await fetch('/api/schedules', {
+    const time = async () => {
+      const res = await fetch("/api/schedules", {
         method: "GET",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         credentials: "include",
-      })
+      });
       const result = await res.json();
       var current_date = new Date().getTime();
       var end = new Date(result.schedule.end).getTime();
       var start = new Date(result.schedule.start).getTime();
-  
-      if (
-        current_date < start ||
-        current_date > end
-      ) {
+
+      if (current_date < start || current_date > end) {
         window.location.href = "/timer";
       }
-    }
-    time()
+    };
+    time();
   }, []);
 
   const [transaction, setTransaction] = useState([]);
@@ -37,6 +35,7 @@ function Transaction() {
     const transaction = await response.json();
     console.log(transaction.transactions);
     setTransaction(transaction.transactions);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -74,6 +73,7 @@ function Transaction() {
       }
     });
   };
+  
 
   return (
     <>
@@ -106,25 +106,34 @@ function Transaction() {
               <li>Price</li>
               <li>Gain/Loss</li>
             </div>
-            {transaction.map((item, i) => {
-              return (
-                <div className="transactionTableBody" key={i}>
-                  <div className="row">
-                    <li>{item.Stock.name}</li>
-                    <li className={item.type}>{item.type}</li>
-                    <li>{item.quantity}</li>
-                    <li>{item.Stock.code}</li>
-                    <li>${item.price}</li>
-                    {/* <li className="sold">${item.netProfit}</li> */}
-                    {item.netProfit < 0 ? (
-                      <li className="sold"> {item.netProfit} </li>
-                    ) : (
-                      <li className="bought"> {item.netProfit} </li>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
+    
+            {loading ? (
+              <div className="loader">
+                <h4>Loading...</h4>
+              </div>
+            ) : (
+              <>
+                {transaction.map((item, i) => {
+                  return (
+                    <div className="transactionTableBody" key={i}>
+                      <div className="row">
+                        <li>{item.Stock.name}</li>
+                        <li className={item.type}>{item.type}</li>
+                        <li>{item.quantity}</li>
+                        <li>{item.Stock.code}</li>
+                        <li>${item.price}</li>
+                        {/* <li className="sold">${item.netProfit}</li> */}
+                        {item.netProfit < 0 ? (
+                          <li className="sold"> {item.netProfit} </li>
+                        ) : (
+                          <li className="bought"> {item.netProfit} </li>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </>
+            )}
           </div>
         </div>
       </div>

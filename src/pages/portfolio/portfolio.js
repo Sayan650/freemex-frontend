@@ -1,23 +1,20 @@
 import "./portfolio.css";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-import React, { useRef, useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import MetaDecorator from "../../components/metaDecorator/metaDecorator";
-
+import { StockContext } from "../../context/context";
 Modal.setAppElement("#root");
 
-const { io } = require("socket.io-client");
-
 const Portfolio = () => {
+  const stock = React.useContext(StockContext);
   const [loading, setLoading] = useState(true);
   const [BUYmodal, setbuyModal] = useState(false);
   const [sellmodal, setsellModal] = useState(false);
   const [MSGmodal, setMSGModal] = useState(false);
   const [profile, setProfile] = useState(false);
-  const socketRef = useRef();
-  const [data, setData] = useState([]);
   const [stocks, setStocks] = useState([]);
   const [StockId, setStockId] = useState([]);
   const [min, setMin] = useState("");
@@ -58,45 +55,15 @@ const Portfolio = () => {
     time();
     getPlayer();
   }, [getPlayer, profile]);
-
-  useEffect(() => {
-    const Stocks = async () => {
-      const response = await fetch("/api/assets");
-      const asset = await response.json();
-      console.log(asset.assets);
-      setStocks(asset.assets);
-      setLoading(false);
-    };
+ useEffect(() => {
+  const Stocks = async () => {
+    const response = await fetch("/api/assets");
+    const asset = await response.json();
+    console.log(asset.assets);
+    setStocks(asset.assets);
+    setLoading(false);
+  }
     Stocks();
-  }, []);
-  useEffect(() => {
-    // request for stocks
-    const calStocks = async () => {
-      const res = await fetch("/api/stocks");
-      const result = await res.json();
-      const t = result.Stocks.sort(function (a, b) {
-        return a.id - b.id;
-      });
-      setData(t);
-
-      // socket connection for stocks
-      socketRef.current = io(`${process.env.REACT_APP_BACKEND_URL}`);
-      socketRef.current.on("connection", () => {
-        console.log("connection is done");
-      });
-      socketRef.current.on("connect_error", (err) => {
-        console.log("connect error:", err.message);
-      });
-      socketRef.current.on("market", (res) => {
-        const t = res.sort(function (a, b) {
-          return a.id - b.id;
-        });
-
-        setData(t);
-      });
-    };
-    calStocks();
-    return () => socketRef.current.disconnect();
   }, []);
 
   const openBuyModal = (e, i) => {
@@ -120,8 +87,8 @@ const Portfolio = () => {
     const n = stocks[i].asset.quantity;
     setmaxBuyStock(n);
     setsellModal(true);
-    for (let j = 0; j < data.length; j++) {
-      const element = data[j];
+    for (let j = 0; j < stock.length; j++) {
+      const element = stock[j];
       const marketdate = stocks[i];
       const buyPrice =
         parseFloat(stocks[i].asset.invested) /
@@ -282,15 +249,15 @@ const Portfolio = () => {
             </p>
           </div>
           <div className="updated">
-            {data.length !== 0 && (
+            {stock.length !== 0 && (
               <p>
                 Page last updated on :{" "}
                 <span>
-                  {Date(data[0].updatedAt).split(" ")[1] +
+                  {Date(stock[0].updatedAt).split(" ")[1] +
                     " " +
-                    Date(data[0].updatedAt).split(" ")[2] +
+                    Date(stock[0].updatedAt).split(" ")[2] +
                     ", " +
-                    new Date(data[0].updatedAt).toLocaleString().split(",")[1]}
+                    new Date(stock[0].updatedAt).toLocaleString().split(",")[1]}
                 </span>
               </p>
             )}
@@ -307,6 +274,11 @@ const Portfolio = () => {
               <div className="stockscard">
                 <div className="cards">
                   {stocks.map((item, i) => {
+                    const res = stock.find(
+                      (e) => e.code === item.Stock.code
+                    );
+                    console.log(res);
+                    
                     return item.asset.quantity === 0 ? (
                       <></>
                     ) : (
@@ -319,35 +291,35 @@ const Portfolio = () => {
                         <div className="stocks" key={item.Stock.change}>
                           <p className="nameStock">
                             {item.Stock.code}
-                            {item.Stock.change < 0 ? (
+                            {res && res.change < 0 ? (
                               <span style={{ color: "red" }}>
                                 <ArrowDownwardIcon className="downIcon" />
-                                {item.Stock.change}
+                                {res && res.change}
                               </span>
                             ) : (
                               <span style={{ color: "green" }}>
                                 <ArrowUpwardIcon className="downIcon" />
-                                {item.Stock.change}
+                                {res && res.change}
                               </span>
                             )}
                           </p>
                           <p className="nStock">
                             {item.Stock.name}
                             <span className="span">
-                              {parseFloat(item.Stock.changePercent).toFixed(2)}%
+                              {parseFloat(res && res.changePercent).toFixed(2)}%
                             </span>
                           </p>
                           <div className="priceStock">
-                            $ {item.Stock.latestPrice}{" "}
+                            $ {res && res.latestPrice}{" "}
                           </div>
                           <div className="updateStocks">
                             Last Updated On :{" "}
                             <span>
-                              {Date(item.Stock.latestUpdate).split(" ")[1] +
+                              {Date(res && res.latestUpdate).split(" ")[1] +
                                 " " +
-                                Date(item.Stock.latestUpdate).split(" ")[2] +
+                                Date(res && res.latestUpdate).split(" ")[2] +
                                 ", " +
-                                new Date(item.Stock.latestUpdate)
+                                new Date(res && res.change.latestUpdate)
                                   .toLocaleString()
                                   .split(",")[1]}
                             </span>{" "}
@@ -372,8 +344,8 @@ const Portfolio = () => {
                                   </span>
                                 )}
                               </div>
-                              Net <br />
-                              Profit
+                              Net Profit <br />
+                              On Selling
                             </div>
                             <div className="updateStock">
                               <div className="amount">

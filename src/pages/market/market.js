@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback, useEffect } from "react";
+import React, { useRef, useState, useCallback, useEffect} from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
@@ -6,17 +6,16 @@ import "./market.css";
 import Modal from "react-modal";
 import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 // import { useHistory } from 'react-router-dom';
+import { StockContext } from "../../context/context";
 
-const { io } = require("socket.io-client");
 
 Modal.setAppElement("#root");
 
 function Market() {
+    const stock = React.useContext(StockContext);
   const inputRef = useRef();
-  const socketRef = useRef()
   const [BUYmodal, setbuyModal] = useState(false);
   const [MSGmodal, setMSGModal] = useState(false);
-  const [data, setData] = useState([])
   const [StockId, setStockId] = useState([]);
   const [maxBuyStock, setmaxBuyStock] = useState();
   const [quantity, setQuantity] = useState();
@@ -51,39 +50,6 @@ function Market() {
     inputRef.current.focus();
   }, []);
 
-  useEffect(
-    () => {
-      // request for stocks
-      const getstocks = async () => {
-        const res = await fetch('/api/stocks')
-        const result = await res.json()
-        if (res.status === 200) {
-          const t = result.Stocks.sort(function (a, b) {
-            return a.id - b.id
-          })
-          setData(t)
-        }
-
-      }
-      getstocks()
-      // socket connection for stocks
-      socketRef.current = io(`${process.env.REACT_APP_BACKEND_URL}`)
-      socketRef.current.on('connection', () => {
-        console.log("connection is done")
-      })
-      socketRef.current.on("connect_error", (err) => {
-        console.log("connect error:", err.message);
-      });
-      socketRef.current.on("market", (res) => {
-        const t = res.sort(function (a, b) {
-          return a.id - b.id
-        })
-        setData(t)
-      })
-      return () => socketRef.current.disconnect()
-    },
-    []
-  )
 
   // player status
   const [player, setPlayer] = useState([]);
@@ -101,8 +67,8 @@ function Market() {
 
   // open/close button for modal
   const openModal = (e, i) => {
-    setStockId([data[i].code, i])
-    const n = Math.floor(player.valueInCash / data[i].latestPrice)
+    setStockId([stock[i].code, i])
+    const n = Math.floor(player.valueInCash / stock[i].latestPrice)
     setmaxBuyStock(n)
     setbuyModal(true);
   };
@@ -113,7 +79,7 @@ function Market() {
 
   // for buy transaction 
   const BuyTransaction = async (e) => {
-    const details = data[e.target.value]
+    const details = stock[e.target.value]
     const code = details.code
     // console.log(parseInt(quantity))
 
@@ -141,7 +107,7 @@ function Market() {
         }, 2000);
 
       } else {
-        if (result.Stock.code === data[e.target.value].code) {
+        if (result.Stock.code === stock[e.target.value].code) {
           closeModal()
           getPlayer()
           setHide('success')
@@ -211,9 +177,9 @@ function Market() {
           <div className="updated">
 
             {
-              data.length !== 0 && <p>Page last updated on : <span>
-                {/* {Date(data[0].updatedAt)} */}
-                {Date(data[0].updatedAt).split(" ")[1] + " " + Date(data[0].updatedAt).split(" ")[2] + ", " + new Date(data[0].updatedAt).toLocaleString().split(',')[1]}
+              stock.length !== 0 && <p>Page last updated on : <span>
+                {/* {Date(stock[0].updatedAt)} */}
+                {Date(stock[0].updatedAt).split(" ")[1] + " " + Date(stock[0].updatedAt).split(" ")[2] + ", " + new Date(stock[0].updatedAt).toLocaleString().split(',')[1]}
               </span></p>
             }
 
@@ -221,9 +187,9 @@ function Market() {
         </div>
         <div className="stockscard">
           <div className="cards">
-            {data.length === 0 ? (<div style={{ margin: 'auto', color: 'white' }}>Loading...</div>)
+            {stock.length === 0 ? (<div style={{ margin: 'auto', color: 'white' }}>Loading...</div>)
               : (<>
-                {data.map((item, i) => {
+                {stock.map((item, i) => {
                   return <div className="scard" key={i}>
                     <img
                       src="Images/divBackground.png"

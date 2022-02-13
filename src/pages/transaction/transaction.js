@@ -61,7 +61,7 @@ function Transaction() {
 
   const searchValue = (e) => {
     // console.log(e.target.value);
-    const filter = e.target.value;
+    const filter = e.target.value.toLowerCase();
 
     document.querySelectorAll(".row").forEach((element) => {
       if (

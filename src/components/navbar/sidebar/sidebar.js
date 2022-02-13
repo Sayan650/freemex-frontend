@@ -157,7 +157,7 @@ function Sidebar({ state, closeHandler }) {
                 <a href="/portfolio">Portfolio</a>
                </li>
                 <li className="menuListItem">
-                  <a href="/leaderboard">leaderboard</a>
+                  <a href="/leaderboard">Leaderboard</a>
                 </li>
                 <li className="menuListItem">
                   <a href="/" onClick={(e) => openModal(e)}>

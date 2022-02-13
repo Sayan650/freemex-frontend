@@ -143,7 +143,7 @@ function Market() {
 
   const searchValue = (e) => {
     // console.log(e.target.value);
-    const filter = e.target.value;
+    const filter = e.target.value.toLowerCase();
 
     document.querySelectorAll('.scard').forEach(element => {
       if ((element.children[1].children[1].children[0].innerHTML.indexOf(filter) > -1 ) || (element.children[1].children[1].children[0].innerHTML.toLowerCase().indexOf(filter) > -1)) {
@@ -239,7 +239,7 @@ function Market() {
           onRequestClose={() => setMSGModal(false)}
         >
           <div className={`snackbar`}>{hide === 'error' ? (`${msg}`) : (<>
-            your transaction was successful head over to <a href="/portfolio">Portfolio</a> see.
+            Your transaction was successful head over to <a href="/portfolio">Portfolio</a> see.
           </>)}
           </div>
           <div className="modalFooter">

@@ -19,7 +19,7 @@ const Leaderboard = () => {
   }, [getPlayers]);
 
   const searchValue = (e) => {
-    const filter = e.target.value;
+    const filter = e.target.value.toLowerCase();
 
     document.querySelectorAll(".row").forEach((element) => {
       if (

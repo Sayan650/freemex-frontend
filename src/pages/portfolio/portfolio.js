@@ -55,14 +55,14 @@ const Portfolio = () => {
     time();
     getPlayer();
   }, [getPlayer, profile]);
- useEffect(() => {
-  const Stocks = async () => {
-    const response = await fetch("/api/assets");
-    const asset = await response.json();
-    console.log(asset.assets);
-    setStocks(asset.assets);
-    setLoading(false);
-  }
+  useEffect(() => {
+    const Stocks = async () => {
+      const response = await fetch("/api/assets");
+      const asset = await response.json();
+      console.log(asset.assets);
+      setStocks(asset.assets);
+      setLoading(false);
+    };
     Stocks();
   }, []);
 
@@ -197,24 +197,29 @@ const Portfolio = () => {
           setHide("hide");
         }, 10000);
       } else {
-        if (result.Stock.code === stocks[e.target.value].Stock.code) {
-          closeModal();
-          getPlayer();
-          setMSGModal(true);
-          setHide("success");
-          setmsg("Some thing went wrong. Please try again.");
-          setsellModal(false);
-          setTimeout(() => {
-            setHide("hide");
-          }, 3000);
+        if (parseInt(quantity) > maxBuyStock) {
+          setmsg(result.message);
         } else {
-          setHide("error");
-          setMSGModal(true);
-          setmsg("Some thing went wrong. Please try again.");
-          setsellModal(false);
-          setTimeout(() => {
-            setHide("hide");
-          }, 2000);
+          if (result.Stock.code === stocks[e.target.value].Stock.code) {
+            console.log(maxBuyStock);
+            closeModal();
+            getPlayer();
+            setMSGModal(true);
+            setHide("success");
+            setmsg("Some thing went wrong. Please try again.");
+            setsellModal(false);
+            setTimeout(() => {
+              setHide("hide");
+            }, 3000);
+          } else {
+            setHide("error");
+            setMSGModal(true);
+            setmsg("Some thing went wrong. Please try again.");
+            setsellModal(false);
+            setTimeout(() => {
+              setHide("hide");
+            }, 2000);
+          }
         }
       }
     } else {
@@ -274,11 +279,7 @@ const Portfolio = () => {
               <div className="stockscard">
                 <div className="cards">
                   {stocks.map((item, i) => {
-                    const res = stock.find(
-                      (e) => e.code === item.Stock.code
-                    );
-                    console.log(res);
-                    
+                    const res = stock.find((e) => e.code === item.Stock.code);
                     return item.asset.quantity === 0 ? (
                       <></>
                     ) : (
@@ -319,7 +320,7 @@ const Portfolio = () => {
                                 " " +
                                 Date(res && res.latestUpdate).split(" ")[2] +
                                 ", " +
-                                new Date(res && res.change.latestUpdate)
+                                new Date(res && res.latestUpdate)
                                   .toLocaleString()
                                   .split(",")[1]}
                             </span>{" "}
@@ -474,6 +475,9 @@ const Portfolio = () => {
               <span style={{ color: "green" }}>${profitcal}</span>
             )}
           </p>
+          <span style={{ color: "red", fontSize: "15px" }}>
+            This profit/loss may change
+          </span>
           <input
             type="number"
             min="1"
@@ -498,6 +502,11 @@ const Portfolio = () => {
           </button>
           {hide === "error" ? (
             <div className="time">Wait for {min} min before you could sell</div>
+          ) : (
+            <></>
+          )}
+          {parseInt(quantity) > maxBuyStock ? (
+            <div className="time">{msg}</div>
           ) : (
             <></>
           )}

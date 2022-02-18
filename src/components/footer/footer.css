@@ -14,12 +14,12 @@
   height: 40px;
    margin: 5px;
 }
-/* .footer h2 {
-  margin: 10px;
-} */
+.footer h2 {
+  margin: 0px 5px;
+}
 @media only screen and (max-width : 768px) {
   .footer {
-    font-size: 2vw;
+    font-size: 1.5vw;
   }
   .footer img {
     width: auto;

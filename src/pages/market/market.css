@@ -15,6 +15,9 @@
     color: white;
     padding: 20px;
     font-size: 120px;
+    text-shadow:
+    0 0 7px #fff,
+    0 0 18px var(--button-color);
 }
 .Markethead h2 {
     padding: 20px;
@@ -132,7 +135,7 @@
 }
 .stockscard .updateStocks{
   font-size: clamp(14px, 1.25vw, 18px);
-  color: rgb(160, 160, 160);
+  color: #CDCDCD !important;
   position: relative;
   margin: 3px 0px 10px 0px;
 }
@@ -152,7 +155,7 @@
      width: clamp(95px, 8.65vw, 125px);
      height:clamp(32px, 2.6vw, 38px);
      border: 1px !important;
-     background-color: #297904 !important;
+     background-color: var(--button-green-color) !important;
      color: white;
      font-weight: 700;
      cursor: pointer;
@@ -161,7 +164,7 @@
 }
 .stockscard .buymore:hover{
    background-color: transparent !important;
-   border: 2px solid #297904 !important;
+   border: 2px solid var(--button-green-color) !important;
    /* color: rgb(140, 16, 140); */
    backdrop-filter: blur(10px);
 }

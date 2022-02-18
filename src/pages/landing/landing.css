@@ -69,6 +69,7 @@
   width: 85%;
   margin: 0 auto;
   color: var(--text-color);
+  margin-bottom: 50px;
 }
 
 .notes h1 {

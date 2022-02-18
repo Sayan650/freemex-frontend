@@ -12,9 +12,11 @@ body {
 }
 :root {
   --text-color: white;
-  --shadow-color: rgb(172, 172, 172);
-  --background-color: rgba(0, 4, 34, 0.7);
+  --shadow-color: rgb(94, 47, 202);
+  --background-color: rgba(76, 0, 99, 0.582);
   --hover-color:rgb(88, 249, 255);
-  --button-color: blue;
+  --button-color: rgb(140, 16, 140);
   --text-green-color: rgb(19, 255, 19);
+  --modal-color: #180334ef;
+  --button-green-color: rgb(15, 197, 15);
 }

@@ -31,6 +31,8 @@
   scrollbar-width: 0.5px !important;
   display: flex;
   justify-content: center;
+  transform: translateY(0%) !important;
+  padding: 0px !important;
 }
 .close {
   background-color: var(--button-color);
@@ -53,9 +55,21 @@
   justify-content: center;
   align-items: center;
 }
+.rulescross {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-right: 10px;
+}
+.rulescross img{
+  width: 30px;
+  height: 30px;
+}
 @media only screen and (max-width: 900px) {
   .rulesmodal {
-    width: 92vw!important;
+    width: 80vw!important;
     border-radius: 15px !important;
     max-height: 85vh;
     
@@ -69,5 +83,15 @@
   .rules-list {
     padding: 10px;
     font-size: 15px;
+  }
+}
+@media only screen and (max-width: 1250px) {
+  .rulescross {
+    margin-right: 50px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .rulescross {
+    margin-right: 20px;
   }
 }

@@ -186,17 +186,18 @@ function Sidebar({ state, closeHandler }) {
         className="rulesmodal"
       >
         <div className="">
-          <Rules />
-          <div className="btn">
-            <button className="close" onClick={(e) => closeModal(e)}>
-              Close
-            </button>
+        <div className="rulescross">
+          <img src="Images/cross.png" alt="" onClick={(e) => closeModal(e)}/>
           </div>
+          <Rules />
         </div>
       </Modal>
       {/* Profile Modal */}
        <Modal isOpen={username} onRequestClose={() => setUsername(false)} className="usernamemodal">
            <div className="modalheader">
+           <div className="profilecross">
+          <img src="Images/cross.png" alt="" onClick={(e) => closeModal(e)}/>
+          </div>
           <h3>Hello {profile.username}!</h3>
         </div>
         <div className="Username">
@@ -217,11 +218,6 @@ function Sidebar({ state, closeHandler }) {
           </button>
           </div>
         </div>
-        <div className="btn">
-          <button className="close" onClick={(e) => closeModal(e)}>
-            Close
-          </button>
-        </div>
       </Modal>
 
 
@@ -232,6 +228,9 @@ function Sidebar({ state, closeHandler }) {
         onRequestClose={() => setNameModal(false)}
       >
         <div className="modalheader">
+        <div className="cross">
+          <img src="Images/cross.png" alt="" onClick={(e) => closeModal(e)}/>
+          </div>
           <h1>Change Username</h1>
         </div>
         <hr />
@@ -249,9 +248,6 @@ function Sidebar({ state, closeHandler }) {
         <div className="modalFooter">
           <button className="buy" onClick={(e) => changeName(e)}>
             Change
-          </button>
-          <button className="close" onClick={(e) => closeModal(e)}>
-            Cancel
           </button>
              {stat === 500 ? (
             <div className="time">{msg}</div>

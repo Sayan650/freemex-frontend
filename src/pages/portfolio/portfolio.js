@@ -298,7 +298,7 @@ const Portfolio = () => {
                                 {res && res.change}
                               </span>
                             ) : (
-                              <span style={{ color: "green" }}>
+                              <span style={{ color: " var(--button-green-color)" }}>
                                 <ArrowUpwardIcon className="downIcon" />
                                 {res && res.change}
                               </span>
@@ -340,13 +340,13 @@ const Portfolio = () => {
                                     ${item.asset.netProfit}
                                   </span>
                                 ) : (
-                                  <span style={{ color: "green" }}>
+                                  <span style={{ color: " var(--button-green-color)" }}>
                                     ${item.asset.netProfit}
                                   </span>
                                 )}
                               </div>
                               Net Profit <br />
-                              On Selling
+                              After Selling
                             </div>
                             <div className="updateStock">
                               <div className="amount">
@@ -419,6 +419,9 @@ const Portfolio = () => {
         onRequestClose={() => setbuyModal(false)}
       >
         <div className="modalheader">
+        <div className="cross">
+          <img src="Images/cross.png" alt="" onClick={(e) => closeModal(e)}/>
+          </div>
           <h1>Buy : {StockId[0]}</h1>
         </div>
         <hr />
@@ -443,9 +446,6 @@ const Portfolio = () => {
           >
             Buy
           </button>
-          <button className="close" onClick={(e) => closeModal(e)}>
-            Cancel
-          </button>
           {hide === "error" ? (
             <div className="time">You don't have enough cash</div>
           ) : (
@@ -462,6 +462,9 @@ const Portfolio = () => {
         onRequestClose={() => setsellModal(false)}
       >
         <div className="modalheader">
+          <div className="cross">
+          <img src="Images/cross.png" alt="" onClick={(e) => closeModal(e)}/>
+          </div>
           <h1>Sell : {StockId[0]}</h1>
         </div>
         <hr />
@@ -472,7 +475,7 @@ const Portfolio = () => {
             {profitcal < 0 ? (
               <span style={{ color: "red" }}>${profitcal}</span>
             ) : (
-              <span style={{ color: "green" }}>${profitcal}</span>
+              <span style={{ color: " var(--button-green-color)" }}>${profitcal}</span>
             )}
           </p>
           <span style={{ color: "red", fontSize: "15px" }}>
@@ -496,9 +499,6 @@ const Portfolio = () => {
             onClick={(e) => sellTransaction(e)}
           >
             Sell
-          </button>
-          <button className="close" onClick={(e) => closeModal(e)}>
-            Cancel
           </button>
           {hide === "error" ? (
             <div className="time">Wait for {min} min before you could sell</div>

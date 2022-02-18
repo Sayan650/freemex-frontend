@@ -166,7 +166,7 @@ function Market() {
         <div className="Markethead">
           <h1>Market</h1>
           <h2>
-            Cash in your hand: $ <span>{player.valueInCash}</span>
+            Cash in your hand: <span>${player.valueInCash}</span>
           </h2>
           <div className="searchbox">
             <SearchIcon className="searchIcon" />
@@ -201,7 +201,7 @@ function Market() {
                         {
                           item.change < 0 ? (<span style={{ color: 'red' }}>
                             <ArrowDownwardIcon className="downIcon" /> {item.change}
-                          </span>) : (<span style={{ color: 'green' }}>
+                          </span>) : (<span style={{ color: ' var(--button-green-color)' }}>
                             <ArrowUpwardIcon className="downIcon" /> {item.change}
                           </span>)
                         }
@@ -255,6 +255,9 @@ function Market() {
           onRequestClose={() => setbuyModal(false)}
         >
           <div className="modalheader">
+          <div className="cross">
+          <img src="Images/cross.png" alt="" onClick={(e) => closeModal(e)}/>
+          </div>
             <h1>Buy : {StockId[0]}</h1>
           </div>
           <hr />
@@ -265,9 +268,6 @@ function Market() {
           <hr />
           <div className="modalFooter">
             <button className="buy" value={StockId[1]} onClick={(e) => BuyTransaction(e)}>Buy</button>
-            <button className="close" onClick={(e) => closeModal(e)}>
-              Cancel
-            </button>
           </div>
         </Modal>
       </div>

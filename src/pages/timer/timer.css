@@ -27,6 +27,10 @@
     sans-serif;
     text-align : center;
     margin: clamp(25px, 2.15vw, 35px);
+      font-size: 100px;
+      text-shadow:
+      0 0 7px #fff,
+      0 0 18px var(--button-color);
 }
 .labelsTime {
   display: flex;
@@ -49,4 +53,9 @@
 .labels li {
   margin: 0px clamp(1px,0.348vw,5px);
   padding-top: 0px;
+}
+@media only screen and (max-width :750px) {
+  .clock h1{
+      font-size: 60px;
+}
 }

@@ -1,6 +1,6 @@
 .sidebar {
       height: 100%;
-      background: rgba(0, 4, 34, 0.97);
+      background: #180334ef;
       color: var(--text-color);
       position: fixed;
       top: 0;

@@ -13,6 +13,9 @@
     color: white;
     padding: 20px;
     font-size: 120px;
+    text-shadow:
+    0 0 7px #fff,
+    0 0 18px var(--button-color);
 }
 .leaderboardhead .searchbox{
     margin: auto;
@@ -87,6 +90,12 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
+}
+.loader {
+    font-size: 20px;
+    color:white;
+    text-align: center;
+    margin-top: 20px;
 }
 @media only screen and (max-width :750px){
     .leaderboardhead h1{

@@ -9,6 +9,7 @@ function Rules() {
         title="Rules - Freemex"
       />
       <div className="rules" id="rules">
+        
         <h1>Rules</h1>
         <div className="rules-list">
           <li>

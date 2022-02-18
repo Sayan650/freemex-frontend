@@ -12,7 +12,7 @@ const Leaderboard = () => {
     const response = await fetch("/api/players?sort=true");
     const players = await response.json();
     setPlayers(players.players);
-      setLoading(false);
+    setLoading(false);
     console.log(players);
   }, []);
 
@@ -61,26 +61,29 @@ const Leaderboard = () => {
             <li className="Playavatar">Username</li>
             <li>Total Asset</li>
           </div>
-             {loading ? (
+          {loading ? (
             <div className="loader">
               <h4>Loading...</h4>
             </div>
           ) : (
             <>
-          {players.map((play, i) => (
-            <div key={i} className="tableBody">
-              <div key="row" className="row">
-                <li key="no" className="NO">
-                  {i + 1}
-                </li>
-                <li className="Playavatar" key="name">
-                  <img src={play.avatar} alt=""></img>
-                  {play.username}
-                </li>
-                <li key="value">{play.valueInTotal}</li>
-              </div>
-            </div>
-          ))}</> )}
+              {players.map((play, i) => (
+                <div key={i} className="tableBody">
+                  <div key="row" className="row">
+                    <li key="no" className="NO">
+                      {i + 1}
+                    </li>
+                    <li className="Playavatar" key="name">
+                      <img src={play.avatar} alt=""></img>
+                      {play.username}
+                    </li>
+                    <li key="value">{Number(play.valueInTotal).toLocaleString('en-US')}</li>
+                    {console.log(play.valueInTotal.toLocaleString("en-IN"))}
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
         </div>
       </div>
     </div>

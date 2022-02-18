@@ -166,7 +166,7 @@ function Market() {
         <div className="Markethead">
           <h1>Market</h1>
           <h2>
-            Cash in your hand: <span>${player.valueInCash}</span>
+            Cash in your hand: <span>${Number(player.valueInCash).toLocaleString('en-US')} </span>
           </h2>
           <div className="searchbox">
             <SearchIcon className="searchIcon" />
@@ -210,7 +210,7 @@ function Market() {
                         <span>{item.name} </span><span className="span">{parseFloat(item.changePercent).toFixed(2)}%</span>
                       </p>
                       <div className="priceStocks">
-                        $ {item.latestPrice}{" "}
+                        ${Number(item.latestPrice).toLocaleString('en-US')}
                       </div>
                       <div className="updateStocks">
                         Last Updated On: <span>
@@ -263,7 +263,7 @@ function Market() {
           </div>
           <hr />
           <div className="modalBody">
-            <p>Max you can buy : {maxBuyStock}</p>
+            <p>Max you can buy : {Number(maxBuyStock).toLocaleString('en-US')}</p>
             <input type="number" min="1" max={maxBuyStock} onChange={(e) => { setQuantity(e.target.value) }} placeholder="Quantity" />
           </div>
           <hr />

@@ -244,13 +244,13 @@ const Portfolio = () => {
         <div className="body">
           <div className="card">
             <p>
-              Cash: <span>${player.valueInCash}</span>
+              Cash: <span>${Number(player.valueInCash).toLocaleString('en-US')}</span>
             </p>
             <p>
-              Value in Stock : <span>${player.valueInStocks}</span>
+              Value in Stock : <span>${Number(player.valueInStocks).toLocaleString('en-US')}</span>
             </p>
             <p className="total">
-              Total : <span>${player.valueInTotal}</span>
+              Total : <span>${Number(player.valueInTotal).toLocaleString('en-US')}</span>
             </p>
           </div>
           <div className="updated">
@@ -311,7 +311,7 @@ const Portfolio = () => {
                             </span>
                           </p>
                           <div className="priceStock">
-                            $ {res && res.latestPrice}{" "}
+                            $ {res && Number(res.latestPrice).toLocaleString('en-US')}
                           </div>
                           <div className="updateStocks">
                             Last Updated On :{" "}
@@ -329,7 +329,7 @@ const Portfolio = () => {
                           <div className="updateStocksColumn">
                             <div className="updateStock">
                               <div className="amount">
-                                ${item.asset.invested}
+                                ${Number(item.asset.invested).toLocaleString('en-US')}
                               </div>
                               Amount <br /> Invested
                             </div>
@@ -337,11 +337,11 @@ const Portfolio = () => {
                               <div className="amount">
                                 {item.asset.netProfit < 0 ? (
                                   <span style={{ color: "red" }}>
-                                    ${item.asset.netProfit}
+                                    ${Number(item.asset.netProfit).toLocaleString('en-US')}
                                   </span>
                                 ) : (
                                   <span style={{ color: " var(--button-green-color)" }}>
-                                    ${item.asset.netProfit}
+                                     ${Number(item.asset.netProfit).toLocaleString('en-US')}
                                   </span>
                                 )}
                               </div>
@@ -350,7 +350,7 @@ const Portfolio = () => {
                             </div>
                             <div className="updateStock">
                               <div className="amount">
-                                {item.asset.quantity}
+                               {Number(item.asset.quantity).toLocaleString('en-US')}
                               </div>
                               Quantity <br /> Purchased
                             </div>
@@ -426,7 +426,7 @@ const Portfolio = () => {
         </div>
         <hr />
         <div className="modalBody">
-          <p>Max you can buy : {maxBuyStock}</p>
+          <p>Max you can buy : {Number(maxBuyStock).toLocaleString('en-US')}</p>
           <input
             type="number"
             min="1"
@@ -469,13 +469,13 @@ const Portfolio = () => {
         </div>
         <hr />
         <div className="modalBody">
-          <p>Max you can sell : {maxBuyStock}</p>
+          <p>Max you can sell : {Number(maxBuyStock).toLocaleString('en-US')}</p>
           <p>
             Profit/Loss if you sell :{" "}
             {profitcal < 0 ? (
-              <span style={{ color: "red" }}>${profitcal}</span>
+              <span style={{ color: "red" }}>${Number(profitcal).toLocaleString('en-US')}</span>
             ) : (
-              <span style={{ color: " var(--button-green-color)" }}>${profitcal}</span>
+              <span style={{ color: " var(--button-green-color)" }}>${Number(profitcal).toLocaleString('en-US')}</span>
             )}
           </p>
           <span style={{ color: "red", fontSize: "15px" }}>

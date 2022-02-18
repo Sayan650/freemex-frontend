@@ -119,14 +119,14 @@ function Transaction() {
                       <div className="row">
                       <li>{item.Stock.code}</li>
                         <li className={item.type}>{item.type}</li>
-                        <li>{item.quantity}</li>
+                        <li>{Number(item.quantity).toLocaleString('en-US')}</li>
                       
-                        <li>${item.price}</li>
+                        <li>${Number(item.price).toLocaleString('en-US')}</li>
                         {/* <li className="sold">${item.netProfit}</li> */}
                         {item.netProfit < 0 ? (
-                          <li className="sold"> {item.netProfit} </li>
+                          <li className="sold"> ${Number(item.netProfit).toLocaleString('en-US')} </li>
                         ) : (
-                          <li className="bought"> {item.netProfit} </li>
+                          <li className="bought">${Number(item.netProfit).toLocaleString('en-US')}  </li>
                         )}
                       </div>
                     </div>

@@ -58,9 +58,20 @@
 }
 .portfolio .heading h1 {
   font-size: 100px;
-  text-shadow:
-  0 0 7px #fff,
-  0 0 px var(--button-color);
+  text-align: center;
+  color: #fff;
+  -webkit-animation: glow2 1s ease-in-out infinite alternate;
+  -moz-animation: glow2 1s ease-in-out infinite alternate;
+  animation: glow2 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow2 {
+  from {
+    text-shadow: 0 0 5px #fff, 0 0 20px  var(--button-color);
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px  var(--button-color);
+  }
 }
 .portfolio .body {
   width: fit-content;
@@ -106,9 +117,9 @@
 .stockDetails h2 {
   font-size: 65px;
   margin-bottom: 30px;
-  text-shadow:
-  0 0 7px #fff,
-  0 0 18px var(--button-color);
+  -webkit-animation: glow2 1s ease-in-out infinite alternate;
+  -moz-animation: glow2 1s ease-in-out infinite alternate;
+  animation: glow2 1s ease-in-out infinite alternate;
   
 }
 .stockDetails .cards {

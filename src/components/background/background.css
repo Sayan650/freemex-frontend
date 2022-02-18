@@ -4,7 +4,7 @@
   z-index: -10;
   object-fit: cover;
   backdrop-filter: blur(12px);
-  background-color: rgb(8, 1, 31);
+  background-color: #4C0E64 !important;
   position: fixed;
   margin: 0px;
 }

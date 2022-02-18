@@ -19,7 +19,7 @@
 }
 @media only screen and (max-width : 768px) {
   .footer {
-    font-size: 1.5vw;
+    font-size: 2vw;
   }
   .footer img {
     width: auto;

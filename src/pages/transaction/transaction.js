@@ -117,7 +117,7 @@ function Transaction() {
                   return (
                     <div className="transactionTableBody" key={i}>
                       <div className="row">
-                        <li>{item.Stock.name}</li>
+                        <li  className="name">{item.Stock.name}</li>
                         <li className={item.type}>{item.type}</li>
                         <li>{item.quantity}</li>
                         <li>{item.Stock.code}</li>

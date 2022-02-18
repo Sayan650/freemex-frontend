@@ -122,14 +122,13 @@
 
     .transactionTableHead li {
         font-size: 14px;
-        white-space: nowrap;
     }
 
     .searchIcon {
         top: 6px;
     }
 
-    .transactionTableBody li {
-        font-size: 12px;
+    .name {
+        width: 95px !important;
     }
 }

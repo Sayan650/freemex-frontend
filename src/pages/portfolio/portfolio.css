@@ -60,7 +60,7 @@
   font-size: 100px;
   text-shadow:
   0 0 7px #fff,
-  0 0 18px var(--button-color);
+  0 0 px var(--button-color);
 }
 .portfolio .body {
   width: fit-content;

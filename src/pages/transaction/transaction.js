@@ -99,10 +99,10 @@ function Transaction() {
         <div className="transactionBody">
           <div className="transactionTable">
             <div className="transactionTableHead">
-              <li>Stock name</li>
+            <li>Stock code</li>
               <li>Status</li>
               <li>Qty</li>
-              <li>Stock code</li>
+
               <li>Price</li>
               <li>Gain/Loss</li>
             </div>
@@ -117,10 +117,10 @@ function Transaction() {
                   return (
                     <div className="transactionTableBody" key={i}>
                       <div className="row">
-                        <li  className="name">{item.Stock.name}</li>
+                      <li>{item.Stock.code}</li>
                         <li className={item.type}>{item.type}</li>
                         <li>{item.quantity}</li>
-                        <li>{item.Stock.code}</li>
+                      
                         <li>${item.price}</li>
                         {/* <li className="sold">${item.netProfit}</li> */}
                         {item.netProfit < 0 ? (

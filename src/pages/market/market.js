@@ -239,7 +239,8 @@ function Market() {
           onRequestClose={() => setMSGModal(false)}
         >
           <div className={`snackbar`}>{hide === 'error' ? (`${msg}`) : (<>
-            Your transaction was successful head over to <a href="/portfolio">Portfolio</a> see.
+            Your transaction was successful head over to <a href="/portfolio" style={{
+  color: 'var(--hover-color)'}}>Portfolio</a> see.
           </>)}
           </div>
           <div className="modalFooter">

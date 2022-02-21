@@ -78,7 +78,6 @@ const Leaderboard = () => {
                       {play.username}
                     </li>
                     <li key="value">{Number(play.valueInTotal).toLocaleString('en-US')}</li>
-                    {console.log(play.valueInTotal.toLocaleString("en-IN"))}
                   </div>
                 </div>
               ))}

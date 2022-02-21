@@ -57,7 +57,7 @@ function LandingSection() {
               // textStyle={{ fontFamily: "Red Hat Display" }}
               startDelay={100}
               cursorColor="orange"
-              text="NASDAQ Timings:8PM - 2:30AM"
+              text="NASDAQ Timings: 7PM - 1:30AM"
               typeSpeed={150}
             />
             <div className="auth">
@@ -87,7 +87,7 @@ function LandingSection() {
         <div className="notesWrapper">
           <ul>
             <li>Stock prices are updated every 30 seconds.</li>
-            <li>Leaderboard is updated every minute.</li>
+            <li>Leaderboard is also updated every 30 seconds.</li>
             <li>
               You may notice some after hour fluctuations in stock prices which
               are normal.

@@ -2,8 +2,11 @@ import "./background.css";
 
 function Background() {
   return (
-    <div className="background" style={{backgroundColor: '#4C0E64'}} >
+    <div >
+
+    <div className="background"  >
       <img src="Images/BG.png" alt="" />
+    </div>
     </div>
   );
 }

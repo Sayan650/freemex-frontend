@@ -82,7 +82,7 @@ function Transaction() {
         <div className="Transactionhead">
           <h1>Transaction</h1>
           <h2>
-            Cash in your hand: $ <span>{player.valueInCash}</span>
+            Cash in your hand:  <span>${Number(player.valueInCash).toLocaleString('en-US')} </span>
           </h2>
           <div className="searchbox">
             <SearchIcon className="searchIcon" />

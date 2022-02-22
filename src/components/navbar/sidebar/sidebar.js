@@ -138,7 +138,7 @@ function Sidebar({ state, closeHandler }) {
                   <img src={profile.avatar} alt="" className="avatar"
                   ></img> )}</a>
              </li> <li className="menuListItem">
-                  <a href="/leaderboard">leaderboard</a>
+                  <a href="/leaderboard">Leaderboard</a>
                 </li>
                 <li className="menuListItem">
                   <a href="/" onClick={(e) => openModal(e)}>

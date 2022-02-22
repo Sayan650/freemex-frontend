@@ -64,13 +64,15 @@
 .leaderboardTable .tableHead li,.leaderboardTable .tableBody li{
     list-style: none;
     margin: 0px;
-    width: 100%!important;
+    width: 100%;
     padding: 10px;
        text-align: center;
        margin: 0 auto;
 
 }
-
+.NO{
+    width: 30% !important;
+}
 .leaderboardTable .tableHead li{
     font-weight: 900;
     backdrop-filter: blur(10px);

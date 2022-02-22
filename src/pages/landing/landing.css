@@ -26,6 +26,18 @@
   height: 100px;
   width: auto;
 }
+.sponsored {
+  color: white;
+  display: flex;
+  margin-top: 40px;
+  align-items: center;
+  font-size: 25px;
+}
+.sponsored img {
+  width: auto;
+  height: 65px;
+  margin-left: 10px;
+}
 .react-typewriter-text {
   margin: 40px 0px !important;
   font-size: 35px !important;
@@ -33,7 +45,7 @@
 }
 .auth img {
   width: auto;
-  height: 45px;
+  height: 55px;
   margin-right: 40px;
   cursor: pointer;
 }
@@ -101,7 +113,15 @@
 .landingIllustration {
   display: none;
 }
-@media only screen and (max-width: 910px) {
+@media only screen and (max-width: 1195px) {
+  .sponsored  {
+    font-size: 20px;
+  }
+  .sponsored  img{
+    height: 45px;
+  }
+}
+@media only screen and (max-width: 997px) {
   .landingIllustration2 {
     display: none;
   }
@@ -116,7 +136,7 @@
   }
   .landing {
     margin-top: 65px;
-    height: 550px;
+    height: 600px;
     padding: 20px;
     justify-content: center;
   }
@@ -137,8 +157,24 @@
   }
   .auth img {
     width: auto;
-    height: 30px;
+    height: 40px;
     margin: 0 30px;
   }
+  .sponsored  {
+    font-size: 20px;
+  }
+  .sponsored  img{
+    height: 45px;
+  }
+}
 
+@media only screen and (max-width :542px){
+  .sponsored {
+   flex-direction: column;
+   justify-content: center;
+ font-size: 12px;
+  }
+  .sponsored  img{
+    height: 40px;
+  }
 }

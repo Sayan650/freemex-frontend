@@ -53,6 +53,12 @@ function LandingSection() {
             <div className="Logo">
               <img src="Images/logo.png" alt="" />
             </div>
+            <div className="sponsored">
+        <h2>Sponsorsed by : </h2>
+        <a href="https://funstox.live/">
+          <img src="Images/funstox.png" alt="" />
+        </a>
+      </div>
             <TypeWriterEffect
               // textStyle={{ fontFamily: "Red Hat Display" }}
               startDelay={100}

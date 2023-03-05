@@ -24,7 +24,7 @@ function Market() {
 
   useEffect(() => {
     const time = async()=>{
-      const res = await fetch('/api/schedules', {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/schedules`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json"
@@ -54,7 +54,9 @@ function Market() {
   // player status
   const [player, setPlayer] = useState([]);
   const getPlayer = useCallback(async () => {
-    const response = await fetch('/api/players');
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/players`,{
+      credentials: "include",
+    });
     const player = await response.json();
     setPlayer(player.player);
   }, []);
@@ -84,7 +86,7 @@ function Market() {
     // console.log(parseInt(quantity))
 
     if (parseInt(quantity) > 0 && Number.isInteger(Number(quantity))) {
-      const res = await fetch('/api/transactions?type=bought', {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/transactions?type=bought`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -192,7 +194,7 @@ function Market() {
                 {stock.map((item, i) => {
                   return <div className="scard" key={i}>
                     <img
-                      src="Images/divBackground.png"
+                      src="Images/cards.png"
                       alt=""
                       key={item.code}
                     />

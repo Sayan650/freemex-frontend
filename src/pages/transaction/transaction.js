@@ -9,7 +9,7 @@ function Transaction() {
 
   useEffect(() => {
     const time = async () => {
-      const res = await fetch("/api/schedules", {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/schedules`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +31,9 @@ function Transaction() {
   const [transaction, setTransaction] = useState([]);
 
   const getTransaction = useCallback(async () => {
-    const response = await fetch("/api/transactions");
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/transactions`,{
+      credentials: "include",
+    });
     const transaction = await response.json();
     console.log(transaction.transactions);
     setTransaction(transaction.transactions);
@@ -45,7 +47,9 @@ function Transaction() {
   // player status
   const [player, setPlayer] = useState([]);
   const getPlayer = useCallback(async () => {
-    const response = await fetch("/api/players");
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/players`,{
+      credentials: "include",
+    });
     const player = await response.json();
     setPlayer(player.player);
   }, []);

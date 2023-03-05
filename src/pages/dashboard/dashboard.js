@@ -21,7 +21,7 @@ function Dashboard() {
     const Loginadmin = async (e) => {
         console.log(!username, !password)
         if (username && password) {
-            const res = await fetch('/auth/admin', {
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/admin`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -45,7 +45,7 @@ function Dashboard() {
     const timer = async () => {
         if (start_time && end_time) {
             console.log(start_time, end_time)
-            const res = await fetch('/admin/api/schedules', {
+            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/api/schedules`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -67,7 +67,7 @@ function Dashboard() {
         console.log(e.target.className)
         const item = e.target.className
         const name = e.target.innerText
-        const response = await fetch(`/admin/api/${item}`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/api/${item}`, {
             method: "GET",
             headers: {
                 "content-type": "application/json"
@@ -81,7 +81,7 @@ function Dashboard() {
 
     const someRoute = async ()=>{
         console.log(instance,options,method)
-        const response = await fetch(`/admin/api/${method}`,{
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/admin/api/${method}`,{
             method: method,
             headers:{
                 "content-type": "application/json"

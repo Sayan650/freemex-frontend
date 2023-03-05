@@ -34,8 +34,8 @@
 .changebutton .buymore {
   padding: 8px;
   border-radius: 5px;
-  border: 1px solid rgba(28, 74, 176, 0.4);
-  background-color: rgb(140, 16, 140);
+  border: 1px solid rgb(176,0,66);
+  background-color: rgb(176,0,66);
   color: white;
   font-weight: 700;
   cursor: pointer;
@@ -44,7 +44,7 @@
 }
 .changebutton .buymore:hover {
     background-color: transparent;
-    border: 1px solid rgb(140, 16, 140);
+    border: 1px solid rgb(176,0,66);
     backdrop-filter: blur(10px);
 }
 .portfolio .heading {
@@ -67,10 +67,10 @@
 
 @keyframes glow2 {
   from {
-    text-shadow: 0 0 5px #fff, 0 0 20px  var(--button-color);
+    text-shadow: 0 0 5px #8E003F, 0 0 20px  var(--button-color);
   }
   to {
-    text-shadow: 0 0 20px #fff, 0 0 30px  var(--button-color);
+    text-shadow: 0 0 20px #8E003F, 0 0 30px  var(--button-color);
   }
 }
 .portfolio .body {
@@ -140,7 +140,10 @@
 .scards img {
   width: clamp(376px,31.9vw,460px);
   height: clamp(315px,26.7vw,385px);
-}
+  border-radius: 15px;
+  }
+
+
 .stocks {
   position: absolute;
    top: 50%;
@@ -280,12 +283,12 @@ font-weight: 600;
   color: white;
   font-size: 18px;
   font-weight: 700;
-  border: 1px solid rgb(140, 16, 140);
+  border: 1px solid rgb(148,0,23);
   border-radius: 6px;
   cursor: pointer;
 }
 .marketbtn:hover {
-  background-color: rgb(140, 16, 140);
+  background-color: rgb(148,0,23);
 }
 
 /* css for modal */
@@ -364,12 +367,12 @@ font-weight: 600;
   height: clamp(32px, 2.6vw, 38px) !important;
 }
 .ReactModal__Content .modalFooter .buy {
-  background-color: rgb(140, 16, 140);
+  background-color: rgb(176,0,66);
 }
 .ReactModal__Content .modalFooter .buy:hover {
   background-color: transparent;
   padding: 4px 14px;
-  border: 1px solid rgb(140, 16, 140);
+  border: 1px solid rgb(176,0,66);
 }
 
 .ReactModal__Content .modalFooter .close {

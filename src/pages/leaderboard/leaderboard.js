@@ -9,7 +9,9 @@ const Leaderboard = () => {
   const [loading, setLoading] = useState(true);
 
   const getPlayers = useCallback(async () => {
-    const response = await fetch("/api/players?sort=true");
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/players?sort=true`,{
+      credentials: "include",
+    });
     const players = await response.json();
     setPlayers(players.players);
     setLoading(false);

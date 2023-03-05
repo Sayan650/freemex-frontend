@@ -4,8 +4,10 @@ function Background() {
   return (
     <div >
 
-    <div className="background"  >
-      <img src="Images/BG.png" alt="" />
+    <div className="overlay"  >
+    <div className="background">
+     <img src="Images/bg.jpg" alt="" />
+     </div>
     </div>
     </div>
   );

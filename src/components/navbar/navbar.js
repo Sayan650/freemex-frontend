@@ -44,7 +44,10 @@ const Nav = () => {
   const [player, setPlayer] = useState([]);
   const [profile, setProfile] = useState([]);
   const getPlayer = useCallback(async () => {
-    const response = await fetch("/api/players");
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/players`
+    ,{
+      credentials: "include",
+    });
     const player = await response.status;
     if (player !== 401) {
       const play = await response.json();
@@ -61,7 +64,7 @@ const Nav = () => {
     setNameModal(true);
   };
   const changeName = async (e) => {
-    const res = await fetch("/api/players?scope=username ", {
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/players?scope=username`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -102,7 +105,7 @@ const Nav = () => {
   };
  useEffect(() => {
     const time = async()=>{
-      const res = await fetch('/api/schedules', {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/schedules`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json"
@@ -246,7 +249,7 @@ const Nav = () => {
           className="buymore logout"
             onClick={(e) => {
               e.preventDefault();
-              window.location.href = "/auth/logout";
+              window.location.href = ` ${process.env.REACT_APP_BACKEND_URL}/auth/logout`;
             }}
           >
             Logout

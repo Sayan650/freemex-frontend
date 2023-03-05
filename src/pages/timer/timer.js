@@ -5,7 +5,9 @@ import { useHistory } from "react-router-dom";
 const Timer = () => {
   const [player, setPlayer] = useState(0);
   const getPlayer = async () => {
-    const response = await fetch("/api/players");
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/players`,{
+      credentials: "include",
+    });
     const player = await response.status;
     const play = await response.json();
     console.log(play);
@@ -23,7 +25,7 @@ const Timer = () => {
 
   useEffect(() => {
     const time = async () => {
-      const res = await fetch("/api/schedules", {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/schedules`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +33,7 @@ const Timer = () => {
         credentials: "include",
       });
       const result = await res.json();
-      console.log(result);
+      console.log("result is ",result);
       setTimer(result.schedule);
       setCurrentdate(new Date().getTime());
       setEnd(new Date(result.schedule.end).getTime());

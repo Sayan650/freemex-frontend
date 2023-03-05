@@ -130,9 +130,14 @@
     justify-content: center;
     margin-bottom: 20px;
   }
-  .landingIllustration img {
+  /* .landingIllustration img {
     height: auto;
     width: 250px;
+  } */
+  
+  .landingIllustration img{
+    height: 250px;
+    width: auto;
   }
   .landing {
     margin-top: 65px;
@@ -177,4 +182,9 @@
   .sponsored  img{
     height: 40px;
   }
+}
+
+.main_Illustration{
+  height: 500px;
+  width: auto;
 }

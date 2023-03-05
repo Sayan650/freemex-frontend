@@ -5,7 +5,9 @@ import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 function LandingSection() {
   const [player, setPlayer] = useState(0);
   const getPlayer = async () => {
-    const response = await fetch("/api/players");
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/players`, {
+      credentials: "include",
+    });
     const player = await response.status;
     setPlayer(player);
     console.log(player);
@@ -14,7 +16,7 @@ function LandingSection() {
   useEffect(() => {
     getPlayer();
     const time = async () => {
-      const res = await fetch("/api/schedules", {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/schedules`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -48,17 +50,17 @@ function LandingSection() {
         <div className="landing">
           <div className="landingWrapper">
             <div className="landingIllustration">
-              <img src="Images/illustration.png" alt="" />
+              <img src="Images/illustration-new.png" alt="" />
             </div>
             <div className="Logo">
               <img src="Images/logo.png" alt="" />
             </div>
-            <div className="sponsored">
+            {/* <div className="sponsored">
         <h2>Sponsorsed by : </h2>
         <a href="https://funstox.live/">
           <img src="Images/funstox.png" alt="" />
         </a>
-      </div>
+      </div> */}
             <TypeWriterEffect
               // textStyle={{ fontFamily: "Red Hat Display" }}
               startDelay={100}
@@ -67,16 +69,17 @@ function LandingSection() {
               typeSpeed={150}
             />
             <div className="auth">
-              <a href="/auth/google">
+              <a href={`${process.env.REACT_APP_BACKEND_URL}/auth/google`}>
                 <img src="Images/googlewhite.png" alt="" />
               </a>
-              <a href="/auth/github">
+              <a href={`${process.env.REACT_APP_BACKEND_URL}/auth/github`}>
                 <img src="Images/github.png" alt="" />
               </a>
             </div>
           </div>
           <div className="landingIllustration2">
-            <img src="Images/illustration.png" alt="" />
+            {/* <img className="main_Illustration" src="Images/illustration-new.png" alt="" /> */}
+            <img className="main_Illustration" src="Images/illustration-animated.svg" alt="animated"/>
           </div>
         </div>
       </div>

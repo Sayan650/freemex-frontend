@@ -11,7 +11,9 @@ useEffect(
     () => {
       // request for stocks
       const getstocks = async () => {
-        const res = await fetch('/api/stocks')
+        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/stocks`,{
+          credentials: "include",
+        });
         const result = await res.json()
         if (res.status === 200) {
           const t = result.Stocks.sort(function (a, b) {

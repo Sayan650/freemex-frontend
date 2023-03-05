@@ -32,7 +32,9 @@ function Sidebar({ state, closeHandler }) {
   const [profile, setProfile] = useState([]);
 
   const getPlayer = useCallback(async () => {
-    const response = await fetch('/api/players');
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/players`,{
+      credentials: "include",
+    });
     const player = await response.status;
     if(player !== 401) {
     const play = await response.json();
@@ -50,7 +52,7 @@ function Sidebar({ state, closeHandler }) {
   };
 
   const changeName = async (e) => {
-    const res = await fetch("/api/players?scope=username ", {
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/players?scope=username`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -99,7 +101,8 @@ function Sidebar({ state, closeHandler }) {
 
  useEffect(() => {
     const time = async()=>{
-      const res = await fetch('/api/schedules', {
+      console.log("port is ",process.env.REACT_APP_BACKEND_URL)
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/schedules`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json"

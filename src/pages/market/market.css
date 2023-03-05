@@ -96,6 +96,7 @@
 .scard img {
   width: clamp(320px, 28vw, 404px);
   height: clamp(210px, 19.8vw, 286px);
+  border-radius: 15px;
 }
 .stock {
     position: absolute;

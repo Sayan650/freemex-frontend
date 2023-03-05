@@ -26,7 +26,9 @@ const Portfolio = () => {
 
   const [player, setPlayer] = useState([]);
   const getPlayer = useCallback(async () => {
-    const response = await fetch("/api/players");
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/players`,{
+      credentials: "include",
+    });
     const player = await response.json();
     const prof = await response.status;
     console.log(player);
@@ -36,7 +38,7 @@ const Portfolio = () => {
 
   useEffect(() => {
     const time = async () => {
-      const res = await fetch("/api/schedules", {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/schedules`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +59,9 @@ const Portfolio = () => {
   }, [getPlayer, profile]);
   useEffect(() => {
     const Stocks = async () => {
-      const response = await fetch("/api/assets");
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/assets`,{
+        credentials: "include",
+      });
       const asset = await response.json();
       console.log(asset.assets);
       setStocks(asset.assets);
@@ -109,7 +113,7 @@ const Portfolio = () => {
     // console.log(parseInt(quantity))
 
     if (parseInt(quantity) > 0 && Number.isInteger(Number(quantity))) {
-      const res = await fetch("/api/transactions?type=bought", {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/transactions?type=bought`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -170,7 +174,7 @@ const Portfolio = () => {
     const code = details.Stock.code;
 
     if (parseInt(quantity) > 0 && Number.isInteger(Number(quantity))) {
-      const res = await fetch("/api/transactions?type=sold", {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/transactions?type=sold`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -283,9 +287,11 @@ const Portfolio = () => {
                     return item.asset.quantity === 0 ? (
                       <></>
                     ) : (
+                  
+                    
                       <div className="scards" key={i}>
-                        <img
-                          src="Images/divBackground.png"
+                      <img
+                          src="Images/cards.png"
                           alt=""
                           key={item.Stock.code}
                         />
@@ -348,6 +354,7 @@ const Portfolio = () => {
                               Net Profit <br />
                               After Selling
                             </div>
+                            </div>
                             <div className="updateStock">
                               <div className="amount">
                                {Number(item.asset.quantity).toLocaleString('en-US')}
@@ -372,7 +379,7 @@ const Portfolio = () => {
                             </button>
                           </div>
                         </div>
-                      </div>
+                      
                     );
                   })}
                 </div>

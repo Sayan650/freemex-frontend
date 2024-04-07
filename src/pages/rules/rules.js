@@ -13,10 +13,10 @@ function Rules() {
         <h1>Rules</h1>
         <div className="rules-list">
           <li>
-          Freemex contest for Aarohan will begin at 7 PM on 28th February, 2022.
+          Freemex contest for Aarohan will begin at 7 PM on 7th March, 2024.
           </li>
           <li>
-          Contest will end at 1:30 AM on 3rd March, 2022.
+          Contest will end at 1:30 AM on 10th March, 2024.
           </li>
           <li>
           NASDAQ Opens at 7 PM and closed at 1:30 AM (IST). The price of stocks are updated only in this period.

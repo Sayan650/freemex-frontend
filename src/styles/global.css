@@ -15,11 +15,12 @@ body {
 }
 :root {
   --text-color: white;
-  --shadow-color: ;
+  /* --shadow-color: ; */
   --background-color: rgba(11, 3, 41, 0.582);
   --hover-color:rgb(247,0,76);
   --button-color: rgb(176,0,66);
   --text-green-color: rgb(19, 255, 19);
   --modal-color: rgb(11,0,65);
   --button-green-color: rgb(15, 197, 15);
+  --shadow-color: #916a87;
 }

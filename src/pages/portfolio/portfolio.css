@@ -80,12 +80,14 @@
 }
 .portfolio .card {
   text-align: center;
-  background-color: transparent;
+  /* background-color: rgba(57, 43, 255, 0.37); */
+  background-image: linear-gradient(#0021dd5d, #06194d63);
+  /* background: transparent; */
   backdrop-filter: blur(10px);
   border-radius: 15px;
   border-style: solid;
   border: none;
-  box-shadow: 0 0 10px var(--shadow-color);
+  box-shadow: 0 0 20px var(--shadow-color);
   padding: 20px;
   font-size: 20px;
 }

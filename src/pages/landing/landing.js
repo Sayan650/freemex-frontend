@@ -79,7 +79,7 @@ function LandingSection() {
           </div>
           <div className="landingIllustration2">
             {/* <img className="main_Illustration" src="Images/illustration-new.png" alt="" /> */}
-            <img className="main_Illustration" src="Images/illustration-animated.svg" alt="animated"/>
+            <img className="main_Illustration" src="Images/bg.png" alt="animated"/>
           </div>
         </div>
       </div>

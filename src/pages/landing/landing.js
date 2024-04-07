@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import MetaDecorator from "../../components/metaDecorator/metaDecorator";
 function LandingSection() {
   const [player, setPlayer] = useState(0);
-  const getPlayer = async () => {
+  const getPlayer = async () => {    
     const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/players`, {
       credentials: "include",
     });

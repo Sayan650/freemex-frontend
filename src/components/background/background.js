@@ -6,7 +6,7 @@ function Background() {
 
     <div className="overlay"  >
     <div className="background">
-     <img src="Images/bg.jpg" alt="" />
+     <img src="Images/bg2.jpg" alt="" />
      </div>
     </div>
     </div>
